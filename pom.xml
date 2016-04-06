@@ -8,6 +8,7 @@
   <modules>
     <module>imms-web</module>
     <module>imms-common</module>
+    <module>imms-system</module>
   </modules>
   <packaging>pom</packaging>
 
