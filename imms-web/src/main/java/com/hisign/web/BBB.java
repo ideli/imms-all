@@ -1,9 +1,11 @@
 package com.hisign.web;
 
+import com.hisign.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +21,17 @@ import java.util.Map;
 @Controller
 public class BBB {
 
+    @Resource
+    private PersonService personService;
+
     @RequestMapping("getList")
     @ResponseBody
     public List<String> getList() {
         List<String> list = new ArrayList<>();
         list.add("111");
         list.add("222");
+        Integer count = personService.selectCount();
+        System.out.println(count);
         return list;
     }
 

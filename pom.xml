@@ -179,21 +179,27 @@
       </dependency>
 
       <dependency>
-        <groupId>com.sun.tools.btrace</groupId>
-        <artifactId>btrace-agent</artifactId>
-        <version>1.2.3</version>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.0.2</version>
       </dependency>
 
       <dependency>
-        <groupId>com.sun.tools.btrace</groupId>
-        <artifactId>btrace-boot</artifactId>
-        <version>1.2.3</version>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc6</artifactId>
+        <version>11.2.0.2</version>
       </dependency>
 
       <dependency>
-        <groupId>com.sun.tools.btrace</groupId>
-        <artifactId>btrace-client</artifactId>
-        <version>1.2.3</version>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.2.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>1.2.2</version>
       </dependency>
 
       <dependency>
