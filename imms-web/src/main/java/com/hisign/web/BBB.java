@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class BBB {
 
     @RequestMapping("getMap")
     @ResponseBody
-    public Map<String, Object> getMap() {
+    public Map<String, Object> getMap(HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         map.put("111", 111);
         map.put("222", 222);
@@ -48,6 +49,7 @@ public class BBB {
         list.add("111");
         list.add("222");
         map.put("666", list);
+        session.setAttribute("777", map);
         return map;
     }
 }

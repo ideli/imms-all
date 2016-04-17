@@ -55,6 +55,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <session-config>
+        <session-timeout>1800</session-timeout>
+    </session-config>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
