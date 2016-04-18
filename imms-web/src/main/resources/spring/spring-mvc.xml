@@ -13,7 +13,7 @@
 
     <!-- 设置使用注解的类所在的文件夹 -->
     <context:component-scan base-package="com.hisign"/>
-    <!--<mvc:resources location="/static/" mapping="/static/**" />-->
+    <mvc:resources location="/stp/" mapping="/stp/**" />
     <mvc:annotation-driven/>
 
     <mvc:annotation-driven>
@@ -34,9 +34,9 @@
     </mvc:annotation-driven>
 
     <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
-          <!--p:prefix="/my/"-->
-          <!--p:suffix=".jsp"/>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/"
+          p:suffix=".jsp"/>
 
     <!-- 解析json请求数据，将json转换为java对象 -->
     <bean id="jsonHttpMessageConverter"
