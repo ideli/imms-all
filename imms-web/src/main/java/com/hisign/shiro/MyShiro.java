@@ -12,13 +12,27 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 public class MyShiro extends AuthorizingRealm {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Resource
     private SysUserService sysUserService;
+
+    @PostConstruct
+    public void initCredentialsMatcher() {
+        //该句作用是重写shiro的密码验证，让shiro用我自己的验证
+        setCredentialsMatcher(new MyMd5CredentialsMatcher());
+
+    }
+
     /**
      * 权限认证
      */
@@ -53,9 +67,14 @@ public class MyShiro extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
         //UsernamePasswordToken对象用来存放提交的登录信息
-        UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //查出是否有此用户
-        SysUser user = sysUserService.findSysUserByUserName(token.getUsername());
+        SysUser user = null;
+        try {
+            user = sysUserService.findSysUserByUserName(token.getUsername());
+        } catch (Exception e) {
+            logger.error("myshiro search username:{} error", token.getUsername(), e);
+        }
         if(user!=null){
             //若存在，将此用户存放到登录认证info中
             return new SimpleAuthenticationInfo(user.getUserName(), user.getUserPwd(), getName());
