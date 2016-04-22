@@ -1,7 +1,7 @@
-package com.hisign.service.impl;
+package com.hisign.system.service.impl;
 
-import com.hisign.dao.Person;
-import com.hisign.service.PersonService;
+import com.hisign.system.dao.Person;
+import com.hisign.system.service.PersonService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

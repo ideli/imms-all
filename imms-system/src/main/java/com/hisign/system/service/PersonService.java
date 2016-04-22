@@ -1,4 +1,4 @@
-package com.hisign.service;
+package com.hisign.system.service;
 
 /**
  * 测试接口

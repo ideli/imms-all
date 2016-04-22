@@ -130,7 +130,7 @@
 
 </body>
 
-<script type="text/javascript" src="stp/stp.js"></script>
+<script type="text/javascript" src="js/stp/stp.js"></script>
 <script>
 
     //假设以下是取到的权限控制信息

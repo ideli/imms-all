@@ -1,11 +1,13 @@
 package com.hisign.web;
 
-import com.hisign.service.PersonService;
+import com.hisign.system.service.PersonService;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +20,13 @@ import java.util.Map;
  * @version 1.0
  * @since 2016/4/2 22:00
  */
-@RequestMapping("/bbb")
 @Controller
 public class BBB {
 
     @Resource
     private PersonService personService;
 
-    @RequestMapping("getList")
+    @RequestMapping("api/getList")
     @ResponseBody
     public List<String> getList() {
         List<String> list = new ArrayList<>();
@@ -38,7 +39,7 @@ public class BBB {
 
     @RequestMapping("getMap")
     @ResponseBody
-    public Map<String, Object> getMap(HttpSession session) {
+    public Map<String, Object> getMap(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
         map.put("111", 111);
         map.put("222", 222);
@@ -49,7 +50,7 @@ public class BBB {
         list.add("111");
         list.add("222");
         map.put("666", list);
-        session.setAttribute("777", map);
+        request.getSession().setAttribute("777", map);
         return map;
     }
 }

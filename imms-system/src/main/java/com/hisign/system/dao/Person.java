@@ -1,4 +1,4 @@
-package com.hisign.dao;
+package com.hisign.system.dao;
 
 /**
  * 测试
