@@ -30,12 +30,14 @@ public class BBB {
     @ResponseBody
     public List<String> getList() {
         List<String> list = new ArrayList<>();
-        list.add("111");
+        list.add("1116666");
         list.add("222");
         Integer count = personService.selectCount();
-        System.out.println(count);
+//        System.out.println(count);
+        list.add(count + "");
         return list;
     }
+
 
     @RequestMapping("getMap")
     @ResponseBody
