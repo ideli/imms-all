@@ -9,7 +9,7 @@ import org.junit.Test;
  * @version 1.0
  * @since 2016/5/5 0:18
  */
-public class MyTest {
+public class MyTest2 {
 
     @Test
     public void thisTest() {
