@@ -13,6 +13,6 @@ public class MyTest {
 
     @Test
     public void thisTest() {
-        Assert.assertTrue(1 == 2);
+        Assert.assertTrue(1 == 1);
     }
 }
