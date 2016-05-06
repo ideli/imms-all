@@ -15,4 +15,8 @@ public class MyTest {
     public void thisTest() {
         Assert.assertTrue(1 == 1);
     }
+
+    public void testSecond() {
+        Assert.assertTrue(true);
+    }
 }
