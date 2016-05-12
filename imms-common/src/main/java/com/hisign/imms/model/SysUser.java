@@ -1,6 +1,10 @@
-package com.hisign.model;
+package com.hisign.imms.model;
 
-public class SysUser {
+import java.io.Serializable;
+
+public class SysUser implements Serializable {
+
+    private static final long serialVersionUID = 424834830L;
     private String id;
 
     private String userName;

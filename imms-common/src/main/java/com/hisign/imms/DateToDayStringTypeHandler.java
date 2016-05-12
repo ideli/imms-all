@@ -1,4 +1,4 @@
-package com.hisign;
+package com.hisign.imms;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

@@ -1,4 +1,4 @@
-package com.hisign;
+package com.hisign.imms;
 
 import java.util.HashMap;
 import java.util.Map;

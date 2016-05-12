@@ -1,4 +1,4 @@
-package com.hisign;
+package com.hisign.imms;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,10 +15,8 @@ public class ConfigUtil {
     private static File configFile = null; 
     private static long fileLastModified = 0L; 
     
-    private static String configFileName = "oracle.properties";
-    public static String EC_CONFIG = "extremecomponents.properties";
-    public static String TREE_ITEMS = "TreeItems.properties";
-    
+    private static String configFileName = "jdbc.properties";
+
     private static void init() {
         try {
 	        InputStream inputStream = ConfigUtil.class.getClassLoader().getResourceAsStream(configFileName);

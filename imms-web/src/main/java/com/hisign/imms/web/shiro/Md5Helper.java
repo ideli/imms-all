@@ -1,7 +1,4 @@
-package com.hisign.shiro;
-
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.crypto.hash.Sha384Hash;
+package com.hisign.imms.web.shiro;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

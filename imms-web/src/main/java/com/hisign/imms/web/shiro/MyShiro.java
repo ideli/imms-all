@@ -1,8 +1,7 @@
-package com.hisign.shiro;
+package com.hisign.imms.web.shiro;
 
-import com.github.pagehelper.PageHelper;
-import com.hisign.model.SysUser;
-import com.hisign.system.users.service.SysUserService;
+import com.hisign.imms.api.system.SysUserService;
+import com.hisign.imms.model.SysUser;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,7 +13,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

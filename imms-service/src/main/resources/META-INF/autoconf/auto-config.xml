@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <!--database -->
+        <property name="db.driverClassName" defaultValue="com.mysql.jdbc.Driver"
+                  description="mysql驱动类"/>
+        <property name="db.url"
+                  defaultValue="jdbc:mysql://120.25.198.13:3306/xjpt?characterEncoding=utf-8"
+                  description="jdbc的路径"/>
+        <property name="db.username" defaultValue="xjpt" description="用户名"/>
+        <property name="db.password" defaultValue="xjpt"
+                  description="密码"/>
+
+    </group>
+    <script>
+        <generate template="spring-mybatis.xml.vm" destfile="spring-mybatis.xml"
+                  charset="UTF-8"></generate>
+    </script>
+</config>

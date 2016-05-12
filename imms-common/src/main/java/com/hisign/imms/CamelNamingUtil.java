@@ -1,4 +1,4 @@
-package com.hisign;
+package com.hisign.imms;
 
 /**
  * 驼峰命名转换工具
