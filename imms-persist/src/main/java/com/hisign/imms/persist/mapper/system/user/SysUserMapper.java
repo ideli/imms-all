@@ -1,6 +1,6 @@
-package com.hisign.system.users.dao;
+package com.hisign.imms.persist.mapper.system.user;
 
-import com.hisign.model.SysUser;
+import com.hisign.imms.model.SysUser;
 
 import java.util.List;
 

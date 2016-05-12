@@ -1,10 +1,7 @@
-package com.hisign.system.users.service;
+package com.hisign.imms.api.system;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.hisign.model.SysUser;
-
-import java.util.List;
+import com.hisign.imms.model.SysUser;
 
 /**
  * 用户信息接口

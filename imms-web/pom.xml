@@ -124,14 +124,26 @@
 
         <dependency>
             <groupId>com.hisign</groupId>
-            <artifactId>imms-common</artifactId>
+            <artifactId>imms-api</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hisign</groupId>
+            <artifactId>dubbo-monitor-simple</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.hisign</groupId>
-            <artifactId>imms-system</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>dubbox</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
         </dependency>
     </dependencies>
 

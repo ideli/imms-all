@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hisign.system.users.dao.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.hisign.model.SysUser" >
-    <id column="ID" property="id" jdbcType="VARCHAR" />
-    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
-    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+<mapper namespace="com.hisign.imms.persist.mapper.system.user.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.hisign.imms.model.SysUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, USER_NAME, USER_PWD
+    id, user_name, user_pwd
   </sql>
   <sql id="ForCount" >
     count(1)
@@ -15,22 +15,22 @@
   <sql id="select_By_Filter_For_Where" >
     <where >
 		<if test="userName != null and userName != ''" >
-			and USER_NAME = #{userName,jdbcType=VARCHAR}
+			and user_name = #{userName,jdbcType=VARCHAR}
 		</if>
 		<if test="userPwd != null and userPwd != ''" >
-	        and USER_PWD = #{userPwd,jdbcType=VARCHAR}
+	        and user_pwd = #{userPwd,jdbcType=VARCHAR}
 	    </if>
   	</where>
   </sql>
 
-  <select id="findSysUserListByFilter" parameterType="com.hisign.model.SysUser" resultMap="BaseResultMap">
+  <select id="findSysUserListByFilter" parameterType="com.hisign.imms.model.SysUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_user
     <include refid="select_By_Filter_For_Where" />
   </select>
 
-  <select id="findSysUserListByFilterForCount" parameterType="com.hisign.model.SysUser" resultType="java.lang.Integer">
+  <select id="findSysUserListByFilterForCount" parameterType="com.hisign.imms.model.SysUser" resultType="java.lang.Integer">
     select
     <include refid="ForCount" />
     from sys_user
@@ -41,6 +41,6 @@
     select
     <include refid="Base_Column_List" />
     from sys_user
-    where USER_NAME = #{userName,jdbcType=VARCHAR}
+    where user_name = #{userName,jdbcType=VARCHAR}
   </select>
 </mapper>
