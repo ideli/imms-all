@@ -23,4 +23,6 @@ public interface SysUserService {
      * @return
      */
     SysUser findSysUserByUserName(String userName);
+
+    public SysUser findSysUserList(String username);
 }

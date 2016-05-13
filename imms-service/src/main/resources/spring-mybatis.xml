@@ -22,10 +22,10 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://120.25.198.13:3306/xjpt?characterEncoding=utf-8"/>
-        <property name="username" value="xjpt"/>
-        <property name="password" value="xjpt"/>
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
 
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="3"/>
