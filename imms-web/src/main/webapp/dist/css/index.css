@@ -14,13 +14,23 @@
            font-weight: 600;
            text-shadow: 5px 5px 3px rgba(26, 51, 72, 0.71);
        }
+       @keyframes hozinal {
+           30%{right:-25px;top:0px;}
+           50%{right:-25px;top:0px;}
+           75%{right:-25px;top:90px;}
+           85%{right:-25px;top:90px;}
+           92%{right:1109px;top:90px;}
+           96%{right:-180px;top:90px;}
+           100%{right:-25px;top:90px;}
+       }
        .nav-wrap{
             display: table;
             position: absolute;
             top:90px;
-            right:5vw;
+            right:-25px;
             padding:0 31px;
             background: transparent;
+            animation:hozinal 6s 0.2s 1;
         }
 		.arr-l-wrap,.arr-r-wrap{
             position: absolute;
@@ -45,12 +55,12 @@
         .arr-l{
             right:0;
             top:0;
-            border-color: transparent #777 transparent transparent;
+            border-color: transparent #555 transparent transparent;
         }
         .arr-r{
             left:0;
             bottom:0;
-            border-color: transparent transparent transparent  #666 ;
+            border-color: transparent transparent transparent  #555 ;
         }
         /*.nav,.arr-l,.arr-r{
             opacity: 0.88;
@@ -68,7 +78,7 @@
             display: table; 
             overflow: visible;
             box-shadow: -5px 5px 5px rgba(55,55,55,.5),inset 0px 1px 0px rgba(255,255,255,.1);
-            background:-webkit-linear-gradient(left, #777, rgba(155,155,155,.85) 45%,rgba(180,180,180,.85) 50%,rgba(155,155,155,.85) 55%,#666);
+            background:-webkit-linear-gradient(left, #555, rgba(155,155,155,.85) 45%,rgba(170,170,170,.85) 50%,rgba(155,155,155,.85) 55%,#555);
         }
         .nav a{
             line-height: 32px; 
@@ -239,3 +249,34 @@
        .icon-reload{
            cursor: pointer;
        }
+
+       /*选项卡*/
+       #root-tabs>.tabs-panels{
+           border: none;
+       }
+       #root-tabs .tabs-first>a.tabs-inner{
+           background: -webkit-linear-gradient(top , gold, palegoldenrod 38%, #fff 90%)!important;
+           /*background: -webkit-linear-gradient(top , orange, rgba(243, 161, 10, 0.34) 38%, #fff 90%)!important;*/
+       }
+       #root-tabs .tabs-first>a.tabs-inner span{
+           /*color:#888;*/
+       }
+       #root-tabs .tabs-first a.tabs-close{
+
+       }
+       #root-tabs a.tabs-inner{
+           max-width:10em;
+           overflow: hidden;
+           text-overflow: ellipsis;
+       }
+
+      #root-mask{
+          width:100vw;
+          height: 100vh;
+          background-color: rgba(155,155,155,0.5);
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 2;
+      }

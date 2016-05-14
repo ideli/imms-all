@@ -7,8 +7,8 @@
     <!--<link rel="stylesheet" href="../dist/css/info-mng.css"/>-->
 </head>
 <body>
-<div id="main" class="table">
-    <div id="tree-menu" class="table-cell">
+<div id="main">
+    <div id="tree-menu">
         <div class="easyui-accordion">
             <div title="实施项目管理" data-options="iconCls:'icon-la',collapsible:false">
             </div>
@@ -29,66 +29,11 @@
         </div>
         <p id="toggle-tag">◄</p>
     </div>
-    <div id="content" class="table-cell">
+    <div id="content">
         <iframe src="http://baidu.com"></iframe>
     </div>
-
 </div>
 
-<style>
-    body{
-        clear:both;
-        visibility:hidden;
-    }
-    #main{
-        clear:both;
-        width: 100%;
-        height:100%;
-    }
-    .accordion{
-        /*border-right:none;*/
-    }
-    .accordion-body li{
-        padding-left:30px;
-        line-height: 24px;
-        cursor: pointer;
-    }
-    #tree-menu{
-        /*float:left;*/
-        width: 170px;
-        height: 100%;
-        overflow-y: auto;
-        background-color: #eee;
-        vertical-align: top;
-        /*border-right:1px solid #ddd;*/
-    }
-    #content{
-        /*float:right;*/
-        height: 100%;
-        background: #fff;
-    }
-    #content>iframe{
-        width: 100%;
-        height:100%;
-    }
-    #toggle-tag{
-        position: fixed;
-        top: 45%;
-        left: -3px;
-        width: 13px;
-        height: 100px;
-        line-height: 100px;
-        font-size: 13px;
-        background-color: #A2A2A2;
-        color: #fff;
-        border-radius: 0 5px 5px 0;
-        -webkit-user-select: none;
-    }
-    .accordion .accordion-header-selected{
-        background-color: #aaa;
-        color:gold;
-    }
-</style>
 
 <script type="text/template" id="search-result-tp">
 
@@ -99,33 +44,7 @@
 <script>
 
     $(function(){
-        $('.accordion-header').click(function(){
-            $('.accordion-header').removeClass('accordion-header-selected');
-            $(this).addClass('accordion-header-selected');
-        });
-        $('.accordion-collapse').click(function(){
-            $('.accordion-header').removeClass('accordion-header-selected');
-            $(this.parentNode.parentNode).addClass('accordion-header-selected');
-        });
-        var toogleTag=$('#toggle-tag');
-        var treeMenu=$('#tree-menu');
-        var content=$('#content')
-
-        //content.width(window.width-185);
-        $('body').css('visibility','visible');
-        var collapsed=false;
-        toogleTag.click(function(){
-            if(collapsed){
-                treeMenu.width(170);
-                //content.width(window.width-185);
-                toogleTag.html('◄')
-            }else{
-                treeMenu.width(1);
-               // content.width(window.width-16);
-                toogleTag.html('▶')
-            }
-            collapsed=!collapsed;
-        });
+        layoutInit();
     })
 </script>
 <!--<script src="../dist/js/info-mng.js"></script>-->

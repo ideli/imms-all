@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports={
+module.exports=module.exports={
     distVersion:"1.0"
 };
 },{}],2:[function(require,module,exports){
@@ -158,7 +158,7 @@ module.exports={
     importing('../lib/lambda');
     importing('../lib/echarts-all','echart');
     */
-    var config=require('../data/config');
+    var config=require('../data/config.json');
     var $=require('../lib/jquery');
     var $eui=require('../lib/eui');
     var $cookie=require('../lib/jquery.cookie');
@@ -217,7 +217,7 @@ module.exports={
             info:function(n){info(n);}
         }
     }
-},{"../data/config":1,"../lib/eui":3,"../lib/exDefEasyui":4,"../lib/exDefJquery":5,"../lib/exy":6,"../lib/jquery":9,"../lib/jquery.autocompleteplus":7,"../lib/jquery.cookie":8,"../lib/lambda":10}],3:[function(require,module,exports){
+},{"../data/config.json":1,"../lib/eui":3,"../lib/exDefEasyui":4,"../lib/exDefJquery":5,"../lib/exy":6,"../lib/jquery":9,"../lib/jquery.autocompleteplus":7,"../lib/jquery.cookie":8,"../lib/lambda":10}],3:[function(require,module,exports){
 var _easyui=function(jQuery) {
     (function ($) {
         $.parser = {
@@ -15806,7 +15806,37 @@ module.exports={
                 closable: closable!==false
             });
         }
+    },
+    layoutInit:function (){
+        $('.accordion-header').click(function(){
+            $('.accordion-header').removeClass('accordion-header-selected');
+            $(this).addClass('accordion-header-selected');
+        });
+        $('.accordion-collapse').click(function(){
+            $('.accordion-header').removeClass('accordion-header-selected');
+            $(this.parentNode.parentNode).addClass('accordion-header-selected');
+        });
+        var toggleTag=$('#toggle-tag');
+        var treeMenu=$('#tree-menu');
+        var content=$('#content')
+
+        //content.width(window.width-185);
+        $('body').css('visibility','visible');
+        var collapsed=false;
+        toggleTag.click(function(){
+            if(collapsed){
+                treeMenu.width(170).find('.accordion').fadeIn();
+                //content.width(window.width-185);
+                toggleTag.html('◄')
+            }else{
+                treeMenu.find('.accordion').hide(),treeMenu.width(1);
+                // content.width(window.width-16);
+                toggleTag.html('▶')
+            }
+            collapsed=!collapsed;
+        });
     }
+
 };
 },{}],5:[function(require,module,exports){
 //基于jquery的拓展

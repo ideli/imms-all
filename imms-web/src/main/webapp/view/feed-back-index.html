@@ -8,35 +8,34 @@
 </head>
 <body>
 
-<div id="main" class="table">
-        <div id="tree-menu" class="table-cell">11</div>
-        <div id="content" class="table-cell">22</div>
-</div>
+
+<h1>用户反馈</h1>
+<input type="text" id="addr" value="./reports-index.html"/>
+<button id="btn-open">用模态窗打开页面</button>
+<button id="btn-open2">在顶层用模态窗打开页面</button>
+<button id="btn-open3">用新标签打开页面</button>
+<button id="btn-open4">打开内部form弹窗</button>
+<!--<button id="btn-open5">顶层打开form弹窗</button>-->
+
+<form action="" id="myform" class="hidden">
+    姓名:<input type="text"/><br>
+    年龄:<input type="text"/><br>
+    电话:<input type="text"/><br>
+    地址:<input type="text"/><br>
+    工作:<input type="text"/><br>
+    性别:<input type="text"/><br>
+    <input type="button" value="提交"/><br>
+</form>
 
 
-<!--<h1>用户反馈</h1>-->
-<!--<input type="text" id="addr" value="./view/reports-index.html"/>-->
-<!--<button id="btn-open">打开模块内弹窗</button>-->
-<!--<button id="btn-open2">打开顶层弹窗</button>-->
-<!--<button id="btn-open3">打开新标签窗口</button>-->
-<!--<button id="btn-open4">打开录入form弹窗</button>-->
-<!--<form action="" id="myform" class="hidden">-->
-    <!--姓名:<input type="text"/><br>-->
-    <!--年龄:<input type="text"/><br>-->
-    <!--电话:<input type="text"/><br>-->
-    <!--地址:<input type="text"/><br>-->
-    <!--工作:<input type="text"/><br>-->
-    <!--性别:<input type="text"/><br>-->
-    <!--<input type="button" value="提交"/><br>-->
-<!--</form>-->
-<!--<table >-->
-    <!--<thead>  <th></th> <th></th> <th></th> </thead>-->
-    <!--<tbody  class="search-result">-->
-    <!--<tr tpsource="#search-result-tp">-->
-    <!--</tbody>-->
-<!--</table>-->
+<table >
+    <thead>  <th></th> <th></th> <th></th> </thead>
+    <tbody  class="search-result">
+    <tr tpsource="#search-result-tp">
+    </tbody>
+</table>
 
-
+<div class="mask"></div>
 <script type="text/template" id="search-result-tp">
 
 </script>
@@ -47,15 +46,6 @@
 <script src="../dist/js/base.js"></script>
 <!--<script src="../dist/js/feed-back.js"></script>-->
 <style>
-    #main{
-        width:100%;
-    }
-    #tree-menu{
-        width:100px;
-    }
-    #content{
-        background: red;
-    }
     #myform{
         padding: 10px;
         height:320px;
@@ -66,28 +56,31 @@
         height:22px;
         margin: 5px;
     }
+    .mask{
+        width:100vw;
+        height:100vh;
+    }
 </style>
 <script>
     $('#btn-open4').click(function(){
         $open('#myform',{width:640,height:320});
         //$('#myform').window({width:640,height:320})
     });
+//    $('#btn-open5').click(function(){
+//        var win=$open('#myform',{width:640,height:320,top:-100});
+//        $('.mask').show();
+//        win.find('a.panel-tool-close').click(function(){$('.mask').hide();})
+//    });
     $('#btn-open').click(function(){
-        $open(byid('addr').value||'http://baidu.com',{width:960,height:520});
+        $open('http://baidu.com',{width:960,height:520});
     });
     $('#btn-open2').click(function(){
-        top.$open('./view/reports-index.html',{width:1160,height:680});
+        top.$open('http://baidu.com',{width:1160,height:680});
     });
     var index=0;
     $('#btn-open3').click(function(){
         index++;
-//        var winTabs=top.$('#root-tabs');
-//        winTabs.tabs('add',{
-//            title: '关系网络'+index,
-//            content:'<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(byid('addr').value||'http://baidu.com'),
-//            closable: true
-//        });
-        $append(byid('addr').value||'http://baidu.com','关系网络'+index);
+        $append('http://baidu.com','关系网络'+index);//byid('addr').value||
     })
 
 </script>

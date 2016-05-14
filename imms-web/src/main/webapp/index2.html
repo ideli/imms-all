@@ -143,7 +143,7 @@
     </nav>
     </header>
 
-    <div id="main"></div>
+    <div id="root-main"></div>
     <div id="root-tabs" class="easyui-tabs" style="height:720px;width:100%;">
         <!--<div title="应用面板" class="pd10">-->
             <!--<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>-->
@@ -154,31 +154,14 @@
         </div>
     </div>
     <!--<iframe id="content" name="content" src="view/reports/reports-index.html" frameborder="0"></iframe>-->
-
+    <div id="root-mask"></div>
 </body>
 
 <!--<script src="lib/easyloader.js"></script>-->
 <script src="dist/js/base.js"></script>
 <!--<script src="dist/js/index.js"></script>-->
 <style>
-    #root-tabs>.tabs-panels{
-        border: none;
-    }
-    .tabs-first>a.tabs-inner{
-        background: -webkit-linear-gradient(top , gold, palegoldenrod 38%, #fff 90%)!important;
-        /*background: -webkit-linear-gradient(top , orange, rgba(243, 161, 10, 0.34) 38%, #fff 90%)!important;*/
-    }
-    .tabs-first>a.tabs-inner span{
-        /*color:#888;*/
-    }
-    .tabs-first a.tabs-close{
 
-    }
-    a.tabs-inner{
-        max-width:10em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 </style>
 <script>
 
@@ -197,12 +180,12 @@
                 setTimeout(function(){
                     $this.animate({height:110},1600)
                             .animate({height:120},200);
-                },2000);
+                },1600);
             });
-        },500);
+        },300);
     }
 
-    indexInit();
+    indexInit(1);
 
     window.extending('rootTabs',$('#root-tabs'));
     rootTabs.height(window.height-130).tabs({'scrollIncrement':320});

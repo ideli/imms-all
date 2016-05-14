@@ -119,9 +119,6 @@
 /*@end*/
 
 
-/* @group 公共头部*/
-/*@end 公共头部*/
-
 
 /* @group 公共foot */
 /* @end 公共foot*/
@@ -208,5 +205,84 @@
     	filter:alpha(opacity=30)
     }
 /* @end */
+
+
+
+/*@group 总体布局*/
+
+/*@end 总体布局*/
+
+
+/*@group 公共布局*/
+	#main{
+		clear:both;
+		display:table;
+		width: 100%;
+		height:100%;
+	}
+	.accordion{
+		/*border-right:none;*/
+	}
+	.accordion-body li{
+		padding-left:30px;
+		line-height: 24px;
+		cursor: pointer;
+	}
+	#tree-menu{
+		/*float:left;*/
+		display: table-cell;
+		width: 170px;
+		height: 100%;
+		overflow-y: auto;
+		background-color: #eee;
+		vertical-align: top;
+		transition: 0.2s 0s ease;
+		/*border-right:1px solid #ddd;*/
+	}
+	#content{
+		/*float:right;*/
+		display: table-cell;
+		height: 100%;
+		background: #fff;
+	}
+	#content>iframe{
+		width: 100%;
+		height:100%;
+		box-sizing: border-box;
+		padding-left: 5px;
+	}
+	@keyframes heartbeat {
+		0%{transform:scale(1); }
+		50%{transform:scale(1,1.3); }
+		100%{transform:scale(1); }
+	}
+	@keyframes fadeInUp {
+		0%{opacity:1; }
+		50%{opacity:.2; }
+		100%{opacity:1; }
+	}
+	#toggle-tag{
+		position: fixed;
+		top: 40%;
+		left: -3px;
+		width: 13px;
+		height: 110px;
+		line-height: 110px;
+		font-size: 13px;
+		background-color: #A2A2A2;
+		color: #fff;
+		cursor: pointer;
+		border-radius: 0 5px 5px 0;
+		-webkit-user-select: none;
+		animation:fadeInUp 0.6s 3;
+	}
+	.accordion .accordion-header-selected{
+		background-color: #777;
+		/*background:-webkit-linear-gradient(top , #999, #BBB 80%, #DDD);*/
+	}
+	.accordion .accordion-header-selected .panel-title{
+		color:gold;
+	}
+/* @end 公共布局*/
 
 /*html,body{background-color:#6a6a6a;color:#fff;}*/
