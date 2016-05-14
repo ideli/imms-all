@@ -3,7 +3,14 @@
 var geoData=require('../data/geo.json');
 
 //checkDtd();
-importing('../lib/echarts-all.js',function(){mapInit(geoData);})
+importing('../lib/echarts-all.js',function(){
+    mapInit(geoData);
+    $('#main').animate({opacity:'0.1'},1200);
+    setTimeout(function(){
+        $('#main').animate({opacity:'1'},2400);
+    },3000)
+
+});
 
 function mapInit(geoData){
     var stars=[{"name":"福建省厅","value":"111"},{"name":"江西省厅","value":"111"},{"name":"上饶","value":"111"},{"name":"吉安","value":"111"},{"name":"潍坊","value":"111"},{"name":"济宁","value":"111"},{"name":"河南省厅","value":"222"},{"name":"郑州","value":"111"},{"name":"鹤壁","value":"222"},{"name":"新乡","value":"111"},{"name":"南阳","value":"111"},{"name":"驻马店","value":"111"},{"name":"武汉","value":"111"},{"name":"宜昌","value":"111"},{"name":"湖南省厅","value":"111"},{"name":"怀化","value":"111"},{"name":"广东省厅","value":"111"},{"name":"广州","value":"222"},{"name":"深圳","value":"222"},{"name":"梅州","value":"222"},{"name":"云浮","value":"222"},{"name":"拉萨","value":"111"},{"name":"陕西省厅","value":"111"},{"name":"青海省厅","value":"111"},{"name":"西宁","value":"111"},{"name":"宁夏省厅","value":"111"},{"name":"梧州","value":"333"},{"name":"北海","value":"333"},{"name":"实施管理平台省厅","value":"111"},{"name":"山东省厅","value":"333"},{"name":"新疆省厅","value":"111"},{"name":"银川","value":"333"},{"name":"崇左","value":"333"},{"name":"上海","value":"333"},{"name":"重庆","value":"333"},{"name":"泸州","value":"333"},{"name":"贵州省厅","value":"111"},{"name":"广西省厅","value":"333"},{"name":"内蒙古省厅","value":"111"},{"name":"北京","value":"222"},{"name":"天津","value":"111"},{"name":"河北省厅","value":"222"},{"name":"石家庄","value":"222"},{"name":"秦皇岛","value":"222"},{"name":"山西省厅","value":"111"},{"name":"太原","value":"111"},{"name":"晋城","value":"111"},{"name":"吕梁","value":"111"},{"name":"临汾","value":"111"},{"name":"辽宁省厅","value":"111"},{"name":"沈阳","value":"111"},{"name":"本溪 ","value":"111"},{"name":"吉林省厅","value":"111"},{"name":"浙江省厅","value":"111"},{"name":"杭州","value":"111"},{"name":"芜湖","value":"111"},{"name":"淮南","value":"111"}];
@@ -17,7 +24,7 @@ function mapInit(geoData){
         animation:true,
         //地图标题
         title : {
-            text: '云节点分布',
+            text: '刑技平台分布图',
             subtext: '',
             x:'center',
             textStyle : {color: 'steelblue','fontSize':'22px'}
@@ -270,10 +277,6 @@ function mapInit(geoData){
     window.onresize = myChart.resize;
     myChart.setOption(option);
 }
-
-$(doc.body).css('background','gray').on('dblclick',function(){
-    mapInit(geoData);
-})
 
 
 //$script('../lib/echarts-all',function(){
