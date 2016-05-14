@@ -7,8 +7,8 @@
     <!--<link rel="stylesheet" href="../dist/css/info-mng.css"/>-->
 </head>
 <body>
-<div id="main">
-    <div id="tree-menu">
+<div id="main" class="table">
+    <div id="tree-menu" class="table-cell">
         <div class="easyui-accordion">
             <div title="实施项目管理" data-options="iconCls:'icon-la',collapsible:false">
             </div>
@@ -27,9 +27,12 @@
             <div title="问题共享管理" data-options="iconCls:'icon-la',collapsed:false,collapsible:false" >
             </div>
         </div>
+        <p id="toggle-tag">◄</p>
     </div>
-    <p id="toggle-tag">◄</p>
-    <iframe id="content" src="http://baidu.com"></iframe>
+    <div id="content" class="table-cell">
+        <iframe src="http://baidu.com"></iframe>
+    </div>
+
 </div>
 
 <style>
@@ -39,6 +42,7 @@
     }
     #main{
         clear:both;
+        width: 100%;
         height:100%;
     }
     .accordion{
@@ -50,17 +54,22 @@
         cursor: pointer;
     }
     #tree-menu{
-        float:left;
+        /*float:left;*/
         width: 170px;
         height: 100%;
         overflow-y: auto;
         background-color: #eee;
+        vertical-align: top;
         /*border-right:1px solid #ddd;*/
     }
     #content{
-        float:right;
-        min-height: 100%;
+        /*float:right;*/
+        height: 100%;
         background: #fff;
+    }
+    #content>iframe{
+        width: 100%;
+        height:100%;
     }
     #toggle-tag{
         position: fixed;
@@ -74,6 +83,10 @@
         color: #fff;
         border-radius: 0 5px 5px 0;
         -webkit-user-select: none;
+    }
+    .accordion .accordion-header-selected{
+        background-color: #aaa;
+        color:gold;
     }
 </style>
 
@@ -98,17 +111,17 @@
         var treeMenu=$('#tree-menu');
         var content=$('#content')
 
-        content.width(window.width-185);
+        //content.width(window.width-185);
         $('body').css('visibility','visible');
         var collapsed=false;
         toogleTag.click(function(){
             if(collapsed){
                 treeMenu.width(170);
-                content.width(window.width-185);
+                //content.width(window.width-185);
                 toogleTag.html('◄')
             }else{
                 treeMenu.width(1);
-                content.width(window.width-16);
+               // content.width(window.width-16);
                 toogleTag.html('▶')
             }
             collapsed=!collapsed;
