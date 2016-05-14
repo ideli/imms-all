@@ -1,6 +1,6 @@
 //var base=require('./base');
 //var echarts=require('../lib/echarts-all');
-var geoData=require('../data/geo.js');
+var geoData=require('../data/geo.json');
 
 //checkDtd();
 importing('../lib/echarts-all.js',function(){mapInit(geoData);})

@@ -153,7 +153,7 @@
     importing('../lib/lambda');
     importing('../lib/echarts-all','echart');
     */
-    var config=require('../data/config');
+    var config=require('../data/config.json');
     var $=require('../lib/jquery');
     var $eui=require('../lib/eui');
     var $cookie=require('../lib/jquery.cookie');
