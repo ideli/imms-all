@@ -1,19 +1,3 @@
-//jQuery lite
-if(typeof jQuery=='undefined'){
-    var jQuery=function(id){return new jQuery.init(document.getElementById(id.slice(1)))};
-    jQuery.init=function(ele){
-        this[0]=ele;
-        this.html=function(str){
-            if(str){
-				this[0].innerHTML=str;
-				return this;
-			}else{
-				return this[0].innerHTML.replace(/^\s*|\s*$/gm,'');
-			} 
-        };
-        this.attr=function(name){return this[0].getAttribute(name);}
-    };
-}
 
 //for null,undefined,number,xss and others
 function encodeTag(str,desc4null){
@@ -70,7 +54,7 @@ function $compile(source,data,arg2,arg3) {
     data = typeof data.pop=='function' ? data : [data];
     var i=0,j=data.length,sb=[];
     for(;i<j;i++){
-        helper && helper(data[i],i);
+        helper && !data[i]._done_ && helper(data[i],i) && (data[i]._done_=true);//helper return true就可以保证不重复处理
         //注意这个i是当前相对第几行，而不是所有结果的第几条。要得到后者需要算上页码和页数，或后台传rownum
         sb.push(format(data[i],source).replace('{$index}',i+1));
     }
@@ -93,7 +77,7 @@ var $template=(function($){
             });
         }
     }
-})(jQuery);
+})(window.jQuery);
 
 // 这个方法和$compile一样暴露出来，供特殊情况时手动使用。
 function $makeTemplate(tempstr,colsData,isHead){
@@ -124,4 +108,14 @@ var $templatePlus=(function($){
                 }
                 $(container).html(html);
             }
-})(jQuery);
+})(window.jQuery);
+
+var obj={
+    encodeTag:encodeTag,
+    $compile:$compile,
+    $template:$template,
+    $templatePlus:$templatePlus,
+    $makeTemplate:$makeTemplate
+}
+//window.extending(obj);
+if ( typeof module === "object" && typeof module.exports === "object" )module.exports=obj;

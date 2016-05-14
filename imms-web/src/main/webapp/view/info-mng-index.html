@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>evan's simple-template </title>
+    <link rel="stylesheet" href="../dist/css/base.css"/>
+    <!--<link rel="stylesheet" href="../dist/css/info-mng.css"/>-->
+</head>
+<body>
+<div id="main">
+    <div id="tree-menu">
+        <div class="easyui-accordion">
+            <div title="实施项目管理" data-options="iconCls:'icon-la',collapsible:false">
+            </div>
+            <div title="存储过程管理" data-options="iconCls:'icon-la'" style="padding:5px;">
+                <ul>
+                    <li>项目存储过程</li>
+                    <li>工作存储过程</li>
+                </ul>
+            </div>
+            <div title="系统参数管理" data-options="iconCls:'icon-la',collapsible:false">
+            </div>
+            <div title="系统版本管理" data-options="iconCls:'icon-la',collapsible:false" >
+            </div>
+            <div title="模块语句管理" data-options="iconCls:'icon-la',collapsible:false" >
+            </div>
+            <div title="问题共享管理" data-options="iconCls:'icon-la',collapsed:false,collapsible:false" >
+            </div>
+        </div>
+    </div>
+    <p id="toggle-tag">◄</p>
+    <iframe id="content" src="http://baidu.com"></iframe>
+</div>
+
+<style>
+    body{
+        clear:both;
+        visibility:hidden;
+    }
+    #main{
+        clear:both;
+        height:100%;
+    }
+    .accordion{
+        /*border-right:none;*/
+    }
+    .accordion-body li{
+        padding-left:30px;
+        line-height: 24px;
+        cursor: pointer;
+    }
+    #tree-menu{
+        float:left;
+        width: 170px;
+        height: 100%;
+        overflow-y: auto;
+        background-color: #eee;
+        /*border-right:1px solid #ddd;*/
+    }
+    #content{
+        float:right;
+        min-height: 100%;
+        background: #fff;
+    }
+    #toggle-tag{
+        position: fixed;
+        top: 45%;
+        left: -3px;
+        width: 13px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 13px;
+        background-color: #A2A2A2;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        -webkit-user-select: none;
+    }
+</style>
+
+<script type="text/template" id="search-result-tp">
+
+</script>
+
+</body>
+<script src="../dist/js/base.js"></script>
+<script>
+
+    $(function(){
+        $('.accordion-header').click(function(){
+            $('.accordion-header').removeClass('accordion-header-selected');
+            $(this).addClass('accordion-header-selected');
+        });
+        $('.accordion-collapse').click(function(){
+            $('.accordion-header').removeClass('accordion-header-selected');
+            $(this.parentNode.parentNode).addClass('accordion-header-selected');
+        });
+        var toogleTag=$('#toggle-tag');
+        var treeMenu=$('#tree-menu');
+        var content=$('#content')
+
+        content.width(window.width-185);
+        $('body').css('visibility','visible');
+        var collapsed=false;
+        toogleTag.click(function(){
+            if(collapsed){
+                treeMenu.width(170);
+                content.width(window.width-185);
+                toogleTag.html('◄')
+            }else{
+                treeMenu.width(1);
+                content.width(window.width-16);
+                toogleTag.html('▶')
+            }
+            collapsed=!collapsed;
+        });
+    })
+</script>
+<!--<script src="../dist/js/info-mng.js"></script>-->
+</html>

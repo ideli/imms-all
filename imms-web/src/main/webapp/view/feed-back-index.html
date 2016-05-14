@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>evan's simple-template </title>
+    <link rel="stylesheet" href="../dist/css/base.css"/>
+    <link rel="stylesheet" href="../dist/css/feed-back.css"/>
+</head>
+<body>
+<h1>用户反馈</h1>
+<input type="text" id="addr" value="./view/reports-index.html"/>
+<button id="btn-open">打开模块内弹窗</button>
+<button id="btn-open2">打开顶层弹窗</button>
+<button id="btn-open3">打开新标签窗口</button>
+<button id="btn-open4">打开录入form弹窗</button>
+<form action="" id="myform" class="hidden">
+    姓名:<input type="text"/><br>
+    年龄:<input type="text"/><br>
+    电话:<input type="text"/><br>
+    地址:<input type="text"/><br>
+    工作:<input type="text"/><br>
+    性别:<input type="text"/><br>
+    <input type="button" value="提交"/><br>
+</form>
+<table >
+    <thead>  <th></th> <th></th> <th></th> </thead>
+    <tbody  class="search-result">
+    <tr tpsource="#search-result-tp">
+    </tbody>
+</table>
+
+
+<script type="text/template" id="search-result-tp">
+
+</script>
+
+</body>
+<script src="../lib/jquery.js"></script>
+<script src="../lib/eui.js"></script>
+<script src="../dist/js/base.js"></script>
+<!--<script src="../dist/js/feed-back.js"></script>-->
+<style>
+    #myform{
+        padding: 10px;
+        height:320px;
+        text-align: center;
+    }
+    #myform input{
+        width:180px;
+        height:22px;
+        margin: 5px;
+    }
+</style>
+<script>
+    $('#btn-open4').click(function(){
+        $open('#myform',{width:640,height:320});
+        //$('#myform').window({width:640,height:320})
+    });
+    $('#btn-open').click(function(){
+        $open(byid('addr').value||'http://baidu.com',{width:960,height:520});
+    });
+    $('#btn-open2').click(function(){
+        top.$open('./view/reports-index.html',{width:1160,height:680});
+    });
+    var index=0;
+    $('#btn-open3').click(function(){
+        index++;
+//        var winTabs=top.$('#root-tabs');
+//        winTabs.tabs('add',{
+//            title: '关系网络'+index,
+//            content:'<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(byid('addr').value||'http://baidu.com'),
+//            closable: true
+//        });
+        $append(byid('addr').value||'http://baidu.com','关系网络'+index);
+    })
+
+</script>
+</html>
