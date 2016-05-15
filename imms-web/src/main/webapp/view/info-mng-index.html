@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../dist/css/base.css"/>
     <!--<link rel="stylesheet" href="../dist/css/info-mng.css"/>-->
 </head>
-<body>
+<body class="hidden">
 <div id="main">
     <div id="tree-menu">
         <div class="easyui-accordion">
@@ -44,8 +44,8 @@
 <script>
 
     $(function(){
-        layoutInit();
-        $('#tree-menu  .panel-body li').click(function(){
+        layoutInit(600);
+        $('#tree-menu .panel-body li').click(function(){
             $('.accordion-header').removeClass('accordion-header-selected');
             $('.panel-body li').removeClass('current-sec-item');
             $(this).addClass('current-sec-item').parents('.panel').find('.accordion-header').addClass('accordion-header-selected');

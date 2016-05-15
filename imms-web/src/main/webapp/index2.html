@@ -178,7 +178,7 @@
             $this.addClass('current');
         });
 
-        animate && $('.nav-wrap').addClass('.animate').setTimeout(function(){
+        animate && $('.nav-wrap').addClass('animate') && setTimeout(function(){
             $('header').animate({height:360},1200,function(){
                 var $this=$(this);
                 setTimeout(function(){
@@ -189,7 +189,9 @@
         },300);
     }
 
+
     indexInit(localStorage.indexAnimation!=='0');
+
 
     window.extending('rootTabs',$('#root-tabs'));
     rootTabs.height(window.height-130).tabs({'scrollIncrement':320});
