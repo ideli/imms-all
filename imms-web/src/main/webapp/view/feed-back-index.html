@@ -78,9 +78,10 @@
         top.$open('http://baidu.com',{width:1160,height:680});
     });
     var index=0;
+    var urls=['http://baidu.com','http://126.com','http://taobao.com','http://120.24.167.44/bbs/forum.php','http://114.251.89.17:81/zentao/index.php','http://bing.com'];
     $('#btn-open3').click(function(){
         index++;
-        $append('http://baidu.com','关系网络'+index);//byid('addr').value||
+        $append(urls[index%6],'关系网络'+index);//byid('addr').value||
     })
 
 </script>
