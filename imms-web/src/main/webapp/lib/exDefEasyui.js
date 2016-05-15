@@ -122,6 +122,7 @@ module.exports={
     },
     layoutInit:function (){
         $('.accordion-header').click(function(){
+            $('.panel-body li').removeClass('current-sec-item');
             $('.accordion-header').removeClass('accordion-header-selected');
             $(this).addClass('accordion-header-selected');
         });
@@ -136,7 +137,7 @@ module.exports={
         //content.width(window.width-185);
         $('body').css('visibility','visible');
         var collapsed=false;
-        toggleTag.click(function(){
+        var doToggle=function(){
             if(collapsed){
                 treeMenu.width(170).find('.accordion').fadeIn();
                 //content.width(window.width-185);
@@ -147,7 +148,9 @@ module.exports={
                 toggleTag.html('▶')
             }
             collapsed=!collapsed;
-        });
+        };
+        toggleTag.click(doToggle);
+        setTimeout(doToggle,900);
     }
 
 };

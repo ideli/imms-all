@@ -11,10 +11,10 @@
 
 <h1>用户反馈</h1>
 <input type="text" id="addr" value="./reports-index.html"/>
-<button id="btn-open">用模态窗打开页面</button>
-<button id="btn-open2">在顶层用模态窗打开页面</button>
-<button id="btn-open3">用新标签打开页面</button>
-<button id="btn-open4">打开内部form弹窗</button>
+<button id="btn-open"  class="easyui-linkbutton" data-options="iconCls:'icon-add'">用模态窗打开页面</button>
+<button id="btn-open2" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">在顶层用模态窗打开页面</button>
+<button id="btn-open3" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">用新标签打开页面</button>
+<button id="btn-open4" class="easyui-linkbutton" data-options="iconCls:'icon-pencil'">打开内部form弹窗</button>
 <!--<button id="btn-open5">顶层打开form弹窗</button>-->
 
 <form action="" id="myform" class="hidden">
@@ -41,8 +41,6 @@
 </script>
 
 </body>
-<script src="../lib/jquery.js"></script>
-<script src="../lib/eui.js"></script>
 <script src="../dist/js/base.js"></script>
 <!--<script src="../dist/js/feed-back.js"></script>-->
 <style>
@@ -63,7 +61,7 @@
 </style>
 <script>
     $('#btn-open4').click(function(){
-        $open('#myform',{width:640,height:320});
+        $open('#myform',{width:640,height:320,top:24});
         //$('#myform').window({width:640,height:320})
     });
 //    $('#btn-open5').click(function(){

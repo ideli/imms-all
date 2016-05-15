@@ -3,6 +3,7 @@
 }
 .icon-add{
 	background:url('../img/icon/edit_add.png') no-repeat center center;
+	-webkit-filter:grayscale(1);
 }
 .icon-edit{
 	background:url('../img/icon/pencil.png') no-repeat center center;
@@ -54,6 +55,10 @@
 }
 .icon-tip{
 	background:url('../img/icon/tip.png') no-repeat center center;
+}
+.icon-pencil{
+	background:url('../img/icon/pencil.png') no-repeat center center;
+	-webkit-filter:grayscale(1);
 }
 .icon-filter{
 	background:url('../img/icon/filter.png') no-repeat center center;

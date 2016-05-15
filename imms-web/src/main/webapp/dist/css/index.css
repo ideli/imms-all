@@ -30,8 +30,10 @@
             right:-25px;
             padding:0 31px;
             background: transparent;
-            animation:hozinal 6s 0.2s 1;
         }
+       .nav-wrap.animate{
+           animation:hozinal 6s 0.2s 1;
+       }
 		.arr-l-wrap,.arr-r-wrap{
             position: absolute;
             width: 31px;
@@ -251,6 +253,9 @@
        }
 
        /*选项卡*/
+       #root-tabs>.tabs-header{
+           background-color: #fff;
+       }
        #root-tabs>.tabs-panels{
            border: none;
        }
@@ -259,6 +264,8 @@
            /*background: -webkit-linear-gradient(top , orange, rgba(243, 161, 10, 0.34) 38%, #fff 90%)!important;*/
        }
        #root-tabs .tabs-first>a.tabs-inner span{
+           font-size: 13px;
+           font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
            /*color:#888;*/
        }
        #root-tabs .tabs-first a.tabs-close{

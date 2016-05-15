@@ -45,6 +45,22 @@
 
     $(function(){
         layoutInit();
+        $('#tree-menu  .panel-body li').click(function(){
+            $('.accordion-header').removeClass('accordion-header-selected');
+            $('.panel-body li').removeClass('current-sec-item');
+            $(this).addClass('current-sec-item').parents('.panel').find('.accordion-header').addClass('accordion-header-selected');
+
+        });
+        if(top._currentItem_){
+            $('#tree-menu .panel-title,#tree-menu .panel-body li').each(function(i,v){
+                if($(this).html()==top._currentItem_.html()){
+                    //alert(this.nodeName)
+                    this.nodeName!=='LI'?$(this).parents('.panel-header').click():
+                            ($(this).parents('.panel').find('.panel-header .accordion-collapse').click() && $(this).click());
+                    //$(this).parents('.panel').find('.panel-header').click();
+                }
+            });
+        }
     })
 </script>
 <!--<script src="../dist/js/info-mng.js"></script>-->
