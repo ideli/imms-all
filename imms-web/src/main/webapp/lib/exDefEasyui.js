@@ -109,18 +109,26 @@ module.exports={
     },
     $append:function(src,label,iconCls,closable){
         var rootTabs=top.rootTabs||top.$('#root-tabs');
-        if(rootTabs.tabs('tabs').length>6){
-            $alert('页签窗口过多, 请关闭部分页签, 再尝试打开新窗口!');
-        }else{
+        var addTab=function(){
             rootTabs.tabs('add',{
                 title: label,//'Tab'+index,
                 content:'<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(src),
                 iconCls:iconCls||null,//'icon-reload',
                 closable: closable!==false
             });
+        };
+        if(rootTabs.tabs('tabs').length>(parseInt(localStorage.maxtabs)||6)){
+            top.$confirm('页签窗口过多!<br>将自动关闭一个页签, 再打开新窗口。<br>是否继续?',function(res){
+                if(res) {
+                    rootTabs.tabs('close', 1);
+                    addTab();
+                }
+            });
+        }else{
+            addTab();
         }
     },
-    layoutInit:function (){
+    layoutInit:function (autoToggle){
         $('.accordion-header').click(function(){
             $('.panel-body li').removeClass('current-sec-item');
             $('.accordion-header').removeClass('accordion-header-selected');
@@ -150,7 +158,7 @@ module.exports={
             collapsed=!collapsed;
         };
         toggleTag.click(doToggle);
-        setTimeout(doToggle,900);
+        typeof autoToggle=='number'&&setTimeout(doToggle,autoToggle);
     }
 
 };

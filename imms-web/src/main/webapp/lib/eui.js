@@ -4464,8 +4464,8 @@ var _easyui=function(jQuery) {
             }
         };
         $.messager.defaults = $.extend({}, $.fn.window.defaults, {
-            ok: "Ok",
-            cancel: "Cancel",
+            ok: "确定",
+            cancel: "取消",
             width: 300,
             height: "auto",
             modal: true,
