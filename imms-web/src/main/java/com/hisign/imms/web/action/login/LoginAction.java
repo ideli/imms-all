@@ -51,6 +51,7 @@ public class LoginAction {
             //所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法
             logger.info("对用户[{}}]进行登录验证..验证开始", username);
             currentUser.login(token);
+
             logger.info("对用户[{}]进行登录验证..验证通过", username);
             resultPageURL = InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/index";
         }catch(UnknownAccountException uae){

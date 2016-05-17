@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-xxx
-=======
 <%@ page language="java" contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -241,4 +238,3 @@ xxx
 
 </script>
 </html>
->>>>>>> 0888e86b260b115b27c2399d6760119df8a2e562

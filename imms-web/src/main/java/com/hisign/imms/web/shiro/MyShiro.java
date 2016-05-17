@@ -66,6 +66,7 @@ public class MyShiro extends AuthorizingRealm {
             AuthenticationToken authenticationToken) throws AuthenticationException {
         //UsernamePasswordToken对象用来存放提交的登录信息
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        String username = (String) authenticationToken.getPrincipal();
         //查出是否有此用户
         SysUser user = null;
         try {

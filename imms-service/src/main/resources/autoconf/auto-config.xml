@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <property name="environment" defaultValue="DEV" description="所属环境"/>
+        <property name="appName" defaultValue="OLAPENGINE_APP"
+                  description="app名称"/>
+
+        <!--MySQL -->
+        <property name="db.driverClass" defaultValue="com.mysql.jdbc.Driver"
+                  description="mysql驱动类"/>
+        <property name="db.jdbcUrl"
+                  defaultValue="jdbc:mysql://10.101.235.37:3306/got?characterEncoding=utf-8"
+                  description="jdbc的路径"/>
+        <property name="db.username" defaultValue="got" description="用户名"/>
+        <property name="db.password" defaultValue="123456"
+                  description="密码"/>
+
+        <property name="olapengine.logging.logger.level"
+                  defaultValue="INFO" description="日志级别"/>
+        <property name="olapengine.logging.logger.root" defaultValue="/home/admin/olapengine/logs"
+                  description="日志路径"/>
+        <property name="olapengine.logging.logger.charset"
+                  defaultValue="UTF-8" description="日志编码"/>
+
+        <!--MetaQ -->
+        <property name="metaq.topic" defaultValue="OLAP_TOPIC"
+                  description="metaq的topic"/>
+        <property name="metaq.group" defaultValue="CID_olapengine"
+                  description="metaq的group"/>
+
+        <!--tbus -->
+        <property name="hsf.tbus.version" defaultValue="1.0.0" description="tbus的hsf版本"/>
+        <property name="hsf.receiver.version" defaultValue="1.0.0.olapEngine" description="hsf的接收版本"/>
+        <property name="hsf.pid" defaultValue="olapEngine" description="hsf的pid"/>
+        <property name="hsf.port" defaultValue="8600" description="hsf端口"/>
+
+    </group>
+    <script>
+        <generate template="common-service.xml.vm" destfile="common-service.xml"
+                  charset="UTF-8"/>
+        <generate template="metaq-service.xml.vm" destfile="metaq-service.xml"
+                  charset="UTF-8"/>
+        <generate template="tbus-client.properties.vm" destfile="tbus-client.properties"
+                  charset="UTF-8"/>
+    </script>
+</config>
