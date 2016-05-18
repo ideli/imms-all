@@ -3,6 +3,8 @@ package com.hisign.imms.api.system;
 import com.github.pagehelper.Page;
 import com.hisign.imms.model.SysUser;
 
+import java.util.List;
+
 /**
  * 用户信息接口
  * @author wangping
@@ -23,6 +25,8 @@ public interface SysUserService {
      * @return
      */
     SysUser findSysUserByUserName(String userName);
+
+    public List<SysUser> findSysUserList2();
 
     public SysUser findSysUserList(String username);
 }

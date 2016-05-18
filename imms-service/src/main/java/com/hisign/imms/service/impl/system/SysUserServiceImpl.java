@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,21 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUser findSysUserList(@PathParam("username") String username) {
         SysUser user = sysUserMapper.findSysUserByUserName(username);
         return user;
+    }
+
+    @GET
+    @Path("list")
+    @Produces({"application/json;charset=UTF-8"})
+    public List<SysUser> findSysUserList2() {
+        List<SysUser> list = new ArrayList<SysUser>();
+        SysUser user = null;
+        for(int i=0;i<10;i++){
+            user = new SysUser();
+            user.setId(i+"_1233456789");
+            user.setUserName("test"+i);
+            list.add(user);
+        }
+        return list;
     }
 
     @Override

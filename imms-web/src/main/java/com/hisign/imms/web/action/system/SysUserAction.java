@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.hisign.imms.api.system.SysUserService;
 import com.hisign.imms.model.SysUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,4 +30,5 @@ public class SysUserAction {
 		Page<SysUser> page = sysUserService.findSysUserListByFilter(user);
 		return page;
 	}
+
 }
