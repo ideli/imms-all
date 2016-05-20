@@ -1,0 +1,20 @@
+#macro(renderOrderList $orders)
+      #foreach($o in $orders)
+        <tr>
+        	<td my-color="#AAAAAA">$o.name</td>
+        	<td>$o.age</td>
+        	<td>$o.no</td>
+        	<td>$o.name</td>
+        </tr>
+      #end
+#end
+<table>
+    <tr>
+        <td my-width="15">序号</td>
+        <td my-width="15">姓名</td>
+        <td my-width="15">年龄</td>
+        <td my-width="15">号码</td>
+    </tr>
+#renderOrderList($list)
+</table>
+

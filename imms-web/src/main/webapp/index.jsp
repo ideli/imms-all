@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" %>
+
 <!DOCTYPE html>
+<!--<%@ page language="java" contentType="text/html; charset=utf-8" %>-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +12,6 @@
 <body>
 <header>
     <canvas id="bubbleCanvas" width="320" height="150"></canvas>
-    <h1 id="head-txt">刑技实施管理平台</h1>
     <nav class="nav-wrap">
         <ul id="main-ul" class="nav">
             <li class="nav-first">
@@ -20,8 +21,8 @@
                 <a href="javascript:void(0);" mol-direct="view/info-mng-index.html">信息管理</a>
                 <div class="nav-second">
                     <a href="#">实施项目管理</a>
-                    <a href="#">项目存储过程</a>
-                    <a href="#">工作存储过程</a>
+                    <a href="#">存储过程管理(项目)</a>
+                    <a href="#">存储过程管理(工作)</a>
                     <a href="#">系统版本管理</a>
                     <a href="#">系统参数管理</a>
                     <a href="#">模块语句管理</a>
@@ -142,33 +143,26 @@
     </nav>
 </header>
 
-<div id="root-main"></div>
 <div id="root-tabs" class="easyui-tabs" style="height:720px;width:100%;">
     <!--<div title="应用面板" class="pd10">-->
     <!--<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>-->
     <!--</div>-->
 
-    <div title="当前模块:首页" no-data-options="iconCls:'icon-reload',closable:false">
-        <iframe id="mol-content" src="view/fst-page.html" frameborder="0"></iframe>
+    <div title="首页" no-data-options="iconCls:'icon-reload',closable:true" style="padding:10px">
+        <iframe class="mol-content" src="view/fst-page.html" frameborder="0"></iframe>
     </div>
 </div>
 <!--<iframe id="content" name="content" src="view/reports/reports-index.html" frameborder="0"></iframe>-->
-<div id="root-mask"></div>
+
 </body>
 
 <!--<script src="lib/easyloader.js"></script>-->
 <script src="dist/js/base.js"></script>
 <!--<script src="dist/js/index.js"></script>-->
-<style>
 
-</style>
 <script>
 
-    function indexInit(animate) {
-        if(!window.chrome){
-            doc.body.innerHTML='';
-            toast('请使用chrome谷歌浏览器打开本系统!',9999)
-        }
+    function indexInit() {
         //$('#content').height(window.height-120);
         $('.nav a').on('click',function(){
             var $this=$(this);
@@ -177,41 +171,29 @@
             $this.addClass('current');
         });
 
-        animate && $('.nav-wrap').addClass('animate') && setTimeout(function(){
+        setTimeout(function(){
             $('header').animate({height:360},1200,function(){
                 var $this=$(this);
                 setTimeout(function(){
                     $this.animate({height:110},1600)
                             .animate({height:120},200);
-                },1600);
+                },2000);
             });
-        },300);
+        },500);
     }
 
-
-    indexInit(localStorage.indexAnimation!=='0');
-
-
-    window.extending('rootTabs',$('#root-tabs'));
-    rootTabs.height(window.height-130).tabs({'scrollIncrement':320});
+    var winTabs=$('#root-tabs');
+    window.rootTabs=winTabs;
+    winTabs.height(window.height-130);
     $('.nav a').click(function(){
         var $this=$(this);
-        top._currentItem_=$this;
-        var mlink=$this.parents('.nav-first').children('a');
-        //log(mlink)
-        $('.nav a').removeClass('current');
-        mlink.addClass('current');
-        var src=mlink.attr('mol-direct');
-        var title='当前模块:'+(mlink.attr('mol-label')||$this.html());
-        var molTab=rootTabs.tabs('getTab',0);
-        //log(href)
-        rootTabs.tabs('update',{
-            tab:molTab,
-            options:{
-                title:title,
-                content: '<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(src)
-            }
-        }).tabs('select',0);
+        var src=$this.attr('mol-direct');
+        var label=$this.attr('mol-label')||$this.html();
+        if(winTabs.tabs('getTab',label)){
+            winTabs.tabs('select',label);
+        }else{
+            src && $append(src,label);
+        }
     });
 
 </script>
