@@ -1,0 +1,147 @@
+<table>
+    
+#############################  一般统计表格  start ######################################
+
+    <tr my-head>
+        <td my-height="35" colspan="3">人员统计表</td>
+    </tr>
+    <tr my-title>
+    	<td my-width="10">序号</td>
+    	<td my-width="10">姓名</td>
+    	<td my-width="10">年龄</td>
+    </tr>
+     #foreach ($person in $list)
+        <tr>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+        </tr>
+    #end
+
+#############################  一般统计表格  end ######################################
+
+<tr></tr>
+<tr></tr>
+<tr></tr>
+
+#############################  简单合并表格  start ######################################
+
+	<tr my-head>
+        <td my-height="35" colspan="4">现勘质量统计表</td>
+    </tr>
+    <tr my-title>
+        <td my-width="8" rowspan="2">地市</td>
+        <td my-width="8">立案数</td>
+        <td my-width="8">勘察数</td>
+        <td my-width="8">勘察率</td>
+    </tr>
+    <tr my-title>
+        <td my-width="8">A1</td>
+        <td my-width="8">B1</td>
+        <td my-width="8">U1</td>
+    </tr>
+    #foreach ($person in $list)
+        <tr>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+        </tr>
+    #end
+
+#############################  简单合并表格  end ###################################### 
+
+<tr></tr>
+<tr></tr>
+<tr></tr>
+
+ #############################  有备注合并表格  start ######################################  
+    <tr my-head>
+        <td my-height="35" colspan="8">人员统计表</td>
+    </tr>
+    <tr  my-title>
+        <td my-width="6" rowspan="2" colspan="2">单位1</td>
+        <td my-width="15" colspan="2">人员1</td>
+
+        <td my-width="15" rowspan="2" colspan="2">单位2</td>
+        <td my-width="15" colspan="2">人员2</td>
+    </tr>
+    <tr my-title>
+        <td my-width="15">姓名姓名姓名姓</td>
+        <td my-width="15">年龄</td>
+
+        <td my-width="15">姓名1</td>
+        <td my-width="15">年龄1</td>
+    </tr>
+    #foreach ($person in $list)
+        <tr>
+            <td my-width="15">$person.bsddm</td>
+            <td my-width="15">$person.bsddm</td>
+            <td my-warp>单位1:$person.bsddm
+            	单位2:$person.bsddm
+            	单位3:$person.bsddm
+            	单位4:$person.bsddm
+            </td>
+            <td>$person.bsddm</td>
+
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+            <td>$person.bsddm</td>
+        </tr>
+    #end
+    <tr>
+		<td my-remark colspan="8" rowspan="8" my-warp>
+		1、立案数A1：警综系统刑事案件立案数，时间：立案时间，单位：受理单位（来源于警综系统）,
+ 		2、10类案件立案数A2：警综系统杀人、爆炸、放火、强奸、绑架、投毒、破坏、伤害致死、入室盗窃和入室抢劫共10类案件立案数（来源于警综系统）,
+		3、勘查数B1：现场勘查系统勘验的数量，时间：勘查开始时间，单位：勘查单位（来源于现勘系统）,
+		4、勘查率U1=B1/A1,
+		5、十类案件勘查数B2：现勘系统杀人、爆炸、放火、强奸、绑架、投毒、破坏、伤害致死、入室盗窃和入室抢劫共10类案件（来源于现勘系统）,
+		6、十类案件勘查率U2=B2/A2,
+		7、已立刑事案件勘查数G1：统计警综案件表，已立案件被勘查,
+		8、已立刑事案件勘查率：G2=G1/A1
+		</td>
+	</tr>
+ #############################  有备注合并表格  end ###################################### 
+ 
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+
+#############################  复杂合并表格  start ######################################
+
+	<tr my-head>
+        <td my-height="35" colspan="12">比中情况统计表</td>
+    </tr>
+    <tr my-title>
+        <td rowspan="3">单位</td>
+        <td colspan="3">人员</td>
+        <td colspan="8">案件</td>
+    </tr>
+    <tr my-title>
+    	<td rowspan="2">总数</td>
+    	<td rowspan="2">指纹</td>
+    	<td rowspan="2">DNA</td>
+    	<td colspan="5">案件</td>
+    	<td rowspan="2">未关联警综案件数</td>
+    	<td colspan="2">指纹</td>
+    </tr>
+    <tr my-title>
+    	<td>案件总数</td>
+    	<td>今年以来案件数</td>
+    	<td>已破案件数</td>
+    	<td>破案前比重案件数</td>
+    	<td>未破案件数</td>
+    	<td>案件数</td>
+    	<td>今年以来案件数</td>
+    </tr>
+    
+#############################  复杂合并表格  end ######################################
+
+</table>
