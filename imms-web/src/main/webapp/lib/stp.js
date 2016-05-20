@@ -1,10 +1,19 @@
 
 //for null,undefined,number,xss and others
-function encodeTag(str,desc4null){
-    //除非显示设定为false，否则数字0会做‘’处理(字符串'0'不会)
-    ( (encodeTag.zeroAsEmpty!==false && str===0) || str==null ) && (str=desc4null||'');
-	return encodeTag.allowHTML ? String(str).replace(/\<\/?script\>/gmi,function(s){return s.replace(/\<|\>/gm,function($){return {'<':'&lt;','>':'&gt;'}[$]})})
-							   : String(str).replace(/\<|\>/gm,function($){return {'<':'&lt;','>':'&gt;'}[$]});
+function $encode(str,desc4null){
+    var dic={'<':'&lt;','>':'&gt;','"':'&quot',"'":'‘',':':'：'};//&#39; &apos;
+    // 除非显示设定为false，否则数字0会做‘’处理(字符串'0'不会)
+    if($encode.zeroAsEmpty!==false && str===0){
+        return '';
+    }
+    // 0做空处理，但不使用空值描述
+    if(str==null || str=='null' || str=='NULL'){
+        return desc4null||'';
+    }
+    str =   $encode.allowHTML ? String(str).replace(/\<\/?script[^\>]*\>/gmi,function(s){return s.replace(/\<|\>/gm,function($){return dic[$]})})
+        : String(str).replace(/\<|\>/gm,function($){return dic[$]});
+    //后台没做转义才开启，避免性能消耗
+    return $encode.tranSymbol ? str.replace(/\"\'\{\}\:/gm,function($){return dic[$];}):str;
 }
 //core
 function $compile(source,data,arg2,arg3) {
@@ -14,49 +23,69 @@ function $compile(source,data,arg2,arg3) {
         desc4null=arg2;
         typeof arg3=='function' && (helper=arg3);
     }else{
-        typeof arg2=='function' && (helper=arg3);
+        typeof arg2=='function' && (helper=arg2);
     }
-    //也可以在$template前先在data挂一个公用的钩子指向额外数据（主要是实现数组各项共用一个扩展数据）
-	//var the=data['this']||this; 放弃在各项上挂载‘this’属性指向this的小技俩
     var the=this;
-	if(!source){
-		throw new Error('source undefined! please chekout the template id or url!');
-	}
+    if(!source){
+        throw new Error('source undefined! please chekout the template id or url!');
+    }
     var format=function (obj,str,prefix) {
-        //二级属性用一级.做前缀即可
+        if(obj==null || (typeof obj.pop=='function' && obj.length==0)){
+            return '';
+        }else if(typeof obj=='object'){
+            var keys='';
+            for(var n in obj) keys+=n;
+            if(!keys) return '';
+        }
         prefix=prefix||'';
-        //{{#tp2}}表示嵌套模版
-        str=str.replace(/{{#\w+}}/g,function(g){
-			var id=g.replace(/{|}/g,'');
-			return jQuery(id).html()||(typeof console=='object' && console.error('can`t find the inlaid template: '+id))||'';
-		});
-        
-			str=str.replace(/{[A-z]+(\.?\w+)*}/gm,function(key){
-                var val=obj;
-                var arr=key.slice(1,-1).split('.');          
-                for(var i=0;i<arr.length;i++){
-                    //如果是this则指向代入的this, 直接赋值走向下个属性
-                    if(i==0 && arr[i]=='this'){
-                        val=the;
-                        continue;
-                    }
-                    //如果属性是方法则取返回值
-                    val= typeof val[arr[i]]=='function'? val[arr[i]]() :val[arr[i]]; 
-                    if(val==null){
-                        //break; 取消break，无属性等于''，这样还可以利用下级属性如length
-                        val='';
-                    } 
-                }               
-                return encodeTag(val,desc4null);
-			});
+        //{{arr:#tp2}}
+        str=str.replace(/{{\w*:?#[\w\-]+}}|{{\w*:?#[^#].+#}}/g,function(g){
+            g=g.replace(/{{|}}/gm,'').replace(/^\s+|\s+$/gm,'');
+            var d,t,e,i=g.indexOf(':');
+            if(i>-1){
+                d=g.slice(0,i);
+                if(g.lastIndexOf('#')==g.length-1){
+                    t=g.slice(i+2,-1);
+                }else{
+                    t=$(g.slice(i+1)).html();
+                    e=$(g.slice(i+1)).attr('desc4null');
+                }
+                return obj[d]?$compile(t,obj[d],e||desc4null):'';
+            }else{
+                return $(g).html()||(typeof console=='object' && console.error('can`t find the inlaid template: '+id))||'';
+            }
+        });
+
+        str=str.replace(/{[A-z]+(\.?\w+)*}/gm,function(key){
+            var val=obj;
+            var arr=key.slice(1,-1).split('.');
+            //console.warn(key)
+            for(var i=0;i<arr.length;i++){
+                //如果是this则指向代入的this, 直接赋值走向下个属性
+                if(i==0 && arr[i]=='this'){
+                    val=the;
+                    continue;
+                }
+                if(typeof val=='number' && arr[i]=='length'){
+                    //val=val;
+                }else{
+                    val=typeof val[arr[i]]=='function'? val[arr[i]]():val[arr[i]];
+                }
+                if((val==null||val=='null' || val=='NULL') && typeof arr[i+1]!='undefined'){
+                    val='';
+                }
+                //console.info('一次循环结束\n\n  ')
+            }
+            return $encode(val,desc4null);
+            //return the[key.replace(/{|}|(this)|\./g,'')];
+        });
         return str;
     }
     data = typeof data.pop=='function' ? data : [data];
     var i=0,j=data.length,sb=[];
     for(;i<j;i++){
-        helper && !data[i]._done_ && helper(data[i],i) && (data[i]._done_=true);//helper return true就可以保证不重复处理
-        //注意这个i是当前相对第几行，而不是所有结果的第几条。要得到后者需要算上页码和页数，或后台传rownum
-        sb.push(format(data[i],source).replace('{$index}',i+1));
+        helper && !data[i]._done_ && helper(data[i],i) && (data[i]._done_=true);
+        sb.push(format(data[i],source).replace(new RegExp('{$index}','g'),i+1).replace(new RegExp('{$native_index}','g'),$encode(i)).replace(new RegExp('{$nth2}','g'),i%2==1?'nth-even':'nth-odd'));
     }
     return sb.join('');
 }
@@ -64,17 +93,19 @@ function $compile(source,data,arg2,arg3) {
 var $template=(function($){
     var cache={};
     return function (container,data,arg2,arg3){
-        var source=$(container)[0].getAttribute('tpsource')||container;							
-        if(cache[source]){ 																	
-            return $(container).html($compile.apply(this,[cache[source],data,arg2,arg3]));
-        }else if(source.indexOf('#')==0){ 													
+        var $container=$(container);
+        var source=$container[0].getAttribute('tpsource')||container;
+        if(cache[source]){
+            return $container.html($compile.apply(this,[cache[source],data,arg2,arg3]));
+        }else if(source.indexOf('#')==0){
             cache[source]=$(source).html();
-            return $(container).html($compile.apply(this,[cache[source],data,arg2,arg3]));
+            return $container.html($compile.apply(this,[cache[source],data,arg2,arg3]));
         }else{
             $.get(source,function(res){
                 cache[source]=res;
-                $(container).html($compile.apply(this,[res,data,arg2,arg3]));
+                $container.html($compile.apply(this,[res,data,arg2,arg3]));
             });
+            return $container;
         }
     }
 })(window.jQuery);
@@ -110,12 +141,12 @@ var $templatePlus=(function($){
             }
 })(window.jQuery);
 
-var obj={
-    encodeTag:encodeTag,
+var stp={
+    $encode:$encode,
     $compile:$compile,
     $template:$template,
     $templatePlus:$templatePlus,
     $makeTemplate:$makeTemplate
 }
 //window.extending(obj);
-if ( typeof module === "object" && typeof module.exports === "object" )module.exports=obj;
+if ( typeof module === "object" && typeof module.exports === "object" )module.exports=stp;

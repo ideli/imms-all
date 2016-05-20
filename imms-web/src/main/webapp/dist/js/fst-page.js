@@ -242,11 +242,12 @@ var geoData=require('../data/geo.json');
 //checkDtd();
 importing('../lib/echarts-all.js',function(){
     mapInit(geoData);
-    $('#main').animate({opacity:'0.1'},1200);
-    setTimeout(function(){
-        $('#main').animate({opacity:'1'},2400);
-    },3000)
-
+    if(localStorage.indexAnimation!=='0'){
+        $('#main').animate({opacity:'0.1'},1200);
+        setTimeout(function(){
+            $('#main').animate({opacity:'1'},2400);
+        },3000)
+    }
 });
 
 function mapInit(geoData){

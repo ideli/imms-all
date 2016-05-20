@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" %>
+<%
+    String path = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,12 +166,74 @@
 
 </style>
 <script>
+    window.extending({
+        //limits:
+        path:'<%=path%>',
+        rootTabs:$('#root-tabs'),
+        molData:[
+            {
+                name:'首页',
+                id:'fst-page',
+                direct:'fst-page.html',
+                items:null
+            },
+            {
+                name:'信息管理',
+                id:'info-mng',
+                items:[
+                    {name:'实施项目管理',id:'',direct:'info-mng-ssxm.html',items:null},
+                    {name:'存储过程管理',id:'',direct:null,items:[
+                        {name:'项目存储过程',id:'',direct:'info-mng-xmccgc.html'},
+                        {name:'工作存储过程',id:'',direct:'info-mng-gzccgc.html'}
+                    ]},
+                    {name:'系统版本管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'系统参数管理',id:'',direct:'info-mng-xxcs.html',items:null},
+                    {name:'模块语句管理',id:'',direct:'info-mng-mkyj.html',items:null},
+                    {name:'问题共享管理',id:'',direct:'info-mng-wtgx.html',items:null}
+                ]
+            },
+            {
+                name:'项目监控',
+                id:'project-watch',
+                items:[
+                    {name:'数据实时统计',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'数据实时监控',id:'',direct:'info-mng-xxcs.html',items:null},
+                    {name:'应用服务监控',id:'',direct:'info-mng-mkyj.html',items:null}
+                ]
+            },
+            {
+                name:'用户反馈',
+                id:'feed-back',
+                items:[
+                    {name:'用户反馈管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'培训情况维护',id:'',direct:'info-mng-xxcs.html',items:null},
+                    {name:'案例情况维护',id:'',direct:'info-mng-mkyj.html',items:null}
+                ]
+            },
+            {
+                name:'统计报表',
+                id:'reports',
+                items:[
+                    {name:'系统使用情况统计',id:'',direct:'info-mng-xxbb.html',items:null}
+                ]
+            },
+            {
+                name:'管理维护',
+                id:'sys',
+                items:[
+                    {name:'登录用户管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'系统角色管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'系统模块管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'登录用户管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'统计报表管理',id:'',direct:'info-mng-xxbb.html',items:null},
+                    {name:'统计报表维护',id:'',direct:'info-mng-xxbb.html',items:null}
+                ]
+            }
 
+        ],
+        status:{}
+    });
     function indexInit(animate) {
-        if(!window.chrome){
-            doc.body.innerHTML='';
-            toast('请使用chrome谷歌浏览器打开本系统!',9999)
-        }
         //$('#content').height(window.height-120);
         $('.nav a').on('click',function(){
             var $this=$(this);
@@ -192,7 +257,6 @@
     indexInit(localStorage.indexAnimation!=='0');
 
 
-    window.extending('rootTabs',$('#root-tabs'));
     rootTabs.height(window.height-130).tabs({'scrollIncrement':320});
     $('.nav a').click(function(){
         var $this=$(this);

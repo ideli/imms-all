@@ -317,15 +317,15 @@
 				callback = config.callback,
                 //默认是用post
 				method = config.method || 'post';
-				//sectionNum = 0,
-				//sectionBegin = 0;
 				
 				config.commonHTML && $this.html(commonHTML);//如果发动容器为空，注明commonHTML，newSearch时生成默认html结构
 
-				
-		/*
-			var remote=function(cb,reset){
-				if(!confirm(jsonObj.begin+' - '+jsonObj.end))return false;
+
+			//该函数就是一个restful封装
+			var remote=function(cb,reset,_begin,_end){
+				//if(!confirm(jsonObj.begin+' - '+jsonObj.end))return false;
+				jsonObj['begin']= _begin;
+				jsonObj['end']  = useCache ? _begin-1+cacheOnce : _end;
 				exeGlobalAjaxEvent('Begin');
 				//params.begin=jsonObj.begin,params.end=jsonObj.end;
 				$[method](action, $.extend({jsonStr: obj2str(jsonObj)}, params)).always(function (res, status) {
@@ -337,92 +337,7 @@
 						}
 						res=str2obj(res);
 						if (res.flag == 1) {
-							//setCache已经内置为remote后默认行为
-							setCache(useCache,cacheMax,res.data,reset,jsonObj['begin']);
-							cb(res);
-						} else if (res.flag == -1) {
-							//TODO session过期
-						} else {
-							warn(obj2str(res).slice(0, 200));
-						}
-					}else{
-						warn('请求地址错误或网络问题');
-					}
-				});
-			};
-			//页码事件,此处的_begin和_end是每页传的参数，不是整个pagingList中的闭包变量
-			var clickHandle=function(_begin, _end){
-				//有缓存,3分钟内有效
-				if (localCache[_begin - 1] && localCache[_end - 1] && new Date().getTime()-localCache.time<3*60*1000) {
-					callback(localCache.slice(_begin - 1, _end), _begin, false);
-				} else {
-					//不需要也不应该使用sectionBegin，而是直接使用begin,让缓存的每次起始与分页起始一致
-					//sectionNum = Math.floor(begin / cacheOnce);
-					//sectionBegin = sectionNum * cacheOnce;
-					//jsonObj['begin'] = sectionBegin + 1;
-					//jsonObj['end'] = sectionBegin + cacheOnce;
-					
-					//begin是从1开始，而不是0开始的。 比如1-30，31-60
-					jsonObj['begin'] = _begin;
-					jsonObj['end'] = _begin-1 + cacheOnce;
-					
-					remote(function(res){
-						callback(localCache.slice(_begin - 1, _end), _begin, false);
-					},false); //不重置，而是每次缓存补充进去
-					//callback是页码点击事件中的具体处理方法，也就是如何代入数据生成html
-					//clickHandle是在callback基础上封装了缓存判断和同异步提取数据机制。
-					//callback是不接受end的，只是接收数据。顺便传入_begin和newSearch，基本也不太用。有需要可以扩充传入内容。
-				}
-			};
-			var tryPaging=function(count){
-				if(!count){
-					return false;
-				}
-				//生成分页
-				!paged && $this.paging({
-					count: count,//res.totalCount,
-					pageOnce: pageOnce,
-					name: name,
-					loadFirstPage: false
-				},clickHandle);
-				// , function (_begin, _end) {
-				// 	//$this.pagingList($.extend(config, {begin: _begin, end: _end, newSearch: false}));//第一次传来的其余参数用闭包保存起来,因为以后点页码就不传了
-				// });
-				return (paged=true);
-			};
-
-            //不使用缓存或新搜索肯定是要ajax请求的，根据返回数据执行paing
-			if (newSearch) {
-				
-				jsonObj['begin'] = begin;
-				jsonObj['end'] = useCache ? begin-1+cacheOnce : end;
-				remote(function(res){
-					tryPaging(res.totalCount);
-					callback(res.data.slice(begin - 1, end), begin, true);//这次的callback执行只是newSearch时执行,因为取消了pagingList递归，没有下次，跑不到这里，以后只会跑clickhandle
-				},!!newSearch); //newSearch时是需要重置cache的
-            //使用缓存并已经执行过newSearch的情况
-			} else {
-				//云查询特殊情况，即使不是newSearch，缓存数据和数目已经存在，也可能未执行过paging
-				tryPaging(config.count);
-				clickHandle(begin,end);
-			}
-			//启动完pagingList后，就不再是newSearch,所以上次要用两次取反返回值，避免传参出现闭包
-			newSearch=fasle;
-		*/
-			//该函数就是一个restful封装
-			var remote=function(cb,reset){
-				if(!confirm(jsonObj.begin+' - '+jsonObj.end))return false;
-				exeGlobalAjaxEvent('Begin');
-				//params.begin=jsonObj.begin,params.end=jsonObj.end;
-				$[method](action, $.extend({jsonStr: obj2str(jsonObj)}, params)).always(function (res, status) {
-					exeGlobalAjaxEvent('End');
-					if (status == 'success') {
-						if(res.length && res.length>2048*100 || (res.data && res.data.length>500)){
-							warn('异常！返回内容超长，end－bengin计算错误？或后台处理参数错误？');
-							return false;
-						}
-						res=str2obj(res);
-						if (res.flag == 1) {				
+							useCache && setCache(cacheMax,res.data,false,jsonObj['begin']);
 							cb(res);
 						} else if (res.flag == -1) {
 							//TODO session过期
@@ -441,11 +356,7 @@
 					//（newSearch为true时会清缓存，所以跑到这里newSearch一定是false,所以直接传false了）
 					callback(localCache.slice(_begin - 1, _end), _begin, _end, false, pageIndex,pageOnce,jq);
 				}else{
-					jsonObj['begin']= _begin;
-					jsonObj['end']  = useCache ? _begin-1+cacheOnce : _end;
-					
 					remote(function(res){
-						useCache && setCache(cacheMax,res.data,false,jsonObj['begin']);
 						//callback(useCache ? localCache.slice(_begin - 1, _end):res.data, _begin,_end,newSearch,pageIndex,pageOnce,jq);//更改了callback参数列表
 						callback(res.data.slice(0,pageOnce), _begin,_end,newSearch,pageIndex,pageOnce,jq);//更改了callback参数列表
 					},false); 

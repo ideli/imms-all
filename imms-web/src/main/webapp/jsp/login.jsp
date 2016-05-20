@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" %>
 <%
     String message_login = (String) request.getAttribute("message_login");
+    String path = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +11,19 @@
 </head>
 <body>
 msgLogin:<%=message_login%>
-<form action="<%=request.getContextPath()%>/login" method="POST">
+<form id="login-form" action="<%=path%>/login" method="POST">
     用户名：<input type="text" name="username"/><br/>
     密码：<input type="text" name="password"/><br/>
-    &nbsp;&nbsp;
     <input type="submit" value="登录"/>
 </form>
+<p id="browser-tip"></p>
+<div id="chrome-download">
+    <a href="<%=path%>/ftp/chrome.zip">点此下载chrome浏览器</a>
+</div>
 </body>
+<script>
+    if(!window.chrome){
+        document.getElementById('browser-tip').innerHTML='检测到您到浏览器非chrome, 请下载chrome谷歌浏览器后, 再打开本系统!';
+    }
+</script>
 </html>

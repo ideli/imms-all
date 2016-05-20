@@ -16,7 +16,7 @@
 <button id="btn-open3" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">用新标签打开页面</button>
 <button id="btn-open4" class="easyui-linkbutton" data-options="iconCls:'icon-pencil'">打开内部form弹窗</button>
 <a href="#" class="easyui-linkbutton" onclick="localStorage.indexAnimation='0'">关闭开场动画</a>
-
+<a href="#" id="test">关闭动画</a>
 <!--<button id="btn-open5">顶层打开form弹窗</button>-->
 
 <form action="" id="myform" class="hidden">
@@ -62,6 +62,9 @@
     }
 </style>
 <script>
+    $('#test').linkbutton({
+        iconCls:'icon-remove'
+    })
     $('#btn-open4').click(function(){
         $open('#myform',{width:640,height:320,top:24});
         //$('#myform').window({width:640,height:320})

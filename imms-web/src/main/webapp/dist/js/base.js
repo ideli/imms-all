@@ -134,90 +134,51 @@ module.exports=module.exports={
         upper:function(){return this.toUpperCase();}            
     });
     
-    /* importing中require不到正确的路径 browserify无法动态解析path    
-    var importing=function(filePath,name) {
-        var lib=require(filePath),arr,obj,i;
-        if(name){
-            arr=name.split(',');
-            obj={};
-            for(i=0;i<arr.length;i++){
-                obj[arr[i]]=lib;
-            }
-            window.extending(obj);  
-        }else{
-            typeof lib=='object' && window.extending(lib);
-        }
-        return window;
-    };
-    window.extending('importing',importing) ;
-    
-    importing('../lib/jquery','$,jQuery');
-    importing('../lib/jquery.autocompleteplus');
-    importing('../lib/exdefJquery');
-    importing('../lib/exDefEasyui');
-    importing('../lib/lambda');
-    importing('../lib/echarts-all','echart');
-    */
+
     var config=require('../data/config.json');
-    var $=require('../lib/jquery');
-    var $eui=require('../lib/eui');
-    var $cookie=require('../lib/jquery.cookie');
-    var $autoComolete=require('../lib/jquery.autocompleteplus');
-    var exy=require('../lib/exy');
-    var lambda=require('../lib/lambda');
-    var exdefJquery=require('../lib/exDefJquery');
-    var exdefEasyui=require('../lib/exDefEasyui');
-
     window.extending({config:config});
-    $eui($);
-    $cookie($);
-    $autoComolete($);
+    
+    var $=require('../lib/jquery');
     window.extending({$:$,jQuery:$});
+    
+    var $eui=require('../lib/eui');
+    $eui($);
+    
+    var $cookie=require('../lib/jquery.cookie');
+    $cookie($);
+    
+    var $autoComolete=require('../lib/jquery.autocompleteplus');
+    $autoComolete($);
+    
+    var exy=require('../lib/exy');
     window.extending(exy);
-    Array.prototype.extending(lambda); 
-    window.extending(exdefJquery);
-    window.extending(exdefEasyui);
+    
+    var lambda=require('../lib/lambda');
+    Array.prototype.extending(lambda);
+    
+    var stp=require('../lib/stp');
+    window.extending(stp);
+    
+    var pub=require('../lib/pub');
+    window.extending(pub);
+    
+    var paging=require('../lib/paging.js');
 
-    // var stp=require('../lib/stp.js');
-    // var paging=require('../lib/paging.js');
-    // var naving=require('../lib/naving.js');
     
-    //var convertArray=function (arr) {
-    //    var i=arr.length, obj = {};
-    //    while (i--){
-    //        if(typeof obj[arr[i].name]=='undefined')
-    //            obj[arr[i].name] = arr[i].value;
-    //        else
-    //            obj[arr[i].name] += ','+arr[i].value;
-    //    }
-    //    return obj;
-    //};
-    //$.fn.serializeObject=function(){
-    //    return convertArray(this.serializeArray());
-    //};
-    //jQuery from 序列化扩展 将jquery系列化后的值转为name:value的形式。
-    //$("#form2").serializeObject() => {id:"007",age:"24""}
-    
-    //$.extending('serializeObject',serializeObject);
-    
-    
-    //var checkDtd=function(){
-    //    //log(window.document.compatMode);
-    //    if(document.compatMode=='BackCompat'){
-    //        throw new Error('BackCompat！please check DTD！');
-    //    }
-    //}
-    //
-    //$(checkDtd);
-    //window.importing('/webapp/dist/css/base');
 
-    if ( typeof module === "object" && typeof module.exports === "object" ){
+    
+    
+
+    if(typeof module === "object" && typeof module.exports === "object" ){
         module.exports={
-            log:function(n){log(n);},
-            info:function(n){info(n);}
+            checkDtd:function(){
+                   if(document.compatMode=='BackCompat'){
+                       throw new Error('BackCompat！please check DTD！');
+                   }
+                }
         }
     }
-},{"../data/config.json":1,"../lib/eui":3,"../lib/exDefEasyui":4,"../lib/exDefJquery":5,"../lib/exy":6,"../lib/jquery":9,"../lib/jquery.autocompleteplus":7,"../lib/jquery.cookie":8,"../lib/lambda":10}],3:[function(require,module,exports){
+},{"../data/config.json":1,"../lib/eui":3,"../lib/exy":4,"../lib/jquery":7,"../lib/jquery.autocompleteplus":5,"../lib/jquery.cookie":6,"../lib/lambda":8,"../lib/paging.js":9,"../lib/pub":10,"../lib/stp":11}],3:[function(require,module,exports){
 var _easyui=function(jQuery) {
     (function ($) {
         $.parser = {
@@ -15685,230 +15646,6 @@ if ( typeof module === "object" && typeof module.exports === "object" ){
 }
 
 },{}],4:[function(require,module,exports){
-//基于easyui的扩展
-module.exports={
-    // 弹窗
-    $open:function showWin(str,params,isAjax,cb){
-            //简写小,中,大 3种尺寸
-            if(params=='s' || params=='S'){
-                params={width:520,height:360};
-            }else if(params=='m' || params=='M'){
-                params={width:720,height:540};
-            }else if(params=='l' || params=='L'){
-                params={width:1020,height:720};
-            }
-            //默认不可缩小拉伸,模态显示,允许滚动条,空白标题
-            ('maximizable' in params) || (params.maximizable=false);
-            ('minimizable' in params) || (params.minimizable=false);
-            ('collapsible' in params) || (params.collapsible=false);
-            ('resizable' in params) || (params.resizable=false);
-            ('scroll' in params) || (params.scroll=true);
-            ('modal' in params) || (params.modal=true);
-            ('title' in params) || (params.title=' ');
-
-            //先分辨是已有元素还是自动生成后ajax加载html或iframe的元素,随后启动,并返回句柄
-            var ele;
-            if(str.indexOf('#')==0 ){
-                ele=$(str);
-                return ele.window(params).css('visibility','visible').show();
-            }else if(isAjax){
-                ele=$('<div class="easy-win-wrap">').css('overflow',params.scroll ? 'auto':'hidden');
-                return ele.window(params).load(str,cb);
-            }else{
-                var id=''+Date.format('MMDDhhmmssS');
-                top._mol_wins=top._mol_wins||{};
-                ele=$('<div class="easy-win-wrap overhide" win-id="{1}"><iframe scrolling="{0}" win-id="{1}"></iframe></div>'.format(params.scroll ? 'auto':'no',id));
-                return (top._mol_wins[id]=ele.window(params).find('iframe').attr('src',str).end());
-            }
-        },   
-    // 单确定框
-    $alert:function(param){
-        var title='提示',icon='info',cb=function(){},msg;
-        if(typeof param!='object'){
-            msg=param;
-            cb=arguments[1]||cb;
-        }else{
-            title=param.title||title;
-            icon=param.icon||icon;
-            cb=param.callback||cb;
-            msg=param.msg;
-        }
-        jQuery.messager.alert(title,msg,icon,cb);
-        jQuery('.messager-window, .messager-window+.window-shadow').css('top',function(i,v){return parseInt(v)-10;});
-        noOutline();
-    },
-    // 二选一确认框
-    $confirm:function(param){
-        var title='提示',cb=function(){},msg;
-        if(typeof param!='object'){
-            msg=param;
-            cb=arguments[1]||cb;
-        }else{
-            title=param.title||title;
-            cb=param.callback||cb;
-            msg=param.msg;
-        }
-        jQuery.messager.confirm(title,msg,cb);
-        jQuery('.messager-window, .messager-window+.window-shadow').css('top',function(i,v){return parseInt(v)-10;});
-        noOutline();
-    },
-    // 自动关闭提示框
-    $show:function(str){
-        jQuery.messager.show({
-            title:'提示',
-            msg:str,
-            showType:'fade',
-            timeout:1500,
-            showSpeed:500,
-            width:220,
-            height:120,
-            style:{
-                right:'50%',
-                top:'50%',
-                margin:'-60px -110px 0  0 '
-            }
-        });
-        noOutline();
-    },
-    $close:function(isTag){
-        if(isTag){
-            //关闭整个当前标签页
-            var rootTabs=top.rootTabs||top.$('#root-tabs');
-            var tab = rootTabs.tabs('getSelected');
-            if (tab){
-                var index = rootTabs.tabs('getTabIndex', tab);
-                index!==0 && rootTabs.tabs('close', index);
-            }
-        }else{
-            //关闭包含本iframe的模态窗
-            var ifr=window.iframe;
-            if(ifr){
-                var win=top._mol_wins[ifr.getAttribute('win-id')];
-                win && win.window('close');
-            }
-        }
-        //        //var win=ifr.parentNode.parentNode;
-        //        //win.parentNode.removeChild(win);
-        //
-        //        //var win=parent.$(ifr.parentNode.parentNode);
-        //        //win.find('.panel-tool-close').click();
-
-    },
-    $append:function(src,label,iconCls,closable){
-        var rootTabs=top.rootTabs||top.$('#root-tabs');
-        var addTab=function(){
-            rootTabs.tabs('add',{
-                title: label,//'Tab'+index,
-                content:'<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(src),
-                iconCls:iconCls||null,//'icon-reload',
-                closable: closable!==false
-            });
-        };
-        if(rootTabs.tabs('tabs').length>6){
-            top.$confirm('页签窗口过多!<br>将自动关闭一个页签, 再打开新窗口。<br>是否继续?',function(res){
-                if(res) {
-                    rootTabs.tabs('close', 1);
-                    addTab();
-                }
-            });
-        }else{
-            addTab();
-        }
-    },
-    layoutInit:function (autoToggle){
-        $('.accordion-header').click(function(){
-            $('.panel-body li').removeClass('current-sec-item');
-            $('.accordion-header').removeClass('accordion-header-selected');
-            $(this).addClass('accordion-header-selected');
-        });
-        $('.accordion-collapse').click(function(){
-            $('.accordion-header').removeClass('accordion-header-selected');
-            $(this.parentNode.parentNode).addClass('accordion-header-selected');
-        });
-        var toggleTag=$('#toggle-tag');
-        var treeMenu=$('#tree-menu');
-        var content=$('#content')
-
-        //content.width(window.width-185);
-        $('body').css('visibility','visible');
-        var collapsed=false;
-        var doToggle=function(){
-            if(collapsed){
-                treeMenu.width(170).find('.accordion').fadeIn();
-                //content.width(window.width-185);
-                toggleTag.html('◄')
-            }else{
-                treeMenu.find('.accordion').hide(),treeMenu.width(1);
-                // content.width(window.width-16);
-                toggleTag.html('▶')
-            }
-            collapsed=!collapsed;
-        };
-        toggleTag.click(doToggle);
-        typeof autoToggle=='number'&&setTimeout(doToggle,autoToggle);
-    }
-
-};
-},{}],5:[function(require,module,exports){
-//基于jquery的拓展
-module.exports={
-        //清除linkbutton点击后的虚线
-        noOutline:function(selector){ 
-            jQuery(selector||'a').on('focus',function(){this.blur();});
-            },
-        //吐司消息
-        toast:function(str){
-                var holding;
-                var callback;
-                var itv;
-                str=String(str);
-                var bol= str.length>15;
-                var len= bol ? str.length : 15;
-                if(typeof arguments[1]=='number'){
-                    holding=arguments[1];
-                }else if(typeof arguments[1]=='function'){
-                    callback=arguments[1];
-                }
-                // 根据文字长度增加延时, 限制最高秒数
-                holding= holding || 1600+(len-15)*30;
-                var p=jQuery('<div><p>str</p></div>'.replace('str',str));
-                var fadeOut=function(){
-                    jQuery('.the-mask').remove();
-                    p.animate({'opacity':0},500,function(){callback && callback(p);p.remove();});
-                };
-                jQuery('.toast').hide();
-                jQuery('body').click(fadeOut);
-                // 预制样式 
-                return  p.addClass('toast').appendTo('body')
-                        //透明度 文字居中居左判断
-                        .css({'text-align':bol?'left':'center'})
-                        // 移入暂停 
-                        .bind('mouseenter',function(){clearTimeout(itv);})
-                        .bind('mouseleave',function(){itv=setTimeout(fadeOut,200);})
-                        // 增加icon
-                        .extend({
-                        ok:function(){return p.addClass('ok');},
-                        err:function(){return p.addClass('err');}
-                        })        		
-                        // 显示
-                        .fadeIn(function(){
-                            itv=setTimeout(fadeOut,holding||960);
-                        });
-            },
-        //tab控件
-        tabsInit:function (selector){
-                $(selector||document.body).find('.tabs-list').find('li').on('click', function(event) {
-                    var tabsList = this.parentNode//$('.tabs-list');
-                    var tabsWrap = tabsList.parentNode;//$('.tabs-wrap');
-                    tabsList.find('.current').removeClass('current');
-                    tabsWrap.find('.tabs-content').hide();
-                    $(this).addClass('current');
-                    $(this.getAttribute('direct')).show();
-                }); 
-            }
-    };
-            
-},{}],6:[function(require,module,exports){
 module.exports={
         //json与string互转
         obj2str:function(obj){return typeof obj=='object'?JSON.stringify(obj):obj;},
@@ -16020,7 +15757,7 @@ module.exports={
             })
         }
     };
-},{}],7:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*
  * jQuery Autocomplete plugin 1.1
  *
@@ -16690,7 +16427,7 @@ module.exports={
         }
     };
 },window.jQuery);
-},{}],8:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery Cookie Plugin v1.4.1
  * https://github.com/carhartl/jquery-cookie
@@ -16812,7 +16549,7 @@ module.exports={
 
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.0
  * http://jquery.com/
@@ -26645,7 +26382,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
     //lambda临时委托方法工厂
     var $lambda=function(foo){
@@ -26860,4 +26597,871 @@ return jQuery;
 
 
 
+},{}],9:[function(require,module,exports){
+ (function($){
+    //计算器 计算页数和各页的begin和end
+	$.PaginationCalculator = function(maxentries, opts) {
+		this.maxentries = maxentries;
+		this.opts = opts;
+	};
+    
+	$.extend($.PaginationCalculator.prototype, {
+		numPages:function() {
+			return Math.ceil(this.maxentries/this.opts.pageOnce);
+		},
+		getInterval:function(currentPage)  {
+			var ne_half = Math.floor(this.opts.num_display_entries/2);
+			var np = this.numPages();
+			var upper_limit = np - this.opts.num_display_entries;
+			var start = currentPage > ne_half ? Math.max( Math.min(currentPage - ne_half, upper_limit), 0 ) : 0;
+			var end = currentPage > ne_half?Math.min(currentPage+ne_half + (this.opts.num_display_entries % 2), np):Math.min(this.opts.num_display_entries, np);
+			return {start:start, end:end};
+		}
+	});
+	
+    //生成器 生成单个或多个页码链接
+	$.PaginationRenderers = {};
+	
+	$.PaginationRenderers.defaultRenderer = function(maxentries, opts) {
+		this.maxentries = maxentries;
+		this.opts = opts;
+		this.pc = new $.PaginationCalculator(maxentries, opts);
+	};
+	$.extend($.PaginationRenderers.defaultRenderer.prototype, {
+		createLink:function(page_id, currentPage, appendopts){
+			var lnk, np = this.pc.numPages();
+			page_id = page_id<0?0:(page_id<np?page_id:np-1); // Normalize page id to sane value
+			appendopts = $.extend({text:page_id+1, classes:""}, appendopts||{});
+			if(page_id == currentPage){
+				lnk = $("<span class='current'>" + appendopts.text + "</span>");
+			}
+			else
+			{
+				lnk = $("<a>" + appendopts.text + "</a>")
+					.attr('href', this.opts.link_to.replace(/__id__/,page_id));
+			}
+			if(appendopts.classes){ lnk.addClass(appendopts.classes); }
+			if(appendopts.rel){ lnk.attr('rel', appendopts.rel); }
+			lnk.data('page_id', page_id);
+			return lnk;
+		},
+		// Generate a range of numeric links 
+		appendRange:function(container, currentPage, start, end, opts) {
+			var i;
+			for(i=start; i<end; i++) {
+				this.createLink(i, currentPage, opts).appendTo(container);
+			}
+		},
+		getLinks:function(currentPage, eventHandler) {
+			var begin, end,
+				interval = this.pc.getInterval(currentPage),
+				np = this.pc.numPages(),
+				//fragment = $("<div class='pagination'></div>");
+				fragment = $("<div>");
+			
+			// Generate "Previous"-Link
+			if(this.opts.prev_text && (currentPage > 0 || this.opts.prev_show_always)){
+				fragment.append(this.createLink(currentPage-1, currentPage, {text:this.opts.prev_text, classes:"prev",rel:"prev"}));
+			}
+			// Generate starting points
+			if (interval.start > 0 && this.opts.num_edge_entries > 0)
+			{
+				end = Math.min(this.opts.num_edge_entries, interval.start);
+				this.appendRange(fragment, currentPage, 0, end, {classes:'sp'});
+				if(this.opts.num_edge_entries < interval.start && this.opts.ellipse_text)
+				{
+					$("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+				}
+			}
+			// Generate interval links
+			this.appendRange(fragment, currentPage, interval.start, interval.end);
+			// Generate ending points
+			if (interval.end < np && this.opts.num_edge_entries > 0)
+			{
+				if(np-this.opts.num_edge_entries > interval.end && this.opts.ellipse_text)
+				{
+					$("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+				}
+				begin = Math.max(np-this.opts.num_edge_entries, interval.end);
+				this.appendRange(fragment, currentPage, begin, np, {classes:'ep'});
+				
+			}
+			// Generate "Next"-Link
+			if(this.opts.next_text && (currentPage < np-1 || this.opts.next_show_always)){
+				fragment.append(this.createLink(currentPage+1, currentPage, {text:this.opts.next_text, classes:"next",rel:"next"}));
+			}
+			$('a', fragment).click(eventHandler);//所以那个return continuePropagation并没有什么软用
+			return fragment;
+		}
+	});
+	
+	// 这个方法是直接发动在分页条元素上，并非整个列表容器
+	$.fn._pagination = function(maxentries, opts){
+		
+		// Initialize options with default values
+		opts = $.extend({
+			pageOnce:15,
+			num_display_entries:11,
+			currentPage:0,
+			num_edge_entries:0,
+			link_to:"javascript:void(0);",
+			prev_text:"上一页",
+			next_text:"下一页",
+			ellipse_text:"...",
+			prev_show_always:true,
+			next_show_always:true,
+			renderer:"defaultRenderer",
+			show_if_single_page:false,
+			loadFirstPage:true,
+			callback:function(){return false;}
+		},opts||{});
+		
+		var containers = this, renderer, links, currentPage;
+		
+		/**
+		 * This is the event handling function for the pagination links. 
+		 * @param {int} page_id The new page number
+		 */
+		function paginationClickHandler(evt){
+			//jQuery("#loadingBar").text('加载中...请稍候');
+			var links, 
+				newCurrentPage = $(evt.target).data('page_id'),
+				continuePropagation = selectPage(newCurrentPage);
+			if (!continuePropagation) {
+				evt.stopPropagation();
+			}
+			return continuePropagation;
+		}
+		
+		function selectPage(newCurrentPage) {
+			// update the link display of a all containers
+			containers.data('currentPage', newCurrentPage);
+			links = renderer.getLinks(newCurrentPage, paginationClickHandler);
+			containers.empty();
+			links.appendTo(containers);
+			// call the callback and propagate the event if it does not return false
+			var continuePropagation = opts.callback(newCurrentPage, containers);
+			return continuePropagation;
+		}
+		
+		// -----------------------------------
+		// Initialize containers
+		// -----------------------------------
+		currentPage = parseInt(opts.currentPage, 10);
+		containers.data('currentPage', currentPage);
+		// Create a sane value for maxentries and pageOnce
+		maxentries = (!maxentries || maxentries < 0)?1:maxentries;
+		opts.pageOnce = (!opts.pageOnce || opts.pageOnce < 0)?1:opts.pageOnce;
+		
+		if(!$.PaginationRenderers[opts.renderer])
+		{
+			throw new ReferenceError("Pagination renderer '" + opts.renderer + "' was not found in jQuery.PaginationRenderers object.");
+		}
+		renderer = new $.PaginationRenderers[opts.renderer](maxentries, opts);
+		
+		// Attach control events to the DOM elements
+		var pc = new $.PaginationCalculator(maxentries, opts);
+		var np = pc.numPages();
+		containers.off('setPage').on('setPage', {numPages:np}, function(evt, page_id) { 
+				if(page_id >= 0 && page_id < evt.data.numPages) {
+					selectPage(page_id); return false;
+				}
+		});
+		containers.off('prevPage').on('prevPage', function(evt){
+				var currentPage = $(this).data('currentPage');
+				if (currentPage > 0) {
+					selectPage(currentPage - 1);
+				}
+				return false;
+		});
+		containers.off('nextPage').on('nextPage', {numPages:np}, function(evt){
+				var currentPage = $(this).data('currentPage');
+				if(currentPage < evt.data.numPages - 1) {
+					selectPage(currentPage + 1);
+				}
+				return false;
+		});
+		containers.off('currentPage').on('currentPage', function(){
+				var currentPage = $(this).data('currentPage');
+				selectPage(currentPage);
+				return false;
+		});
+		
+
+		links = renderer.getLinks(currentPage, paginationClickHandler);
+		containers.empty();
+		if(np > 1 || opts.show_if_single_page) {
+			links.appendTo(containers);
+		}
+        
+		if(opts.loadFirstPage) {
+			//config中一路传过来的newSearch在此时会传入，也只有loadFirstPage时有机会传第三个参数，确保了selectPage时为false
+			opts.callback(currentPage, containers,opt.newSearch);
+		}
+	}; 
+	
+
+	//paging是利用pagination的封装。 在含有paging分页条的母容器上发动。总数count作为option的一部分传入，而callback从option中拿出单独传入。
+ 	$.fn.paging = function(config,clickHandle,newSearch) {   
+ 			typeof config=='number' && (config={count:config});
+ 			var pageOnce=config.pageOnce=config.pageOnce||15;
+ 			var currentPage = config.currentPage||0;
+		    var $this = $(this);
+		    var opt = {
+				pageOnce:pageOnce,
+				loadFirstPage:config.loadFirstPage===false?false:true,
+				num_display_entries:10,
+				num_edge_entries:2,
+				currentPage:currentPage,
+				callback: function(pageIndex, jq){
+		    		var begin = pageIndex * pageOnce;
+				    var end   = Math.min((pageIndex+1) * pageOnce, config.count);
+				    //执行保存了查询条件,只更改页码条件的搜索
+		    		clickHandle((begin+1),end,newSearch,pageIndex,pageOnce,jq);//这个newSearch在整个pagination里只有loadFirstPage时会传递，确保selectPage时为false
+				}
+			};
+            //发动容器内的.paging子元素是分页条元素，对其执行pagination
+			$this.find('.paging')._pagination(config.count,opt);
+            //发动容器内的.total-count元素显示总条数，.table-name元素显示列表名（如果有配置的话将替换原来html中的表名）
+            $this.find('.total-count').html(config.count);
+	        config.name && $this.find('.table-name').html(config.name); 
+            //设置好描述文字后，表头条可以显示出来
+			$this.find('.list-title-bar').show();
+			return $this;
+	};
+	
+	/* 用css inline-block结合IE7 hack *+html .paging div{ display:inline}解决，避免每次callback生成html后调用setFitWidth()
+	function setFitWidth($this){
+		var left=$this.find('.paging .prev').eq(0).offset().left;
+		var right=$this.find('.paging .next').eq(0).offset().left+60;
+		$this.find('.paging>div').width(right-left);
+	}
+	*/ 
+    
+    //pagingList——基于paging的restful再包装， paging处理同步(本地已有数据)情况下的分页，而pagingList是集合了ajax请求、本地缓存、paging分页的合体
+		//如果一个页面要有多个pagingList的话，这里要改写，localCache和paged属性要挂在$this.data()上
+		var localCache=[];
+		localCache.size=0;
+		var paged=false;
+		var commonHTML='<div class="new-color-bar list-title-bar"> <b>▌</b><u class="table-name"></u><span class="table-desc">共查找到<u class="total-count"></u>条数据</span></div>'+
+						'<div class="search-result"  tpsource="#search-result-tp"></div>'+
+						'<div class="paging"></div>';
+		var exeGlobalAjaxEvent=function(eveType){
+			typeof $['globalAjax'+eveType]=='function' && $['globalAjax'+eveType]();
+		};
+		var checkCache=function(cacheMax,cacheOnce,pageOnce){
+			var msg='';
+			//缓存设置必须检测下有效性
+			if (typeof cacheOnce!='number' || typeof cacheMax!='number') {
+				msg='缓存参数设置错误，非数字！';
+			}
+			//单次缓存确保不超过最大缓存
+			if( cacheOnce>cacheMax){
+				msg='缓存参数设置错误，单次缓存数大于总体缓存数!';
+			}
+			//单次缓存确保不低于单页条数
+			if(cacheOnce < pageOnce){
+				msg='缓存参数设置错误，单次缓存数小于单页条数!';
+			};
+			if(msg){
+				throw new Error(msg+' cacheMax,cacheOnce,pageOnce: '+[cacheMax,cacheOnce,pageOnce].join(','));
+			}
+			return true;
+		};
+		var resetCache=function(){
+			localCache = [];
+			localCache.size = 0;
+			localCache.time = new Date().getTime();
+		};
+		//var setCache=function(useCache,cacheMax,data,newSearch,sectionBegin){
+		var setCache=function(cacheMax,data,reset,_begin){
+			_begin=_begin||1;
+			//newSearch或超过缓存极限时重置
+			if (reset || (localCache.size + data.length > cacheMax)) {
+				resetCache();
+			}
+
+			//对应放入,localCache的index对应整体数据的index
+			for (var i = data.length - 1; i > -1; i--) {
+				//localCache[sectionBegin + i] = data[i];
+				localCache[_begin-1 + i] = data[i];
+			}
+
+			localCache.size+=data.length;
+			return true;
+		};
+		$.fn.setCache=function(data,_begin,reset,cacheMax){
+			setCache(cacheMax||500,data,reset===false?false:true,_begin||1);
+			return $(this);
+		};
+		//pagingList只接收一个对象做参数
+		 $.fn.pagingList=function(config) {
+			//第一次启动的变量全部保存起来,默认就是newSearch
+            var $this = $(this),
+				newSearch = config.newSearch === false ? false : true,
+				useCache = config.useCache === false ? false : true,
+				cacheMax = config.cacheMax || 120,
+				cacheOnce = config.cacheOnce || 60,
+				pageOnce = config.pageOnce || 15,
+				begin = config.begin||1,
+				end = config.end||(begin-1+pageOnce),
+			
+				name = config.name,
+                //一查通默认向yctPostAction请求，其他可传自定义的action
+				action = config.action || window.yctPostAction,
+                //jsonObj是整个参数集合打包，并包括了跨域转接url，后台无对应接收的忽略此参数
+				jsonObj = config.jsonObj || window.jsonObj || {},
+                //如果不是用jsonObj把参数打包再转为jsonStr单参数传递的话，可以自定义params，是一个键值对对象，后台可以按键一一接收
+				params = config.params,
+				//callback是每次取回单页数据的回调，一般就是代入数据生成html
+				callback = config.callback,
+                //默认是用post
+				method = config.method || 'post';
+				
+				config.commonHTML && $this.html(commonHTML);//如果发动容器为空，注明commonHTML，newSearch时生成默认html结构
+
+
+			//该函数就是一个restful封装
+			var remote=function(cb,reset,_begin,_end){
+				//if(!confirm(jsonObj.begin+' - '+jsonObj.end))return false;
+				jsonObj['begin']= _begin;
+				jsonObj['end']  = useCache ? _begin-1+cacheOnce : _end;
+				exeGlobalAjaxEvent('Begin');
+				//params.begin=jsonObj.begin,params.end=jsonObj.end;
+				$[method](action, $.extend({jsonStr: obj2str(jsonObj)}, params)).always(function (res, status) {
+					exeGlobalAjaxEvent('End');
+					if (status == 'success') {
+						if(res.length && res.length>2048*100 || (res.data && res.data.length>500)){
+							warn('异常！返回内容超长，end－bengin计算错误？或后台处理参数错误？');
+							return false;
+						}
+						res=str2obj(res);
+						if (res.flag == 1) {
+							useCache && setCache(cacheMax,res.data,false,jsonObj['begin']);
+							cb(res);
+						} else if (res.flag == -1) {
+							//TODO session过期
+						} else {
+							//参数错误等
+							warn(obj2str(res).slice(0, 200));
+						}
+					}else{
+						warn('请求地址错误或网络问题');
+					}
+				});
+			};
+			var pageHandle=function(_begin,_end,newSearch,pageIndex,pageOnce,jq){
+				//有缓存
+				if (useCache && localCache[_begin - 1] && localCache[_end - 1] && localCache.time+3*60*1000>new Date().getTime()) {
+					//（newSearch为true时会清缓存，所以跑到这里newSearch一定是false,所以直接传false了）
+					callback(localCache.slice(_begin - 1, _end), _begin, _end, false, pageIndex,pageOnce,jq);
+				}else{
+					remote(function(res){
+						//callback(useCache ? localCache.slice(_begin - 1, _end):res.data, _begin,_end,newSearch,pageIndex,pageOnce,jq);//更改了callback参数列表
+						callback(res.data.slice(0,pageOnce), _begin,_end,newSearch,pageIndex,pageOnce,jq);//更改了callback参数列表
+					},false); 
+				}
+			};
+
+			//准备就绪，开始
+			checkCache(cacheMax,cacheOnce,pageOnce);
+
+			newSearch && resetCache();
+			
+			if(config.count){
+				$this.paging(config,pageHandle);
+			}else{
+				remote(function(res){
+					//config.loadFirstPage=false;
+					config.count=res.totalCount;	
+					$this.paging(config,pageHandle);
+					//pagingHandle(begin,end,newSearch);
+					//loadFirstPage的机制是pagination自动执行第一页的handle，但这样无法区分newSearch，因此关闭，改为手动执行(另一方式，config传递到pagination，执行一次callback后设置为false)
+				});
+			}
+			return $this;
+		};
+		 
+})(window.jQuery);
+ 
+ 
+// $('#userTable').paging(97,function(begin,end){})
+ 
+//$('#userTable').pagingList({
+    //begin:1,
+    //end:15,
+    //callback:generateForPerson,
+    //newSearch:true
+    //pageOnce:15,
+    //useCache:true,
+    //cacheOnce:60,
+    //cacheMax:120,
+    //name:'人员列表'
+    //action:yctPostAction,
+    //jsonObj:jsonObj,
+    //commonHTML:false
+//});
+    
+    
+
+},{}],10:[function(require,module,exports){
+//左侧折叠菜单
+window.$.fn.treemenu=function(){
+    function expandMenu(){
+        //console.info(ul)
+        var ul=$(this);
+        if(ul.data('showed')==1){
+            ul.slideUp().data('showed',0).parent().removeClass('expanded');
+        }else{
+            ul.slideDown().data('showed',1).parent().addClass('expanded');
+        }
+    }
+    function selectItem(selectHandle) {
+        var li=$(this);
+        event.stopPropagation();
+        var src,navlink,ul,secCount=li.attr('sec-count');
+
+        //所有项移除,自身加上selected
+        li.parents('.tree-menu-accordion').find('li').removeClass('selected');
+        li.addClass('selected').parents('li').addClass('selected');
+
+        //一级,设置二级selected,自动打开二级内部a
+        if(li.hasClass('grade-1')){
+            ul=li.children('ul').eq(0);
+            expandMenu.call(ul);
+            li.children('ul>li',0).addClass('selected')
+            navlink=li.children('a').eq(0);//TODO 有可能是传进来指定项
+        }
+        //二级,设置一级selected,打开自己内部a
+        else{
+            ul=li.parent();
+            (ul.data('showed')!=1) && expandMenu.call(ul);
+            ul.parent().addClass('selected');
+            navlink=li.children('a').eq(0);
+        }
+
+        src=navlink.attr('direct');
+        selectHandle=selectHandle||function(){info('将载入: '+src);}
+        log(src)
+        src && selectHandle(this);
+    }
+
+    var doToggle=function(){
+        var $this=$(this);
+        var treeMenu=$this.parent();
+        var collapsed=treeMenu.data('collapsed');
+        if(collapsed){
+            treeMenu.width(170).find('.tree-menu-accordion').fadeIn();
+            $this.html('◄')
+        }else{
+            treeMenu.find('.tree-menu-accordion').hide(),treeMenu.width(1);
+            $this.html('▶')
+        }
+        treeMenu.data('collapsed',!collapsed);
+    };
+
+    return function(data,selectHandle){
+        //$this=$(this);
+        //var defaultHTML='<ul class="tree-menu-accordion"></ul><p id="toggle-tag">◄</p>';
+        //var template='<li class="grade-1" sec-count="{secItems.length}"><a title="{name}" direct="{direct}">{name}</a><ul class="hide{secItems.length}">{{secItems:#<li class="grade-2"><a class="nav-link" title="{name}" direct="{direct}">项目存储过程</a></li>#}}</ul><b  class="hide{secItems.length}"></b></li>'
+        //$this.addClass('tree-menu-accordion').html($compile(template,data));
+
+        var ul=$('<ul class="tree-menu-accordion" tpsource="#tree-menu-tp"></ul>');
+        $template(ul,data);
+        return $(this).empty().append($('<p class="toggle-tag">◄</p>').click(doToggle)).append(ul).find('li').click(function(){selectItem.call(this,selectHandle);}).end();
+    }
+}();
+
+//jQuery from 序列化扩展 将jquery系列化后的值转为name:value的形式。
+//$("#form2").serializeObject() => {id:"007",age:"24""}
+window.$.fn.serializeObject=function(){
+    var convertArray=function (arr) {
+        var i=arr.length, obj = {};
+        while (i--){
+            if(typeof obj[arr[i].name]=='undefined')
+                obj[arr[i].name] = arr[i].value;
+            else
+                obj[arr[i].name] += ','+arr[i].value;
+        }
+        return obj;
+    };
+    return function(){
+        return convertArray(this.serializeArray());
+    };
+}();
+
+
+
+module.exports={
+    //----------------基于jquery的拓展------------------
+    //清除linkbutton点击后的虚线
+    noOutline:function(selector){
+        jQuery(selector||'a').on('focus',function(){this.blur();});
+    },
+    //吐司消息
+    toast:function(str){
+        var holding;
+        var callback;
+        var itv;
+        str=String(str);
+        var bol= str.length>15;
+        var len= bol ? str.length : 15;
+        if(typeof arguments[1]=='number'){
+            holding=arguments[1];
+        }else if(typeof arguments[1]=='function'){
+            callback=arguments[1];
+        }
+        // 根据文字长度增加延时, 限制最高秒数
+        holding= holding || 1600+(len-15)*30;
+        var p=jQuery('<div><p>str</p></div>'.replace('str',str));
+        var fadeOut=function(){
+            jQuery('.the-mask').remove();
+            p.animate({'opacity':0},500,function(){callback && callback(p);p.remove();});
+        };
+        jQuery('.toast').hide();
+        jQuery('body').click(fadeOut);
+        // 预制样式
+        return  p.addClass('toast').appendTo('body')
+            //透明度 文字居中居左判断
+            .css({'text-align':bol?'left':'center'})
+            // 移入暂停
+            .bind('mouseenter',function(){clearTimeout(itv);})
+            .bind('mouseleave',function(){itv=setTimeout(fadeOut,200);})
+            // 增加icon
+            .extend({
+                ok:function(){return p.addClass('ok');},
+                err:function(){return p.addClass('err');}
+            })
+            // 显示
+            .fadeIn(function(){
+                itv=setTimeout(fadeOut,holding||960);
+            });
+    },
+    //tab控件
+    tabsInit:function (selector){
+        $(selector||document.body).find('.tabs-list').find('li').on('click', function(event) {
+            var tabsList = this.parentNode//$('.tabs-list');
+            var tabsWrap = tabsList.parentNode;//$('.tabs-wrap');
+            tabsList.find('.current').removeClass('current');
+            tabsWrap.find('.tabs-content').hide();
+            $(this).addClass('current');
+            $(this.getAttribute('direct')).show();
+        });
+    },
+    //--------------基于easyui的扩展----------------
+    // 弹窗
+    $open:function showWin(str,params,isAjax,cb){
+        //简写小,中,大 3种尺寸
+        if(params=='s' || params=='S'){
+            params={width:520,height:360};
+        }else if(params=='m' || params=='M'){
+            params={width:720,height:540};
+        }else if(params=='l' || params=='L'){
+            params={width:1020,height:720};
+        }
+        //默认不可缩小拉伸,模态显示,允许滚动条,空白标题
+        ('maximizable' in params) || (params.maximizable=false);
+        ('minimizable' in params) || (params.minimizable=false);
+        ('collapsible' in params) || (params.collapsible=false);
+        ('resizable' in params) || (params.resizable=false);
+        ('scroll' in params) || (params.scroll=true);
+        ('modal' in params) || (params.modal=true);
+        ('title' in params) || (params.title=' ');
+
+        //先分辨是已有元素还是自动生成后ajax加载html或iframe的元素,随后启动,并返回句柄
+        var ele;
+        if(str.indexOf('#')==0 ){
+            ele=$(str);
+            return ele.window(params).css('visibility','visible').show();
+        }else if(isAjax){
+            ele=$('<div class="easy-win-wrap">').css('overflow',params.scroll ? 'auto':'hidden');
+            return ele.window(params).load(str,cb);
+        }else{
+            var id=''+Date.format('MMDDhhmmssS');
+            top._mol_wins=top._mol_wins||{};
+            ele=$('<div class="easy-win-wrap overhide" win-id="{1}"><iframe scrolling="{0}" win-id="{1}"></iframe></div>'.format(params.scroll ? 'auto':'no',id));
+            return (top._mol_wins[id]=ele.window(params).find('iframe').attr('src',str).end());
+        }
+    },
+    // 单确定框
+    $alert:function(param){
+        var title='提示',icon='info',cb=function(){},msg;
+        if(typeof param!='object'){
+            msg=param;
+            cb=arguments[1]||cb;
+        }else{
+            title=param.title||title;
+            icon=param.icon||icon;
+            cb=param.callback||cb;
+            msg=param.msg;
+        }
+        jQuery.messager.alert(title,msg,icon,cb);
+        jQuery('.messager-window, .messager-window+.window-shadow').css('top',function(i,v){return parseInt(v)-10;});
+        noOutline();
+    },
+    // 二选一确认框
+    $confirm:function(param){
+        var title='提示',cb=function(){},msg;
+        if(typeof param!='object'){
+            msg=param;
+            cb=arguments[1]||cb;
+        }else{
+            title=param.title||title;
+            cb=param.callback||cb;
+            msg=param.msg;
+        }
+        jQuery.messager.confirm(title,msg,cb);
+        jQuery('.messager-window, .messager-window+.window-shadow').css('top',function(i,v){return parseInt(v)-10;});
+        noOutline();
+    },
+    // 自动关闭提示框
+    $show:function(str){
+        jQuery.messager.show({
+            title:'提示',
+            msg:str,
+            showType:'fade',
+            timeout:1500,
+            showSpeed:500,
+            width:220,
+            height:120,
+            style:{
+                right:'50%',
+                top:'50%',
+                margin:'-60px -110px 0  0 '
+            }
+        });
+        noOutline();
+    },
+    $close:function(isTag){
+        if(isTag){
+            //关闭整个当前标签页
+            var rootTabs=top.rootTabs||top.$('#root-tabs');
+            var tab = rootTabs.tabs('getSelected');
+            if (tab){
+                var index = rootTabs.tabs('getTabIndex', tab);
+                index!==0 && rootTabs.tabs('close', index);
+            }
+        }else{
+            //关闭包含本iframe的模态窗
+            var ifr=window.iframe;
+            if(ifr){
+                var win=top._mol_wins[ifr.getAttribute('win-id')];
+                win && win.window('close');
+            }
+        }
+        //        //var win=ifr.parentNode.parentNode;
+        //        //win.parentNode.removeChild(win);
+        //
+        //        //var win=parent.$(ifr.parentNode.parentNode);
+        //        //win.find('.panel-tool-close').click();
+
+    },
+    $append:function(src,label,iconCls,closable){
+        var rootTabs=top.rootTabs||top.$('#root-tabs');
+        var addTab=function(){
+            rootTabs.tabs('add',{
+                title: label,//'Tab'+index,
+                content:'<iframe class="mol-content" src="{0}" frameborder="0"></iframe>'.format(src),
+                iconCls:iconCls||null,//'icon-reload',
+                closable: closable!==false
+            });
+        };
+        if(rootTabs.tabs('tabs').length>(parseInt(localStorage.maxtabs)||6)){
+            top.$confirm('页签窗口过多!<br>将自动关闭一个页签, 再打开新窗口。<br>是否继续?',function(res){
+                if(res) {
+                    rootTabs.tabs('close', 1);
+                    addTab();
+                }
+            });
+        }else{
+            addTab();
+        }
+    }
+    // ,
+    // layoutInit:function (autoToggle){
+    //     $('.accordion-header').click(function(){
+    //         $('.panel-body li').removeClass('current-sec-item');
+    //         $('.accordion-header').removeClass('accordion-header-selected');
+    //         $(this).addClass('accordion-header-selected');
+    //     });
+    //     $('.accordion-collapse').click(function(){
+    //         $('.accordion-header').removeClass('accordion-header-selected');
+    //         $(this.parentNode.parentNode).addClass('accordion-header-selected');
+    //     });
+    //     var toggleTag=$('.toggle-tag');
+    //     var treeMenu=$('#tree-menu');
+    //     var content=$('#content')
+    //
+    //     //content.width(window.width-185);
+    //     $('body').css('visibility','visible');
+    //     var collapsed=false;
+    //     var doToggle=function(){
+    //         if(collapsed){
+    //             treeMenu.width(170).find('.accordion').fadeIn();
+    //             //content.width(window.width-185);
+    //             toggleTag.html('◄')
+    //         }else{
+    //             treeMenu.find('.accordion').hide(),treeMenu.width(1);
+    //             // content.width(window.width-16);
+    //             toggleTag.html('▶')
+    //         }
+    //         collapsed=!collapsed;
+    //     };
+    //     toggleTag.click(doToggle);
+    //     typeof autoToggle=='number'&&setTimeout(doToggle,autoToggle);
+    // }
+};
+},{}],11:[function(require,module,exports){
+
+//for null,undefined,number,xss and others
+function $encode(str,desc4null){
+    var dic={'<':'&lt;','>':'&gt;','"':'&quot',"'":'‘',':':'：'};//&#39; &apos;
+    // 除非显示设定为false，否则数字0会做‘’处理(字符串'0'不会)
+    if($encode.zeroAsEmpty!==false && str===0){
+        return '';
+    }
+    // 0做空处理，但不使用空值描述
+    if(str==null || str=='null' || str=='NULL'){
+        return desc4null||'';
+    }
+    str =   $encode.allowHTML ? String(str).replace(/\<\/?script[^\>]*\>/gmi,function(s){return s.replace(/\<|\>/gm,function($){return dic[$]})})
+        : String(str).replace(/\<|\>/gm,function($){return dic[$]});
+    //后台没做转义才开启，避免性能消耗
+    return $encode.tranSymbol ? str.replace(/\"\'\{\}\:/gm,function($){return dic[$];}):str;
+}
+//core
+function $compile(source,data,arg2,arg3) {
+    var desc4null;
+    var helper;
+    if(typeof arg2=='string'){
+        desc4null=arg2;
+        typeof arg3=='function' && (helper=arg3);
+    }else{
+        typeof arg2=='function' && (helper=arg2);
+    }
+    var the=this;
+    if(!source){
+        throw new Error('source undefined! please chekout the template id or url!');
+    }
+    var format=function (obj,str,prefix) {
+        if(obj==null || (typeof obj.pop=='function' && obj.length==0)){
+            return '';
+        }else if(typeof obj=='object'){
+            var keys='';
+            for(var n in obj) keys+=n;
+            if(!keys) return '';
+        }
+        prefix=prefix||'';
+        //{{arr:#tp2}}
+        str=str.replace(/{{\w*:?#[\w\-]+}}|{{\w*:?#[^#].+#}}/g,function(g){
+            g=g.replace(/{{|}}/gm,'').replace(/^\s+|\s+$/gm,'');
+            var d,t,e,i=g.indexOf(':');
+            if(i>-1){
+                d=g.slice(0,i);
+                if(g.lastIndexOf('#')==g.length-1){
+                    t=g.slice(i+2,-1);
+                }else{
+                    t=$(g.slice(i+1)).html();
+                    e=$(g.slice(i+1)).attr('desc4null');
+                }
+                return obj[d]?$compile(t,obj[d],e||desc4null):'';
+            }else{
+                return $(g).html()||(typeof console=='object' && console.error('can`t find the inlaid template: '+id))||'';
+            }
+        });
+
+        str=str.replace(/{[A-z]+(\.?\w+)*}/gm,function(key){
+            var val=obj;
+            var arr=key.slice(1,-1).split('.');
+            //console.warn(key)
+            for(var i=0;i<arr.length;i++){
+                //如果是this则指向代入的this, 直接赋值走向下个属性
+                if(i==0 && arr[i]=='this'){
+                    val=the;
+                    continue;
+                }
+                if(typeof val=='number' && arr[i]=='length'){
+                    //val=val;
+                }else{
+                    val=typeof val[arr[i]]=='function'? val[arr[i]]():val[arr[i]];
+                }
+                if((val==null||val=='null' || val=='NULL') && typeof arr[i+1]!='undefined'){
+                    val='';
+                }
+                //console.info('一次循环结束\n\n  ')
+            }
+            return $encode(val,desc4null);
+            //return the[key.replace(/{|}|(this)|\./g,'')];
+        });
+        return str;
+    }
+    data = typeof data.pop=='function' ? data : [data];
+    var i=0,j=data.length,sb=[];
+    for(;i<j;i++){
+        helper && !data[i]._done_ && helper(data[i],i) && (data[i]._done_=true);
+        sb.push(format(data[i],source).replace(new RegExp('{$index}','g'),i+1).replace(new RegExp('{$native_index}','g'),$encode(i)).replace(new RegExp('{$nth2}','g'),i%2==1?'nth-even':'nth-odd'));
+    }
+    return sb.join('');
+}
+//seal4quick
+var $template=(function($){
+    var cache={};
+    return function (container,data,arg2,arg3){
+        var $container=$(container);
+        var source=$container[0].getAttribute('tpsource')||container;
+        if(cache[source]){
+            return $container.html($compile.apply(this,[cache[source],data,arg2,arg3]));
+        }else if(source.indexOf('#')==0){
+            cache[source]=$(source).html();
+            return $container.html($compile.apply(this,[cache[source],data,arg2,arg3]));
+        }else{
+            $.get(source,function(res){
+                cache[source]=res;
+                $container.html($compile.apply(this,[res,data,arg2,arg3]));
+            });
+            return $container;
+        }
+    }
+})(window.jQuery);
+
+// 这个方法和$compile一样暴露出来，供特殊情况时手动使用。
+function $makeTemplate(tempstr,colsData,isHead){
+    var wrapArr = isHead ? ['<thead>','','</thead>']:['<tr>','','</tr>'];
+    tempstr = $compile(tempstr,colsData,'nullkey');
+    isHead ||  (tempstr = tempstr.replace(/\[/g,'{').replace(/\]/g,'}'));
+    wrapArr[1] =  tempstr ;
+    return wrapArr.join('');
+}
+
+// 执行有权限列配置的template注入生成
+var $templatePlus=(function($){
+    var singleTable='<td class="{labelClass} {name}-lable">{label}</td><td class="{valClass} {name}-val">[{name}]</td>';
+    var commonBody='<td class="{valClass} {name}-val">[{name}]</td>';
+    var commonHead='<th class="{labelClass} {name}-lable">{label}</th>';
+    var commonForm='<div class="stp-cell {name}-cell"><div class="stp-label {labelClass} {name}-lable">{label}</div><div class="stp-val {vallClass} {name}-val">[{name}]</div></div>';
+    return function (container,config,data,desc4null){
+                var tempHead;
+                var tempBody;
+                var html = '';
+                if(config.type=='map'){              
+                    tempBody=$makeTemplate(commonForm,config.cols);
+                    html=$compile(tempBody,data);
+                }else{
+                    tempHead=$makeTemplate(commonHead,config.cols,true);
+                    tempBody=$makeTemplate(commonBody,config.cols);
+                    html=tempHead + '<tbody>'+$compile(tempBody,data)+'</tbody>'; 
+                }
+                $(container).html(html);
+            }
+})(window.jQuery);
+
+var stp={
+    $encode:$encode,
+    $compile:$compile,
+    $template:$template,
+    $templatePlus:$templatePlus,
+    $makeTemplate:$makeTemplate
+}
+//window.extending(obj);
+if ( typeof module === "object" && typeof module.exports === "object" )module.exports=stp;
 },{}]},{},[2]);

@@ -2,6 +2,7 @@
 @import url("eui-gray.css");
 @import url("eui-icon.css");
 @import url("ap-icon.css");
+@import url("pub.css");
 /*@group reset*/
 	iframe,body,header,footer,menu,div,dl,dt,dd,ul,ol,li,p,h1,h2,h3,h4,h5,input,button,blockquote,textarea,article,aside,details,figcaption,figure,hgroup,nav,section,a{margin:0;padding:0;}
 	header,footer,article,section,nav,menu{display:block;clear:both;}
@@ -119,97 +120,11 @@
 /*@end*/
 
 
-
 /* @group 公共foot */
 /* @end 公共foot*/
 
 
-
-/* @group easyui overwrite & extend diy plugin*/
-	.easy-win-wrap iframe{
-		height:99.5%;
-		width:99.5%;
-		margin:0 auto;
-		border:none;
-	}
-
-	.messager-window .panel-tool{
-		display:none;
-	}
-    .toast{
-    	display:none;
-	    position:fixed;
-	    top:50%;
-	    left:50%;
-	    width:240px;
-	    line-height:1.5;
-	    margin:-40px 0 0 -118px;
-	    padding:30px 5px;
-	    /*border:1px solid #cecede;*/
-	    text-align:left;
-	    background-color:#555;
-	    color:#fff;
-	    font-size:14px;
-	    word-spacing: 2px;
-	    letter-spacing: 1px;
-	    word-break: break-all;
-	    white-space: pre-wrap;
-        z-index: 99999999;
-        border-radius:5px;
-        background-color:rgba(17,17,17,0.6);
-        /*filter: alpha(opacity = 90);*/
-	    /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c5ddf1,endColorstr=#f5f5ff,GradientType=0);*/
-	    /*background:#c5ddf1;*/
-	    /*color:#225;*/
-	    /*box-shadow: 3px 9px 6px #999;*/	
-    }
-
-     /*QQ蓝风格*/
-    .toast.qqblue{    
-		background: #f1f1f1;
-		border-color: #1280CF #888 #888 #999;
-		border-width: 3px 1px 1px 1px;
-		border-color: steelblue;
-		border-width: 9px 2px 2px 2px;
-		border-style: solid;
-		box-shadow: 4px 8px 4px #aaa;
-		box-shadow: 0 0 32px #666;
-		color: #333;
-		border-radius: 3px;
-	}
-    .toast p{
-    	padding-left:12px;
-    	padding-right:12px;
-    }
-	.toast.ok p::before{
-		content: "✔ ";
-		font-family: 宋体;
-		font-size: 16px;
-		color:lightgreen;
-	}
-	 .toast.err p::before{
-		 content: "ㄨ ";
-		 font-size: 16px;
-		 color:red;
-	 }
-    .the-mask{
-    	display:none;
-    	position:fixed;
-    	width:100%;
-    	height:100%;
-    	top:0;
-    	left:0;
-    	background:#555;
-    	z-index:998;
-    	opacity:0.3; 
-    	filter:alpha(opacity=30)
-    }
-/* @end */
-
-
-
 /*@group 总体布局*/
-
 /*@end 总体布局*/
 
 
@@ -254,57 +169,45 @@
 		50%{opacity:.1; }
 		100%{opacity:1; }
 	}
-	#toggle-tag{
-		position: fixed;
-		top: 40%;
-		left: -3px;
-		width: 13px;
-		height: 110px;
-		line-height: 110px;
-		font-size: 13px;
-		background-color: #A2A2A2;
-		color: #fff;
-		cursor: pointer;
-		border-radius: 0 5px 5px 0;
-		-webkit-user-select: none;
-		animation:fadeInUp 0.58s 1.5s 2;
-	}
-	#tree-menu .accordion{
-		border-top:none;
-		border-right:none;
-		border-left:none;
-		border-bottom: none;
-	}
-	#tree-menu .accordion-body li{
-		padding-left:30px;
-		line-height: 24px;
-		cursor: pointer;
-	}
-	#tree-menu .accordion .accordion-header-selected{
-		background-color: #777;
-		background:-webkit-linear-gradient(left , #666,#666 60%, #bbb 85%,#fff);
-		/*background:-webkit-linear-gradient(top , #999, #BBB 80%, #DDD);*/
-	}
-	#tree-menu .accordion .accordion-header-selected .panel-title{
-		color:gold;
-	}
-	#tree-menu .accordion .panel-title{
-		line-height: 22px;
-		height: 22px;
-		font-size: 13px;
-		font-weight: 400;
-		/*font-family: serif;*/
-	}
-	#tree-menu .accordion .accordion-body{
-		border: none;
-	}
-	#tree-menu .accordion .accordion-body li:hover{
-		color: orange;
-	}
-	#tree-menu .accordion .accordion-body li.current-sec-item{
-		color: orange;
-		/*background: #888;*/
-	}
+
+	/*#tree-menu .accordion{*/
+		/*border-top:none;*/
+		/*border-right:none;*/
+		/*border-left:none;*/
+		/*border-bottom: none;*/
+	/*}*/
+	/*#tree-menu .accordion-body li{*/
+		/*padding-left:30px;*/
+		/*line-height: 24px;*/
+		/*cursor: pointer;*/
+	/*}*/
+	/*#tree-menu .accordion .accordion-header-selected{*/
+		/*background-color: #777;*/
+		/*background:-webkit-linear-gradient(left , #666,#666 60%, #bbb 85%,#fff);*/
+		/*!*background:-webkit-linear-gradient(top , #999, #BBB 80%, #DDD);*!*/
+	/*}*/
+	/*#tree-menu .accordion .accordion-header-selected .panel-title{*/
+		/*color:gold;*/
+	/*}*/
+	/*#tree-menu .accordion .panel-title{*/
+		/*line-height: 22px;*/
+		/*height: 22px;*/
+		/*font-size: 13px;*/
+		/*font-weight: 400;*/
+		/*!*font-family: serif;*!*/
+	/*}*/
+	/*#tree-menu .accordion .accordion-body{*/
+		/*border: none;*/
+	/*}*/
+	/*#tree-menu .accordion .accordion-body li:hover{*/
+		/*color: orange;*/
+	/*}*/
+	/*#tree-menu .accordion .accordion-body li.current-sec-item{*/
+		/*color: orange;*/
+		/*!*background: #888;*!*/
+	/*}*/
+
+
 /* @end 公共布局*/
 
 /*html,body{background-color:#6a6a6a;color:#fff;}*/

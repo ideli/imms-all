@@ -129,86 +129,45 @@
         upper:function(){return this.toUpperCase();}            
     });
     
-    /* importing中require不到正确的路径 browserify无法动态解析path    
-    var importing=function(filePath,name) {
-        var lib=require(filePath),arr,obj,i;
-        if(name){
-            arr=name.split(',');
-            obj={};
-            for(i=0;i<arr.length;i++){
-                obj[arr[i]]=lib;
-            }
-            window.extending(obj);  
-        }else{
-            typeof lib=='object' && window.extending(lib);
-        }
-        return window;
-    };
-    window.extending('importing',importing) ;
-    
-    importing('../lib/jquery','$,jQuery');
-    importing('../lib/jquery.autocompleteplus');
-    importing('../lib/exdefJquery');
-    importing('../lib/exDefEasyui');
-    importing('../lib/lambda');
-    importing('../lib/echarts-all','echart');
-    */
+
     var config=require('../data/config.json');
-    var $=require('../lib/jquery');
-    var $eui=require('../lib/eui');
-    var $cookie=require('../lib/jquery.cookie');
-    var $autoComolete=require('../lib/jquery.autocompleteplus');
-    var exy=require('../lib/exy');
-    var lambda=require('../lib/lambda');
-    var exdefJquery=require('../lib/exDefJquery');
-    var exdefEasyui=require('../lib/exDefEasyui');
-
     window.extending({config:config});
-    $eui($);
-    $cookie($);
-    $autoComolete($);
+    
+    var $=require('../lib/jquery');
     window.extending({$:$,jQuery:$});
+    
+    var $eui=require('../lib/eui');
+    $eui($);
+    
+    var $cookie=require('../lib/jquery.cookie');
+    $cookie($);
+    
+    var $autoComolete=require('../lib/jquery.autocompleteplus');
+    $autoComolete($);
+    
+    var exy=require('../lib/exy');
     window.extending(exy);
-    Array.prototype.extending(lambda); 
-    window.extending(exdefJquery);
-    window.extending(exdefEasyui);
+    
+    var lambda=require('../lib/lambda');
+    Array.prototype.extending(lambda);
+    
+    var stp=require('../lib/stp');
+    window.extending(stp);
+    
+    var pub=require('../lib/pub');
+    window.extending(pub);
+    
+    var paging=require('../lib/paging.js');
 
-    // var stp=require('../lib/stp.js');
-    // var paging=require('../lib/paging.js');
-    // var naving=require('../lib/naving.js');
-    
-    //var convertArray=function (arr) {
-    //    var i=arr.length, obj = {};
-    //    while (i--){
-    //        if(typeof obj[arr[i].name]=='undefined')
-    //            obj[arr[i].name] = arr[i].value;
-    //        else
-    //            obj[arr[i].name] += ','+arr[i].value;
-    //    }
-    //    return obj;
-    //};
-    //$.fn.serializeObject=function(){
-    //    return convertArray(this.serializeArray());
-    //};
-    //jQuery from 序列化扩展 将jquery系列化后的值转为name:value的形式。
-    //$("#form2").serializeObject() => {id:"007",age:"24""}
-    
-    //$.extending('serializeObject',serializeObject);
     
     
-    //var checkDtd=function(){
-    //    //log(window.document.compatMode);
-    //    if(document.compatMode=='BackCompat'){
-    //        throw new Error('BackCompat！please check DTD！');
-    //    }
-    //}
-    //
-    //$(checkDtd);
-    //window.importing('/webapp/dist/css/base');
 
-    if ( typeof module === "object" && typeof module.exports === "object" ){
+    if(typeof module === "object" && typeof module.exports === "object" ){
         module.exports={
-            log:function(n){log(n);},
-            info:function(n){info(n);}
+            checkDtd:function(){
+                   if(document.compatMode=='BackCompat'){
+                       throw new Error('BackCompat！please check DTD！');
+                   }
+                }
         }
     }
