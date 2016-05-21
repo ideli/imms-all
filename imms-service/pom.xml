@@ -26,6 +26,11 @@
 
         <dependency>
             <groupId>com.hisign</groupId>
+            <artifactId>cxf-spring4-patch</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hisign</groupId>
             <artifactId>dubbo-monitor-simple</artifactId>
         </dependency>
 
