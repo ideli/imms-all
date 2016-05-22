@@ -29,7 +29,7 @@
     window===top && window.extending({_mol_wins:{},_opener_wins:{}});
 
     window.getting({
-        doc:function(){return document},
+        doc:function(){return document;},
         width:function(){return this.innerWidth;},
         height:function(){return this.innerHeight;},
         scrollTop:function(){return document.documentElement.scrollTop||document.body.scrollTop;},

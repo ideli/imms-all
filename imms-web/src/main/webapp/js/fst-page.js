@@ -9,7 +9,7 @@ importing('../lib/echarts-all.js',function(){
         $('#main').animate({opacity:'0.1'},1200);
         setTimeout(function(){
             $('#main').animate({opacity:'1'},2400);
-        },3000)
+        },3000);
     }
 });
 
@@ -92,7 +92,7 @@ function mapInit(geoData){
                     showDelay:50,
                     trigger: 'item',//'axis',
                     formatter:function(a,b,c){
-                        return a.name + (a.value==0?' 暂无部署':'');
+                        return a.name + (a.value===0?' 暂无部署':'');
                     }//a是配置对象,b是name和index,c是function(e,t){return l.__setContent(e,t)}
                 },
                 //省份样式

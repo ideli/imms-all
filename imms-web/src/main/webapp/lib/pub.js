@@ -278,7 +278,6 @@ module.exports={
     },
     $select:function(){
         var wraper=$(this.iframe).parentsUntil('.panel','.panel-body');
-        log(wraper)
         return wraper.$select();
     },
     $append:function(src,label,iconCls,closable){
