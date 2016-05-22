@@ -72,9 +72,9 @@ for(var i=0;i<people.length;i++){
     people[i].getElementsByTagName('button')[0].onclick=(function(i){
         return function(){
             //$template('#info',data[this.getAttribute('tpindex')]);
-            data[i].this=limits.ctrls
-            $template('#info',data[i])
-        }
+            data[i].this=limits.ctrls;
+            $template('#info',data[i]);
+        };
     })(i);
 }
 
