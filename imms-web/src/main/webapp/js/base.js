@@ -26,7 +26,7 @@
         });
     })(window);
 
-    !window._mol_wins && window.extending({_mol_wins:{}});
+    window===top && window.extending({_mol_wins:{},_opener_wins:{}});
 
     window.getting({
         doc:function(){return document},
@@ -40,6 +40,10 @@
                 if(frs[i].contentWindow==self){return frs[i];}
             }
             return null;
+        },
+        $opener:function(){
+            var openerId=this.iframe.getAttribute('opener-id');
+            return top._opener_wins[openerId];
         }
     });
 
@@ -156,6 +160,9 @@
     
     var pub=require('../lib/pub');
     window.extending(pub);
+    
+    var locals=require('../lib/locals');
+    window.extending(locals);
     
     var paging=require('../lib/paging.js');
 

@@ -12,7 +12,8 @@
         cursor: pointer;
         border-radius: 0 5px 5px 0;
         -webkit-user-select: none;
-        animation:fadeInUp 0.58s 1.5s 2;
+        /*animation:fadeInUp 0.5s 1.5s 3;*/
+        animation:fadeInUp 0.5s 0s 3;
         z-index:9;
     }
     .tree-menu-accordion a {
@@ -82,7 +83,7 @@
 
 
     /* @group easyui overwrite & extend diy plugin*/
-    .easy-win-wrap iframe{
+    .e-win-wrap iframe{
         height:99.5%;
         width:99.5%;
         margin:0 auto;

@@ -10,7 +10,7 @@
 	body{height: 100%;background-color: #fff;font-size: 12px;color:#333;font-family:"Microsoft YaHei",Arial, Helvetica, sans-serif;overflow-x:hidden; }
 	ul,ol,li{list-style:none;}
 	button,input,select,textarea,a{outline:none;}
-	a,a:link,a:visited,a:hover,a:focus,a:active{outline:none;text-decoration:none;cursor:pointer;}
+	a,a:link,a:visited,a:hover,a:focus,a:active{outline:none;text-decoration:none;cursor:pointer;color:#333;}
 	img{border:0;-ms-interpolation-mode:bicubic;}
 	em{font-style:normal;}
 	u{text-decoration:none;}
@@ -117,6 +117,23 @@
 	.pr{position: relative;}
 	.lineheight-plus{line-height:60px;}
 	.no-border{border: none;}
+	.button{
+		display: inline-block;
+		/*padding: 4px 8px;*/
+		padding: 0 8px;
+		line-height: 24px;
+		min-width: 48px;
+		font-size: 12px;
+		text-align: center;
+		border-radius: 3px;
+		box-shadow: none;
+		border: 1px solid #bbb;
+		background: linear-gradient(to bottom,#ffffff 0,#e1e1e1 100%);
+	}
+	.button:hover,button:hover{
+		background: linear-gradient(to bottom,#f5f5f5 0,#dfdfdf 100%);
+		border: 1px solid #bbb;
+	}
 /*@end*/
 
 
@@ -144,7 +161,7 @@
 		overflow-y: auto;
 		background-color: #eee;
 		vertical-align: top;
-		transition: 0.5s 0s ease;
+		/*transition: 0.5s 0s ease;*/
 		/*border-right:1px solid #ddd;*/
 	}
 	#content{
@@ -152,12 +169,13 @@
 		display: table-cell;
 		height: 100%;
 		background: #fff;
+		overflow: hidden;
 	}
 	#content>iframe{
 		width: 100%;
 		height:100%;
 		box-sizing: border-box;
-		padding-left: 5px;
+		/*padding-left: 5px;*/
 	}
 	@keyframes heartbeat {
 		0%{transform:scale(1); }

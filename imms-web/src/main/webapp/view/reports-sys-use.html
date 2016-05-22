@@ -7,8 +7,9 @@
 	<!--<link rel="stylesheet" href="../dist/css/reports.css"/>-->
 </head>
 <body>
-<button id="btn-close">关闭窗口</button>
-<button id="btn-close2">关闭标签</button>
+<button id="btn-close" onclick="window.$close();">关闭窗口</button>
+<button id="btn-close2" onclick="window.$close(true);">关闭标签</button>
+<button id="btn-close3" onclick="$opener.$alert('是我');">谁打开我的?</button>
     <table id="plus-main">
 		<thead>  <th>父亲</th> <th>母亲</th> <th>姓名</th> <th>年龄</th>  <th>婚姻状况</th> <th>操作</th></thead>
         <tbody id="main">
@@ -72,8 +73,8 @@
 <script src="../dist/js/base.js"></script>
 <!--<script src="../dist/js/reports.js"></script>-->
 <script>
-    importing('../dist/css/reports','../lib/stp',function(){
-
+//    importing('../dist/css/reports','../lib/stp',function(){
+        importing('../dist/css/reports',function(){
 //假设以下是取到的权限控制信息
         var limits={
             //可访问的页面
@@ -169,13 +170,7 @@
             ],
             type:'map'
         };
-        //./reports-index.html
-        $('#btn-close').click(function(){
-            $close();
-        });
-        $('#btn-close2').click(function(){
-            $close(true);
-        });
+
 //setTimeout(function(){
 //    if(!confirm('change?'))return false;
 //    $templatePlus('#plus-main',config,data);

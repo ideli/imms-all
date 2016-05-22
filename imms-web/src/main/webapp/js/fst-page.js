@@ -5,11 +5,12 @@ var geoData=require('../data/geo.json');
 //checkDtd();
 importing('../lib/echarts-all.js',function(){
     mapInit(geoData);
-    $('#main').animate({opacity:'0.1'},1200);
-    setTimeout(function(){
-        $('#main').animate({opacity:'1'},2400);
-    },3000)
-
+    if(localParams.get('indexAnimation')){
+        $('#main').animate({opacity:'0.1'},1200);
+        setTimeout(function(){
+            $('#main').animate({opacity:'1'},2400);
+        },3000)
+    }
 });
 
 function mapInit(geoData){
@@ -142,10 +143,10 @@ function mapInit(geoData){
                  },*/
                 markPoint : {
                     //散列点图形(可用图片)
-                    symbol:'emptyCircle',
+                    symbol:'star',//'emptyCircle',
                     //散列点尺寸
                     symbolSize : function (v){
-                        return (3 + v/100);
+                        return (7 + v/100);
                     },
                     //闪动效果
                     effect : {
@@ -199,7 +200,7 @@ function mapInit(geoData){
                  },*/
                 markPoint : {
                     //散列点图形(可用图片)
-                    symbol:'emptyCircle',
+                    symbol:'star',//'emptyCircle',
                     //散列点尺寸
                     symbolSize : function (v){return (9 + v/100);},
                     //闪动效果
@@ -245,8 +246,8 @@ function mapInit(geoData){
                     formatter:function(a,b,c){return a.name + (a.value=='333'?' √已握手!':'');}
                 },
                 markPoint : {
-                    symbol:'emptyCircle',
-                    symbolSize : function (v){ return (6 + v/100); },
+                    symbol:'star',//'emptyCircle',
+                    symbolSize : function (v){ return (9 + v/100); },
                     effect : {
                         show: true,
                         scaleSize:1.1, //放大倍数

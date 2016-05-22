@@ -430,24 +430,36 @@
                 if (!options.url && options.matchContains) {
                     var csub = [];
                     for (var k in data) {
-                        if(q){
+                        if(window['autocompleteSort']===true){
                             if (k.length > 0) {
                                 var c = data[k];
-                                $.each(c, function (i, x) {
+                                $.each(c, function(i, x) {
+                                    // if we've got a match, add it to the array
                                     if (matchSubset(x.value, q)) {
                                         csub.push(x);
                                     }
                                 });
-                            }  
+                            }
                         }else{
-                            if (k == '') {
-                                var c = data[k];
-                                $.each(c, function (i, x) {
-                                    if (matchSubset(x.value, q)) {
-                                        csub.push(x);
-                                    }
-                                });
-                            }   
+                            if(q){
+                                if (k.length > 0) {
+                                    var c = data[k];
+                                    $.each(c, function (i, x) {
+                                        if (matchSubset(x.value, q)) {
+                                            csub.push(x);
+                                        }
+                                    });
+                                }
+                            }else{
+                                if (k == '') {
+                                    var c = data[k];
+                                    $.each(c, function (i, x) {
+                                        if (matchSubset(x.value, q)) {
+                                            csub.push(x);
+                                        }
+                                    });
+                                }
+                            }
                         }
                     }
                     return csub;

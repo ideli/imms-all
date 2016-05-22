@@ -158,7 +158,7 @@
         <iframe class="mol-content" src="view/fst-page.html" frameborder="0"></iframe>
     </div>
 </div>
-<!--<iframe id="content" name="content" src="view/reports/reports-index.html" frameborder="0"></iframe>-->
+<!--<iframe id="content" name="content" src="view/reports/reports-sys-use.html" frameborder="0"></iframe>-->
 
 </body>
 
@@ -184,7 +184,7 @@
                 items:[
                     {name:'实施项目管理',id:'',direct:'info-mng-ssxm.html',items:null},
                     {name:'存储过程管理',id:'',direct:null,items:[
-                        {name:'项目存储过程',id:'',direct:'info-mng-xmccgc.html'},
+                        {name:'项目存储过程',id:'',direct:'info-mng-xmcc.html'},
                         {name:'工作存储过程',id:'',direct:'info-mng-gzccgc.html'}
                     ]},
                     {name:'系统版本管理',id:'',direct:'info-mng-xxbb.html',items:null},

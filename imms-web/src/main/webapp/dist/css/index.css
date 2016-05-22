@@ -300,6 +300,9 @@
        }
 
        /*选项卡*/
+       #root-tabs{
+           /*height:calc(100vh - 130px);*/
+       }
        #root-tabs>.tabs-header{
            background-color: #fff;
        }
@@ -333,4 +336,9 @@
           top: 0;
           left: 0;
           z-index: 2;
+      }
+      /**tree menu*/
+      #tree-menu{
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
