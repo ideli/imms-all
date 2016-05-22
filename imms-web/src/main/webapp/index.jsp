@@ -1,146 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" %>
-<%
-    String path = request.getContextPath();
-%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Index For New IMMS</title>
-    <link rel="stylesheet" href="<%=path%>/dist/css/base.css">
-    <link rel="stylesheet" href="<%=path%>/dist/css/index.css">
+    <link rel="stylesheet" href="${path}/dist/css/base.css">
+    <link rel="stylesheet" href="${path}/dist/css/index.css">
 </head>
 <body>
 <header>
     <canvas id="bubbleCanvas" width="320" height="150"></canvas>
     <h1 id="head-txt">刑技实施管理平台</h1>
     <nav class="nav-wrap">
-        <!--<ul id="root-nav" class="nav">-->
-        <!--<li class="nav-first" >-->
-        <!--<a class="current" href="#" mol-id="fst" mol-direct="view/fst-page.html">首页</a>-->
-        <!--</li>-->
-        <!--<li class="nav-first">-->
-        <!--<a href="javascript:void(0);" mol-id="info-mng" mol-direct="view/info-mng-index.html">信息管理</a>-->
-        <!--<div class="nav-seconds">-->
-        <!--<a href="#">实施项目管理</a>-->
-        <!--<a href="#" mol-direct="view/info-mng-xxcm.html">项目存储过程</a>-->
-        <!--<a href="#">工作存储过程</a>-->
-        <!--<a href="#">系统版本管理</a>-->
-        <!--<a href="#">系统参数管理</a>-->
-        <!--<a href="#">模块语句管理</a>-->
-        <!--<a href="#">问题共享管理</a>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--<li class="nav-first">-->
-        <!--<a href="#" mol-direct="view/prj-watch-index.html">项目监控</a>-->
-        <!--<div class="nav-seconds">-->
-        <!--<a href="#">数据实时统计</a>-->
-        <!--<a href="#">数据实时监控</a>-->
-        <!--<a href="#">应用服务监控</a>-->
-        <!--</div>-->
-        <!--</li>-->
 
-        <!--<li class="nav-first">-->
-        <!--<a href="#">二三级菜单</a>-->
-        <!--<div class="nav-seconds">-->
-
-        <!--<div class="nav-second-wrap">-->
-        <!--<a href="#" class="nav-second-item">工作文档</a>-->
-        <!--</div>-->
-
-        <!--<div class="nav-second-wrap">-->
-        <!--<a href="#" class="nav-second-item">存储过程</a><b>▶</b>-->
-        <!--<div class="nav-third-wrap">-->
-        <!--<a href="#" class="nav-third-item">项目存储</a>-->
-        <!--<a href="#" class="nav-third-item">工作存储</a>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="nav-second-wrap">-->
-        <!--<a href="#" class="nav-second-item">日志反馈</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</li>-->
-
-
-
-        <!--<li class="nav-first hidePlus">-->
-        <!--<a href="#">导航面板</a>-->
-        <!--<div class="nav-second nav-pannel">-->
-        <!--<div class="nav-third-wrap">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">工作日志</a></h5>-->
-        <!--<a href="#">周报</a>-->
-        <!--<a href="#">工作内容</a>-->
-        <!--<a href="#">工作存储</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="nav-third-wrap">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">存储过程</a></h5>-->
-        <!--<a href="#">项目存储</a>-->
-        <!--<a href="#">工作存储</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="nav-third-wrap">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">过程管理</a></h5>-->
-        <!--<a href="#">项目存储过程</a>-->
-        <!--<a href="#">工作存储过程</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="nav-third-wrap">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">日志反馈</a></h5>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--<li class="nav-first hidePlus">-->
-        <!--<a href="#">导航面板2</a>-->
-        <!--<div class="nav-second nav-table">-->
-        <!--<div class="nav-table-row">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">工作日志</a></h5>-->
-        <!--<a href="#">周报</a>-->
-        <!--<a href="#">工作内容</a>-->
-        <!--<a href="#">工作存储</a>-->
-        <!--</div>-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">存储过程</a></h5>-->
-        <!--<a href="#">项目存储</a>-->
-        <!--<a href="#">工作存储</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="nav-table-row">-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">过程管理</a></h5>-->
-        <!--<a href="#">项目存储过程</a>-->
-        <!--<a href="#">工作存储过程</a>-->
-        <!--</div>-->
-        <!--<div class="nav-third">-->
-        <!--<h5><a href="#">日志反馈</a></h5>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--<li class="nav-first">-->
-        <!--<a href="#" mol-direct="view/feed-back-mng.html">用户反馈</a>-->
-        <!--<div class="nav-seconds">-->
-        <!--<a href="#">用户反馈管理</a>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--<li class="nav-first">-->
-        <!--<a href="#" mol-direct="view/reports-sys-use.html" mol-label="统计报表"><b class="large-icon hidePlus">▤</b>统计报表</a>-->
-        <!--<div class="nav-seconds">-->
-        <!--<a href="#">系统使用情况统计</a>-->
-        <!--</div>-->
-        <!--</li>-->
-        <!--<li class="nav-first bigger">-->
-        <!--<a  href="#" mol-direct="view/sys-index.html" mol-label="系统设置"><b class="icon-settings"></b></a>-->
-        <!--</li>-->
-        <!--</ul>-->
         <ul id="root-nav" class="nav" tpsource="#nav-tp"></ul>
         <div class="arr-l-wrap"><p class="arr-l"></p></div>
         <div class="arr-r-wrap"><p class="arr-r"></p></div>
@@ -149,14 +24,6 @@
 
 <div id="root-main"></div>
 <div id="root-tabs"  style="height:720px;width:100%;">
-    <!--<div title="应用面板" class="pd10">-->
-    <!--<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>-->
-    <!--</div>-->
-
-    <!--<div title="当前模块:首页" no-data-options="iconCls:'icon-reload',closable:false">-->
-    <!--<iframe id="mol-content" src="view/fst-page.html" frameborder="0"></iframe>-->
-    <!--</div>-->
-
     <div title="当前模块:首页" no-data-options="iconCls:'icon-reload',closable:false">
         <div id="main">
             <div id="tree-menu"></div>
@@ -166,12 +33,10 @@
         </div>
     </div>
 </div>
-<!--<iframe id="content" name="content" src="view/reports/reports-sys-use.html" frameborder="0"></iframe>-->
 <div id="root-mask"></div>
 <iframe src="" frameborder="0" width="0" height="0 "id="upframe" name="upframe" class="hidePlus"></iframe>
 </body>
-<script src="dist/js/base.js"></script>
-<!--<script src="dist/js/index.js"></script>-->
+<script src="${path}/dist/js/base.js"></script>
 
 <script type="text/template" id="tree-menu-tp">
     <li class="grade-1" sec-count="{items.length}">
@@ -201,6 +66,8 @@
 
 <script>
     top.path='view/';
+    //取得后端数据menus
+    alert('${menus}');
     function indexInit(animate) {
         //检测浏览器
         if(!window.chrome){

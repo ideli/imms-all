@@ -1,4 +1,4 @@
-package com.hisign.imms.web.shiro;
+package com.hisign.imms.web.shiro.realm;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
