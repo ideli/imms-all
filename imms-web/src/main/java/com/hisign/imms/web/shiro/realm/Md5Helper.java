@@ -1,4 +1,4 @@
-package com.hisign.imms.web.shiro;
+package com.hisign.imms.web.shiro.realm;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

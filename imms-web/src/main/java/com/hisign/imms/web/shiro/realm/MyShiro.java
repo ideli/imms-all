@@ -1,4 +1,4 @@
-package com.hisign.imms.web.shiro;
+package com.hisign.imms.web.shiro.realm;
 
 import com.hisign.imms.api.system.SysUserService;
 import com.hisign.imms.model.SysUser;

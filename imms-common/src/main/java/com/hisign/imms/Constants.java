@@ -9,6 +9,8 @@ public class Constants {
 	 * 行政区划代码级别(两位为一个级别)
 	 */
     public static final String XZQHDM_LEVEL_MASK = "00";
+
+	public static final String CURRENT_USER = "currentUser";
     
     /**
      * 消息级别

@@ -34,6 +34,9 @@
                 </property>
             </bean>
         </mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="com.hisign.imms.web.bind.method.CurrentUserMethodArgumentsResolver"/>
+        </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
     <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
