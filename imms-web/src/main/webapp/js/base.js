@@ -146,7 +146,7 @@
     var $cookie=require('../lib/jquery.cookie');
     $cookie($);
     
-    var $autoComolete=require('../lib/jquery.autocompleteplus');
+    var $autoComolete=require('../lib/autocomplete');
     $autoComolete($);
     
     var exy=require('../lib/exy');
