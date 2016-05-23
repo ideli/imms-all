@@ -12,6 +12,7 @@ module.exports={
         log:function (param){typeof console!='undefined' && console.log(param);},
         info:function(param){typeof console!='undefined' && console.info(param);},
         warn:function(param){typeof console!='undefined' && console.warn(param);},
+        error:function(param){typeof console!='undefined' && console.error(param);},
         logex:function(msg,cssTxt){
                 //默认fontsize 18px写前面，后写的可覆盖
                 cssTxt= cssTxt ? 'font-size:18px;'+cssTxt : 'font-size:18px;color:red;';
@@ -100,11 +101,18 @@ module.exports={
         },
         importing:function(){
             var ags=arguments;
-            if(typeof ags[0]!='string'){
-                typeof ags[0]=='function' && ags[0]();
+            var ag=ags[0];
+            if(typeof ag!='string'){
+                typeof ag=='function' && ag();
                 return false;
             }
-            window[ags[0].match(/.*\/css\/.+|.css$/i)?'$style':'$script'](ags[0],function(){
+            var plugins=window.config.plugins;
+            for(var n in plugins){
+                if(ag===n){
+                    ag=(top.path||'')+'/dist/plugin/'+plugins[n];
+                }
+            }
+            window[ag.match(/.*\/css\/.+|.css$/i)?'$style':'$script'](ag,function(){
                 window.importing.apply(this,[].slice.call(ags,1));
             })
         }

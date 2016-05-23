@@ -1,3 +1,10 @@
-module.exports={
-    distVersion:"1.0"
-};
+{
+    "distVersion":"1.0",
+    "plugins":{
+        "ztree":"ztree/ztree.js",
+        "echarts":"echarts/echarts317.js",
+        "echarts2":"echarts/echarts225.js",
+        "echarts3":"echarts/echarts317.js",
+        "china":"echarts/china.js"
+    }
+}

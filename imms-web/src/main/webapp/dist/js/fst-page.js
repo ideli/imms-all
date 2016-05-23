@@ -240,7 +240,8 @@ module.exports={
 var geoData=require('../data/geo.json');
 
 //checkDtd();
-importing('../lib/echarts-all.js',function(){
+//importing('../dist/plugin/echarts/echarts317.js','../dist/plugin/echarts/echarts225.js',function(){
+importing('echarts3','echarts2',function(){
     mapInit(geoData);
     barInit();
     pieInit();
@@ -258,16 +259,16 @@ function mapInit(geoData){
     var nostars=stars.where(/o=>o.value==0/);
     var yunstars=stars.where(/o=>o.value==222/);window.yuncount=yunstars.length;
     var getstars=stars.where(/o=>o.value==333/);window.getcount=getstars.length;
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart = echarts2.init(byid('map-ct'));
     var option =  {
-        backgroundColor:'rgb(233,244,255)',
-        animation:true,
+        //backgroundColor:'rgb(233,244,255)',
+        //animation:true,
         //地图标题
         title : {
-            text: 'XJPT部署地一览',
+            text: '部署地一览',
             subtext: '',
             x:'center',
-            textStyle : {color: 'steelblue','fontSize':'24px'}
+            textStyle : {color: '#999','fontSize':'24px'}
         },
         color: ['#FF6262','steelblue','green'],
         legend: {
@@ -279,7 +280,7 @@ function mapInit(geoData){
                 '云节点':true,
                 '已握手节点':true
             },
-            //textStyle : {color: '#fff','fontSize':'12px'},
+            textStyle : {color: '#888','fontSize':'12px'},
             data:['一般部署地','云节点','已握手节点']
         },
         //移入提示
@@ -307,8 +308,8 @@ function mapInit(geoData){
             x: 'right',
             y: 'center',
             feature : {
-                mark : {show: false},
-                dataView : {show: false, readOnly: 0},
+                mark : {show: true},
+                dataView : {show: false, readOnly: true},
                 restore : {show: 1},
                 saveAsImage : {show: 1}
             }
@@ -594,7 +595,7 @@ function barInit() {
                 }
             ]
         };
-        var myChart = echarts.init(byid('main3'));
+        var myChart = echarts.init(byid('bar-ct'));
         //window.onresize = myChart.resize;
         myChart.setOption(option);
     }
@@ -648,9 +649,32 @@ function pieInit(){
             }
         ]
     };
-    var myChart = echarts.init(byid('main2'));
+    var myChart = echarts.init(byid('pie-ct'));
     //window.onresize = myChart.resize;
     myChart.setOption(option);
+    var app={currentIndex:-1};
+    app.timeTicket = setInterval(function () {
+        var dataLen = option.series[0].data.length;
+        // 取消之前高亮的图形
+        myChart.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            dataIndex: app.currentIndex
+        });
+        app.currentIndex = (app.currentIndex + 1) % dataLen;
+        // 高亮当前图形
+        myChart.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: app.currentIndex
+        });
+        // 显示 tooltip
+        myChart.dispatchAction({
+            type: 'showTip',
+            seriesIndex: 0,
+            dataIndex: app.currentIndex
+        });
+    }, 1000);
 }
 
 //$script('../lib/echarts-all',function(){

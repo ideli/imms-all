@@ -35,7 +35,7 @@ window.$.fn.treemenu=function(){
 
         src=navlink.attr('direct')||navlink.siblings('ul').find('li').eq(0).addClass('selected').find('a').eq(0).attr('direct');//TODO 有可能是传进来指定项
         selectHandle=selectHandle||function(){};
-        log(src)
+        //log(src)
         src && selectHandle(src,this);
     }
 
