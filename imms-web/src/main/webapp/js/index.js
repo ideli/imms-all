@@ -1,5 +1,3 @@
-top.path='/imms-all/imms-web/src/main/webapp';
-
 
 function indexInit(animate) {
     //检测浏览器
