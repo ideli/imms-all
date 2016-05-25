@@ -1,5 +1,4 @@
 .idea/
 /**/*.iml
 /**/target
-/**/src/main/webapp/gulpfile.js
 node_modules/
