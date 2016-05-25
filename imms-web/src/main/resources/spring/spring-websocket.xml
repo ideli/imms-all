@@ -13,7 +13,7 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <websocket:handlers allowed-origins="*">
-        <websocket:mapping path="/myHello" handler="myWebSocketHandler"/>
+        <websocket:mapping path="/websocket/myHello" handler="myWebSocketHandler"/>
         <websocket:handshake-interceptors>
             <bean class="com.hisign.imms.web.websocket.MyHandshakeInterceptor"/>
         </websocket:handshake-interceptors>

@@ -9,6 +9,11 @@
     <title>Index For New IMMS</title>
     <link rel="stylesheet" href="${path}/dist/css/base.css">
     <link rel="stylesheet" href="${path}/dist/css/index.css">
+    <script>
+    top.path='${path}';
+    //取得后端数据menus
+    console.log(${menus});
+    </script>
 </head>
 <body>
 <header>
@@ -62,11 +67,6 @@
     </div>
 </script>
 
-<script>
-    top.path='${path}';
-    //取得后端数据menus
-    console.log(${menus});
-</script>
 
 <script src="${path}/dist/js/base.js"></script>
 <script src="${path}/dist/js/index.js"></script>

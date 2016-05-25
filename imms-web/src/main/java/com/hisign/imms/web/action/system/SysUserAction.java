@@ -31,4 +31,8 @@ public class SysUserAction {
 		return page;
 	}
 
+	public void commitTets(){
+
+	}
+
 }
