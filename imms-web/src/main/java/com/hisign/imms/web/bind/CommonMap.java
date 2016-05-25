@@ -13,16 +13,9 @@ import java.util.Map;
  */
 @Component
 public class CommonMap {
+    private Map<String, Object> map = new HashMap<>();
 
-    private CommonMap() {}
-
-    private static Map<String, Object> map = new HashMap<>();
-
-    public static Map<String, Object> getMap() {
+    public Map<String, Object> getMap() {
         return map;
-    }
-
-    public static void setMap(Map<String, Object> map) {
-        CommonMap.map = map;
     }
 }
