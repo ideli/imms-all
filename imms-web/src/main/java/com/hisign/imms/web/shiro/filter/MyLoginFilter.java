@@ -34,7 +34,10 @@ public class MyLoginFilter extends FormAuthenticationFilter {
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
         }
-        commonMap.getMap().put("loginSuccess", true);
+        //TODO 多用户共享变量问题
+        //同一个操作系统中，开启多个页面进行登录（有可能会出现问题）
+        String clientAddr = request.getLocalAddr();
+        commonMap.getMap().put(clientAddr + "_loginSuccess", true);
         super.issueSuccessRedirect(request, response);
     }
 

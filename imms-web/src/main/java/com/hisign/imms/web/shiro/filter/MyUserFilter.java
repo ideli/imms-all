@@ -46,8 +46,9 @@ public class MyUserFilter extends UserFilter {
         if (isLoginRequest(request, response)) {
             return true;
         } else if (isSuccessRequest(request)) {
-            if (null != commonMap.getMap().get("loginSuccess")) {
-                commonMap.getMap().remove("loginSuccess");
+            String clientAddr = request.getLocalAddr();
+            if (null != commonMap.getMap().get(clientAddr + "_loginSuccess")) {
+                commonMap.getMap().remove(clientAddr + "_loginSuccess");
                 return true;
                 // If principal is not null, then the user is known and should be allowed access.
             } else return subject.getPrincipal() != null;
