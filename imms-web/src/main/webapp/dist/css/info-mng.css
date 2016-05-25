@@ -93,7 +93,7 @@
 }
 .query-btn{
     /*background: #17A3F7;*/
-    background: #777;
+    background: #555;
 }
 .reset-btn{
     background: #FCBC40;
@@ -102,7 +102,6 @@
     height: 30px;
     line-height: 30px;
     text-indent: 1em;
-    background: #777;
     /*background: linear-gradient(to right, #c0d2ec , #DEE9F1);*/
 }
 .new-color-bar b{
@@ -154,12 +153,12 @@
 }
 .typical-tb td td{
     border:none;
+    text-align: left;
 }
 .typical-tb td a{
     color: #0066cc;
 }
 #implement-addr-table td{
-    text-align: center;
     padding:3px;
 }
 .sql-content{
@@ -208,8 +207,10 @@
     float: left;
     margin-top: 6px;
 }
-.server-td{
+.typical-tb td.server-td{
     width: 200px;
+    text-align: left;
+    word-break: break-all;
 }
 .db-info-td{
     width: 150px;
