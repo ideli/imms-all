@@ -1,0 +1,101 @@
+<!-- 标签引入及字符集设置 end-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">	
+	<title>模块语句管理</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/basic-info.css"/>
+</head>
+<body>
+	<div id="current-position">
+		<input type="button" class="add-btn" id="addObj" value="新 增"/>
+	</div>
+	<div class="query-condition mt10 tac">
+		<p class="query-p-helper">
+			<select class="query-select" name="ssmk" id="ssmk">
+				<option disabled="disabled" selected="selected">所属模块</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select>
+			<label for="ssmk" class="qs-label">☰</label>
+		</p>
+		<p class="query-p-helper">
+			<input name="state-use" id="state-use" class="query-input" placeholder="语句用途"/>
+			<label for="state-use" class="qi-label sql-use"></label>
+		</p>
+		<p class="query-p-helper">
+			<input name="filter-content" id="content" class="query-input" placeholder="语句内容"/>
+			<label for="content" class="qi-label sql-con"></label>
+		</p>
+		<input value="查 询" id="search" class="query-btn"/><input type="button" value="重 置" id="resetSearch" class="reset-btn ml10"/>
+	</div>
+	<div id="query-result" class="mt20">
+		<div class="new-color-bar">
+			<span class="title">模块语句列表</span>
+		</div>
+		<table id="module-sql-table" class="typical-tb">
+			<thead>
+			<th>序号</th>
+			<th>所属模块</th>
+			<th>语句用途</th>
+			<th>语句内容</th>
+			<th>操作</th>
+			</thead>
+			<tbody tpsource="#module-sql-list"></tbody>
+		</table>
+		<div class="paging"></div>
+	</div>
+</body>
+<script type="text/template" id="module-sql-list">
+	<tr class="{$nth2}">
+		<td>{rownum}</td>
+		<td>{molname}</td>
+		<td><p class="sql-content">{used}</p><a class="more-a" href="javascript:void(0);" onclick="toggleMoreContent(this,'{id}u');">更多</a></td>
+		<td><p class="sql-content">{content}</p><a class="more-a" href="javascript:void(0);" onclick="toggleMoreContent(this,'{id}c');">更多</a></td>
+		<td>
+			<a href="#" class="delete"></a>
+			<a href="#" class="modify"></a>
+			<a href="#" class="search"></a>
+		</td>
+	</tr>
+</script>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/pub.js"></script>
+<script src="js/paging.js"></script>
+<script src="js/basic-info.js"></script>
+<script type="text/javascript">
+	var modData = [
+		{"rownum":"1","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"665c0038f0154c728c045acaba2e75fe"},
+		{"rownum":"2","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页  12232   <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     eerere<br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理  fdfdf   <br/>     项目运行监控     <br/>     用户反馈fdfsf     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   5654654<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"48e1ae7f25ab451faa776ebc8873798c"},
+		{"rownum":"3","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页  12232   <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     eerere<br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理  fdfdf   <br/>     项目运行监控     <br/>     用户反馈fdfsf     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   5654654<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"456c0038f0154c728c045acaba2e75fe"},
+		{"rownum":"4","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页  12232   <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     eerere<br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理  fdfdf   <br/>     项目运行监控     <br/>     用户反馈fdfsf     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   5654654<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"654c0038f0154c728c045acaba2e75fe"},
+		{"rownum":"5","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页  12232   <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     eerere<br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理  fdfdf   <br/>     项目运行监控     <br/>     用户反馈fdfsf     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   5654654<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"954c0038f0154c728c045acaba2e75fe"},
+		{"rownum":"6","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页  12232   <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     eerere<br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理  fdfdf   <br/>     项目运行监控     <br/>     用户反馈fdfsf     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   5654654<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"369c0038f0154c728c045acaba2e75fe"}
+	];
+	// 在doc准备好后,写js逻辑
+	$(document).ready(function(){
+		//添加当前位置
+		createCurrentPosition({pTitle:['基础信息管理']});
+
+		//加载模块语句列表数据
+		encodeStp.allowHTML = true;
+		$('#query-result').paging({count:modData.length,pageOnce:5},function (begin,end) {
+			$template('#module-sql-table tbody',modData.slice(begin-1,end));
+		});
+
+		//内容在4行内的不显示“更多”
+		$('p.sql-content').each(function(index,el){
+			if(el.innerHTML.match(/<br/gm).length<4){
+				$(el).next().hide();
+			}
+		});
+
+		//点击重置按钮
+		$('#resetSearch').on('click',function(){
+			resetInput();
+		});
+	});
+</script>
+</html>

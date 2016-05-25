@@ -1,6 +1,9 @@
 {
     "distVersion":"1.0",
+    "maxTabCount":9,
     "plugins":{
+        "autocomplete":"autocomplete/autocomplete.js",
+        "datepicker":"my97/datepicker.js",
         "ztree":"ztree/ztree.js",
         "echarts":"echarts/echarts317.js",
         "echarts2":"echarts/echarts225.js",

@@ -30,7 +30,7 @@ var molDatas=[
         name:'信息管理',
         id:'info-mng',
         items:[
-            {name:'实施项目管理',id:'',direct:'info-mng-ssxm.html',items:null},
+            {name:'实施项目管理',id:'',direct:'info-mng/info-mng-ssxmgl.html',items:null},
             {name:'存储过程管理',id:'',direct:null,items:[
                 {name:'项目存储过程',id:'',direct:'info-mng-xmcc.html'},
                 {name:'工作存储过程',id:'',direct:'info-mng-gzcc.html'}

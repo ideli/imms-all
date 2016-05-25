@@ -430,7 +430,7 @@
                 if (!options.url && options.matchContains) {
                     var csub = [];
                     for (var k in data) {
-                        if(window['autocompleteSort']===true){
+                        if(options.sort!=='time'){
                             if (k.length > 0) {
                                 var c = data[k];
                                 $.each(c, function(i, x) {

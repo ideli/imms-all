@@ -296,7 +296,7 @@ module.exports={
                 closable: closable!==false
             });
         };
-        if(rootTabs.tabs('tabs').length>(parseInt(top.maxTabCount)||9)){
+        if(rootTabs.tabs('tabs').length>(parseInt(window.config.maxTabCount)||9)){
             top.$confirm('页签窗口过多!<br>将关闭最先打开的页签, 再打开新窗口。<br>是否继续?',function(res){
                 if(res) {
                     rootTabs.tabs('close', 1);
@@ -307,5 +307,66 @@ module.exports={
             addTab(id);
         }
         return top.$('#'+id);
+    },
+    /**
+     * Created by XiongYing on 2016/5/21.
+     */
+
+    /*生成当前位置  <span>※ </span><span color="#265EA9">当前位置：基础信息管理 ></span> 实施项目管理
+     * @parameter obj:有如下属性的对象：
+     * icon:当前位置前面的符号或者图标
+     * pTitle:当前页面的父页面名称数组
+     * cTitle:当前页面名称
+     */
+    createCurrentPosition:function (obj){
+    obj = obj?obj:{};
+    var icon = obj.icon?obj.icon:'※',
+        pTitle = obj.pTitle?obj.pTitle:[],
+        cTitle = obj.cTitle?obj.cTitle:document.title,
+        parentTitles = '',
+        i = 0,
+        positionHtml = '';
+
+    for(;i<pTitle.length;i++){
+        parentTitles += pTitle[i] + ' > ';
     }
+    positionHtml = '<span>{icon}</span> 当前位置: {parentTitles}{cTitle}'.replace(/{\w*}/g,function(match){
+        switch(match){
+            case '{icon}':
+                return icon;
+            case '{parentTitles}':
+                return parentTitles;
+            case '{cTitle}':
+                return cTitle;
+        }
+    });
+    $('#current-position').prepend(positionHtml);
+},
+
+//显示更多、收起
+toggleMoreContent:(function () {
+    var isShow = [];//isShow = [{id:'1u',show:true},{id:'2c',show:false}];
+    return function (obj,id) {
+        var isShowLen = isShow.length,
+            moreId = id,
+            isMatch = false,//默认false,没有点击过,isShow数组里没有它的id
+            i=0;
+        for(;i<isShowLen;i++){
+            if(isShow[i].id === moreId){
+                if(isShow[i].show){
+                    jQuery(obj).text('收起').prev().addClass('show');
+                    isShow[i].show = false;
+                }else{
+                    jQuery(obj).text('更多').prev().removeClass('show');
+                    isShow[i].show = true;
+                }
+                isMatch = true;
+            }
+        }
+        if(!isMatch){
+            jQuery(obj).text('收起').prev().addClass('show');
+            isShow.push({id:moreId,show:false});
+        }
+    };
+})()
 };

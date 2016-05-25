@@ -3,39 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>工作存储过程</title>
-    <link rel="stylesheet" href="../dist/css/base.css">
+    <link rel="stylesheet" href="../dist/css/base.css?version=1.0">
 </head>
 <body class="pd10">
 <h2>工作存储过程</h2>
 <input type="text" id="addr">
+<input type="text" id="dt-input">
 <ul id="baseTree" class="ztree"></ul>
 </body>
-<script src="../dist/js/base.js"></script>
+<script src="../dist/js/base.js?version=1.0"></script>
 <script>
+
     top.path=top.path||'/imms-all/imms-web/src/main/webapp';
 
     var json=[{value:'111'},{value:'2222'},{value:'333'},{value:'1333'}]
-    $('#addr').autocomplete(json, {
-        max: 20,    //列表里的条目数
-        minChars: 1,    //自动完成激活之前填入的最小字符
-        width: 520,     //提示的宽度，溢出隐藏
-        scrollHeight: 220,   //提示的高度，溢出显示滚动条
-        matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
-        autoFill: false,    //自动填充
-        matchCase:false,	  //开启大小写敏感
-        delay:200,            //延时
-        mouseDownOnSelect:1,
-        formatItem: function(row, i, max) {
-            return  row.value;
-        },
-        formatMatch: function(row, i, max) {
-            return row.value;
-        },
-        formatResult: function(row) {
-            return row.value;
-        }
-    }).result(function(event, row, formatted) {
-    });
 
     var setting = {
         check: {
@@ -58,7 +39,6 @@
             onClick:function(node){log(node)}
         }
     };
-
 
     var nodes =[
         {id:1, pId:0, name:"[core] 基本功能 演示", open:true},
@@ -90,8 +70,38 @@
         ]}
     ];
 
-    importing('ztree',function() {
-        $.ztree.init($('#baseTree'), {},nodes);
+    importing('autocomplete','ztree','datepicker',function() {
+        $.ztree.init($('#baseTree'), setting, nodes);
+
+        $('#addr').autocomplete(json, {
+            max: 20,    //列表里的条目数
+            minChars: 1,    //自动完成激活之前填入的最小字符
+            width: 520,     //提示的宽度，溢出隐藏
+            scrollHeight: 220,   //提示的高度，溢出显示滚动条
+            matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+            autoFill: false,    //自动填充
+            matchCase:false,	  //开启大小写敏感
+            delay:200,            //延时
+            mouseDownOnSelect:1,
+            formatItem: function(row, i, max) {
+                return  row.value;
+            },
+            formatMatch: function(row, i, max) {
+                return row.value;
+            },
+            formatResult: function(row) {
+                return row.value;
+            }
+        }).result(function(event, row, formatted) {
+        });
+
+        $('#dt-input').datepicker();
+
+        //$('#dt-input').datepicker({
+            //maxDate:'%y-%M-%d',
+            //event:'mouseenter'
+        //});
+
     });
 
 </script>

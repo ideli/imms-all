@@ -146,8 +146,8 @@
     var $cookie=require('../lib/jquery.cookie');
     $cookie($);
     
-    var $autoComolete=require('../lib/autocomplete');
-    $autoComolete($);
+    //var $autoComolete=require('../lib/autocomplete');
+    //$autoComolete($);
     
     var exy=require('../lib/exy');
     window.extending(exy);
@@ -166,8 +166,8 @@
     
     var paging=require('../lib/paging.js');
 
-    
-    
+
+    window.path=top.path||location.href.replace(/index2?\.(html|jsp)/,'').replace(/view\/.*/,'');
 
     if(typeof module === "object" && typeof module.exports === "object" ){
         module.exports={

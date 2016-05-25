@@ -13,7 +13,7 @@
     <table id="plus-main">
 		<thead>  <th>父亲</th> <th>母亲</th> <th>姓名</th> <th>年龄</th>  <th>婚姻状况</th> <th>操作</th></thead>
         <tbody id="main">
-        <tr tpindex="{$index}"  msg="{context.msg}">
+        <tr tpindex="{$index}"  class=" testtr2" msg="{context.msg}">
             <td>{family.dad}</td>
             <td>{family.mum}</td>
             <td><a href="{href}">{name}</a></td>
@@ -26,10 +26,22 @@
 
 
     <table id="info"  tpsource="#detail" ></table>
-
+<style>
+    .testtr td{
+        color:red!important;
+        background: #00B83F;
+        font-size: 17px;
+    }
+    .testtr2 td button{
+        transition: ease .5s 0s;
+    }
+    .testtr2 td button:hover{
+        transform:rotate(710deg);
+    }
+</style>
 
     <script type="text/template" id="detail">
-        <tr msg="{context.msg}">
+        <tr  msg="{context.msg}">
             <td>姓名:</td>  <td>{name}</td>  <td>年龄:</td>  <td>{age}</td></tr>
         <tr>
             <td>父亲:</td>  <td>{family.dad}</td>  <td>母亲:</td>  <td>{family.mum}</td></tr>

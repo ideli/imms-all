@@ -85,7 +85,7 @@ function $compile(source,data,arg2,arg3) {
     var i=0,j=data.length,sb=[];
     for(;i<j;i++){
         helper && !data[i]._done_ && helper(data[i],i) && (data[i]._done_=true);
-        sb.push(format(data[i],source).replace(new RegExp('{$index}','g'),i+1).replace(new RegExp('{$native_index}','g'),$encode(i)).replace(new RegExp('{$nth2}','g'),i%2==1?'nth-even':'nth-odd'));
+        sb.push(format(data[i],source).replace(/\{\$rownum\}/g,i+1).replace(/\{\$index\}/g,$encode(i)).replace(/\{\$nth2\}/g,i%2==1?'nth-even':'nth-odd'));
     }
     return sb.join('');
 }

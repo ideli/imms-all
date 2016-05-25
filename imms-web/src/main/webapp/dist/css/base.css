@@ -137,11 +137,71 @@
 /*@end*/
 
 
-/* @group 公共foot */
-/* @end 公共foot*/
+/* @group paging */
+.paging{
+	padding:15px 15px 10px 0;
+	overflow:hidden;
+	text-align: center;
+}
+.paging.bottom{
+	padding-bottom:0;
+	position:absolute;
+	bottom:10px;
+	left: 0;
+}
+.paging div{
+	font-size: 12px;
+	display: inline-block;
+}
+.paging div a {
+	text-decoration: none;
+	border: solid 1px #ABC5E0;
+	color: #15B;
+}
+.paging div a,
+.paging div span {
+	display: block;
+	float: left;
+	padding: 0.3em 0.5em;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	min-width:1em;
+	text-align:center;
+}
+
+.paging div .current {
+	background: #26B;
+	color: #fff;
+	border: solid 1px #ABC5E0;
+}
+
+.paging div .current.prev,
+.paging div .current.next{
+	color:#ABC5E0;
+	border-color:#ccc;
+	background:#fff;
+}
+/* @end paging*/
 
 
 /*@group 总体布局*/
+#current-position{
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 0px dotted #abc5e0;
+	/*color: steelblue;*/
+	font-size: 13px;
+	color:#666;
+	padding-left: 5px;
+}
+.new-color-bar{
+	height: 30px;
+	line-height: 30px;
+	text-indent: 1em;
+	overflow:hidden;
+	background: #777;
+	position:relative;
+}
 /*@end 总体布局*/
 
 

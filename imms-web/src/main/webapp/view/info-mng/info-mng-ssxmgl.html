@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>实施项目管理</title>
+    <link rel="stylesheet" href="../../dist/css/base.css">
+    <link rel="stylesheet" href="../../dist/css/info-mng.css"/>
+</head>
+<body>
+    <div id="current-position">
+        <!--<span>※ </span><span color="#265EA9">当前位置：基础信息管理 ></span> 实施项目管理-->
+        <input type="button" class="add-btn" id="push" value="推 送"/>
+        <input type="button" class="add-btn" id="addObj" value="新 增"/>
+    </div>
+    <div class="query-condition mt10">
+        <p class="query-condition-p">
+            <input id="unit" type="text" class="query-input-implement" placeholder="实施项目单位">
+            <input id="manager" type="text" class="query-input-implement" placeholder="实施项目经理">
+            <input id="director" type="text" class="query-input-implement" placeholder="实施负责人">
+            <input type="button" class="query-btn" value="查 询">
+        </p>
+        <p class="query-condition-p">
+            <input id="version" type="text" class="query-input-implement" placeholder="系统当前版本号">
+            <input type="text" class="query-date" placeholder="实施开展时间开始">~
+            <input type="text" class="query-date" placeholder="实施开展时间结束">
+            <select name="" id="level" class="query-select-implement">
+                <option disabled selected>项目级别</option>
+                <option value="">A</option>
+                <option value="">B</option>
+                <option value="">C</option>
+            </select>
+            <input type="button" class="reset-btn" value="重 置">
+        </p>
+    </div>
+    <div id="query-result" class="mt20">
+        <div class="new-color-bar">
+            <span class="title">实施地信息列表</span>
+        </div>
+        <table id="implement-addr-table" class="typical-tb" cellpadding="3">
+            <thead>
+                <th>序号</th>
+                <th>项目单位</th>
+                <th>实施人员信息</th>
+                <th>开展时间</th>
+                <th>版本号</th>
+                <th>应用服务器信息</th>
+                <th>登录信息</th>
+                <th>数据库服务器信息</th>
+                <th>系统对接情况</th>
+                <th>实施地数据信息</th>
+                <th>操作</th>
+            </thead>
+            <tbody tpsource="#implement-addr-list"></tbody>
+        </table>
+        <div class="paging"></div>
+    </div>
+</body>
+<script type="text/template" id="implement-addr-list">
+    <tr class="{$nth2}">
+        <td>{rownum}</td>
+        <td>{unit}</td>
+        <td class="min-w-155">
+            <table>
+                {{members:#members}}
+            </table>
+        </td>
+        <td>{time}</td>
+        <td>{version}</td>
+        <td class="server-td">
+            <a href="{server.param}" target="_blank">{server.content}</a>
+        </td>
+        <td>{loginInfo}</td>
+        <td class="db-info-td">{databaseInfo}</td>
+        <td class="w-130 min-w-130">{{sysDjqk:#sysDjqk}}</td>
+        <td class="w-130 min-w-130">
+            <table>
+                {{sjxx:#sjxx}}
+            </table>
+        </td>
+        <td>
+            <a href="#" class="add" title="新增升级部署信息"></a><br>
+            <a href="#" class="delete" title="删除"></a><br>
+            <a href="#" class="modify" title="修改"></a><br>
+            <a href="#" class="search" title="查看"></a>
+        </td>
+    </tr>
+</script>
+<script type="text/template" id="members">
+    <tr>
+        <td class="position">{position}:</td>
+        <td>{name}</td>
+    </tr>
+</script>
+<script type="text/template" id="sysDjqk">
+    <p>
+        <span class="xtlb">{xtlb}</span><img class="ifdj" src="../../dist/img/islinked{ifDj}.png"/><span class="xtbdj">{xtbdj}</span>
+    </p>
+</script>
+<script type="text/template" id="sjxx">
+    <tr>
+        <td>{sjlz}:</td>
+        <td>{gsmc}</td>
+    </tr>
+</script>
+<script src="../../dist/js/base.js"></script>
+<script>
+    var implementData = [
+        {"rownum":"1", "unit":"110000|北京(A级)", "members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":"赵金海,张启伦,陈维,刘晋,林元东"}], "time":"2011-01-01", "version":"V2.7.9", "server":{"content":"IP:192.168.1.169 端口：8081 用户名/密码:administrator/hisign  登陆用户：sys/sys","param":"http://192.168.1.169:8081/xjpt"}, "loginInfo":"sys/hisign", "sysDjqk":[{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"1","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"1","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"}], "databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/该数据使用10g", "sjxx":[{"sjlz":"足迹","gsmc":"大连恒锐"},{"sjlz":"警综","gsmc":"三版本"},{"sjlz":"指纹","gsmc":"文创思宇"},{"sjlz":"现勘","gsmc":"北京海鑫"},{"sjlz":"DNA","gsmc":"海华鑫安"}], "id":"8af67d624398eea7014399ba1689003d"},
+        {"rownum":"2","unit":"110109|北京门头沟区(A级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":"谢昆仑"}],"time":"2015-05-26","version":"v2.6.6","server":{"content":"应用服务器：IP:10.12.69.90 端口：8081 用户名/密码:administrator/dell123456@dell.com 登陆用户：sys/sys ","param":"http://10.12.69.90:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"1","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"1","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"1","xtbdj":"DNA"}],"databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d624d8e44bd014d8e44bd780000"},
+        {"rownum":"3","unit":"110115|北京大兴区(A级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":"蔡昭平,孔令超,辜成功"}],"time":"2015-01-20","version":"v2.6.6","server":{"content":"应用服务器：IP:10.12.150.98 端口：8081 用户名/密码：administrator/hisign 登录用户：sys/sys","param":"http://10.12.150.98:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案件","ifDj":"1","xtbdj":"现勘"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"0","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"}],"databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/该数据库使用10g","sjxx":[{"sjlz":"DNA","gsmc":"海华鑫安"},{"sjlz":"警综","gsmc":"三版本"},{"sjlz":"指纹","gsmc":"文创思宇"},{"sjlz":"现勘","gsmc":"北京海鑫"}],"id":"8af67d624b10a56f014b10a56fc30000"},{"rownum":"4","unit":"110116|北京怀柔区(A级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":""}],"time":"2014-12-09","version":"v2.6.6","server":{"content":"应用服务器：IP:10.13.99.107 端口：8081 用户名/密码:administrator/Hisign123456 登陆用户：sys/sys ","param":"http://10.13.99.107:8081/xjpt"},"loginInfo":"sys/hisign","databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/该数据使用10g ","sjxx":[{"sjlz":"警综","gsmc":"三版本"},{"sjlz":"现勘","gsmc":"北京海鑫"},{"sjlz":"DNA","gsmc":"海华鑫安"},{"sjlz":"指纹","gsmc":"文创思宇"}],"id":"8af67d624b10a56f014b10b1dcab0003"},
+        {"rownum":"4","unit":"110228|北京密云县(C级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":""}],"time":"2014-02-25","version":"v2.6.0","server":{"content":"应用服务器：IP:10.13.112.195 端口：8081 用户名/密码:administrator/hisign 登陆用户：sys/sys ","param":"http://10.13.112.195:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"0","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"},{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"}],"databaseInfo":"同北京","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d6248a28d860148a6f3f30e0001"},{"rownum":"6","unit":"120000|天津(C级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"戚佳波"},{"position":"驻地维护人员","name":""}],"time":"2014-04-14","version":"V2.6.3","server":{"content":"应用服务器：              IP:10.88.41.131   端口：8081             用户名/密码:administrator/password01! ","param":"http://10.88.41.131:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"10.88.41.244:1521:xcky/yppt/yppt ","sjxx":[{"sjlz":"警综","gsmc":"TCIC"},{"sjlz":"足迹","gsmc":"恒锐"},{"sjlz":"DNA","gsmc":"国家库"},{"sjlz":"现勘","gsmc":"海鑫"}],"id":"8af67d6245781de80145781de8280000"},{"rownum":"7","unit":"130000|河北(A级)","members":[{"position":"实施项目经理","name":"黄少杰"},{"position":"实施责任人员","name":"许黎明"},{"position":"驻地维护人员","name":""}],"time":"2015-06-03","version":"V2.6.4","server":{"content":"IP:10.24.8.214 端口：8081 用户名/密码:administrator/1","param":"http://10.24.8.214:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"ip://10.24.8.214:yppt/yppt/yppt","sjxx":[{"sjlz":"DNA","gsmc":"海鑫"},{"sjlz":"现勘","gsmc":"海鑫"},{"sjlz":"警综","gsmc":"资讯"},{"sjlz":"足迹","gsmc":"大连恒瑞"},{"sjlz":"指纹","gsmc":"东方金指"}],"id":"8af67d624db907b2014db907b2580000"},{"rownum":"8","unit":"130100|河北石家庄(A级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"李楠"},{"position":"驻地维护人员","name":""}],"time":"2015-12-04","version":"null","server":{"content":"sdds","param":"http://:ds/xjpt"},"loginInfo":"sd1111","databaseInfo":"dsdds","sjxx":[{"sjlz":"现勘","gsmc":"dfs"}],"id":"40288106516ae45901516af0e25b0001"},
+        {"rownum":"5","unit":"110228|北京密云县(C级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":""}],"time":"2014-02-25","version":"v2.6.0","server":{"content":"应用服务器：IP:10.13.112.195 端口：8081 用户名/密码:administrator/hisign 登陆用户：sys/sys ","param":"http://10.13.112.195:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"0","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"},{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"}],"databaseInfo":"同北京","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d6248a28d860148a6f3f30e0001"},{"rownum":"6","unit":"120000|天津(C级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"戚佳波"},{"position":"驻地维护人员","name":""}],"time":"2014-04-14","version":"V2.6.3","server":{"content":"应用服务器：              IP:10.88.41.131   端口：8081             用户名/密码:administrator/password01! ","param":"http://10.88.41.131:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"10.88.41.244:1521:xcky/yppt/yppt ","sjxx":[{"sjlz":"警综","gsmc":"TCIC"},{"sjlz":"足迹","gsmc":"恒锐"},{"sjlz":"DNA","gsmc":"国家库"},{"sjlz":"现勘","gsmc":"海鑫"}],"id":"8af67d6245781de80145781de8280000"},{"rownum":"7","unit":"130000|河北(A级)","members":[{"position":"实施项目经理","name":"黄少杰"},{"position":"实施责任人员","name":"许黎明"},{"position":"驻地维护人员","name":""}],"time":"2015-06-03","version":"V2.6.4","server":{"content":"IP:10.24.8.214 端口：8081 用户名/密码:administrator/1","param":"http://10.24.8.214:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"ip://10.24.8.214:yppt/yppt/yppt","sjxx":[{"sjlz":"DNA","gsmc":"海鑫"},{"sjlz":"现勘","gsmc":"海鑫"},{"sjlz":"警综","gsmc":"资讯"},{"sjlz":"足迹","gsmc":"大连恒瑞"},{"sjlz":"指纹","gsmc":"东方金指"}],"id":"8af67d624db907b2014db907b2580000"},{"rownum":"8","unit":"130100|河北石家庄(A级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"李楠"},{"position":"驻地维护人员","name":""}],"time":"2015-12-04","version":"null","server":{"content":"sdds","param":"http://:ds/xjpt"},"loginInfo":"sd1111","databaseInfo":"dsdds","sjxx":[{"sjlz":"现勘","gsmc":"dfs"}],"id":"40288106516ae45901516af0e25b0001"},
+        {"rownum":"6","unit":"110228|北京密云县(C级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":""}],"time":"2014-02-25","version":"v2.6.0","server":{"content":"应用服务器：IP:10.13.112.195 端口：8081 用户名/密码:administrator/hisign 登陆用户：sys/sys ","param":"http://10.13.112.195:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"0","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"},{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"}],"databaseInfo":"同北京","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d6248a28d860148a6f3f30e0001"},{"rownum":"6","unit":"120000|天津(C级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"戚佳波"},{"position":"驻地维护人员","name":""}],"time":"2014-04-14","version":"V2.6.3","server":{"content":"应用服务器：              IP:10.88.41.131   端口：8081             用户名/密码:administrator/password01! ","param":"http://10.88.41.131:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"10.88.41.244:1521:xcky/yppt/yppt ","sjxx":[{"sjlz":"警综","gsmc":"TCIC"},{"sjlz":"足迹","gsmc":"恒锐"},{"sjlz":"DNA","gsmc":"国家库"},{"sjlz":"现勘","gsmc":"海鑫"}],"id":"8af67d6245781de80145781de8280000"},{"rownum":"7","unit":"130000|河北(A级)","members":[{"position":"实施项目经理","name":"黄少杰"},{"position":"实施责任人员","name":"许黎明"},{"position":"驻地维护人员","name":""}],"time":"2015-06-03","version":"V2.6.4","server":{"content":"IP:10.24.8.214 端口：8081 用户名/密码:administrator/1","param":"http://10.24.8.214:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"ip://10.24.8.214:yppt/yppt/yppt","sjxx":[{"sjlz":"DNA","gsmc":"海鑫"},{"sjlz":"现勘","gsmc":"海鑫"},{"sjlz":"警综","gsmc":"资讯"},{"sjlz":"足迹","gsmc":"大连恒瑞"},{"sjlz":"指纹","gsmc":"东方金指"}],"id":"8af67d624db907b2014db907b2580000"},{"rownum":"8","unit":"130100|河北石家庄(A级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"李楠"},{"position":"驻地维护人员","name":""}],"time":"2015-12-04","version":"null","server":{"content":"sdds","param":"http://:ds/xjpt"},"loginInfo":"sd1111","databaseInfo":"dsdds","sjxx":[{"sjlz":"现勘","gsmc":"dfs"}],"id":"40288106516ae45901516af0e25b0001"},
+        {"rownum":"7","unit":"110228|北京密云县(C级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":""}],"time":"2014-02-25","version":"v2.6.0","server":{"content":"应用服务器：IP:10.13.112.195 端口：8081 用户名/密码:administrator/hisign 登陆用户：sys/sys ","param":"http://10.13.112.195:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"0","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"},{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"}],"databaseInfo":"同北京","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d6248a28d860148a6f3f30e0001"},{"rownum":"6","unit":"120000|天津(C级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"戚佳波"},{"position":"驻地维护人员","name":""}],"time":"2014-04-14","version":"V2.6.3","server":{"content":"应用服务器：              IP:10.88.41.131   端口：8081             用户名/密码:administrator/password01! ","param":"http://10.88.41.131:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"10.88.41.244:1521:xcky/yppt/yppt ","sjxx":[{"sjlz":"警综","gsmc":"TCIC"},{"sjlz":"足迹","gsmc":"恒锐"},{"sjlz":"DNA","gsmc":"国家库"},{"sjlz":"现勘","gsmc":"海鑫"}],"id":"8af67d6245781de80145781de8280000"},{"rownum":"7","unit":"130000|河北(A级)","members":[{"position":"实施项目经理","name":"黄少杰"},{"position":"实施责任人员","name":"许黎明"},{"position":"驻地维护人员","name":""}],"time":"2015-06-03","version":"V2.6.4","server":{"content":"IP:10.24.8.214 端口：8081 用户名/密码:administrator/1","param":"http://10.24.8.214:8081/xjpt"},"loginInfo":"sys/hisign123","databaseInfo":"ip://10.24.8.214:yppt/yppt/yppt","sjxx":[{"sjlz":"DNA","gsmc":"海鑫"},{"sjlz":"现勘","gsmc":"海鑫"},{"sjlz":"警综","gsmc":"资讯"},{"sjlz":"足迹","gsmc":"大连恒瑞"},{"sjlz":"指纹","gsmc":"东方金指"}],"id":"8af67d624db907b2014db907b2580000"},{"rownum":"8","unit":"130100|河北石家庄(A级)","members":[{"position":"实施项目经理","name":"金满"},{"position":"实施责任人员","name":"李楠"},{"position":"驻地维护人员","name":""}],"time":"2015-12-04","version":"null","server":{"content":"sdds","param":"http://:ds/xjpt"},"loginInfo":"sd1111","databaseInfo":"dsdds","sjxx":[{"sjlz":"现勘","gsmc":"dfs"}],"id":"40288106516ae45901516af0e25b0001"}
+    ];
+    importing('datepicker',function(){
+        //添加当前位置
+//        createCurrentPosition({pTitle:['基础信息管理']});
+
+        //为了给type为date的input添加placeholder
+//        $('.query-date').focus(function(){
+//            this.type = 'date';
+//            $(this).addClass('on-date');
+//        }).blur(function(){
+//            this.type='text';
+//            $(this).removeClass('on-date');
+//        });
+        $('.query-date').datepicker();
+        //加载实施地信息列表数据
+        $template('#implement-addr-table tbody',implementData);
+    });
+</script>
+</html>

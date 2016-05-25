@@ -106,12 +106,21 @@ module.exports={
                 typeof ag=='function' && ag();
                 return false;
             }
+            //识别插件
             var plugins=window.config.plugins;
-            for(var n in plugins){
-                if(ag===n){
-                    ag=(top.path||'')+'/dist/plugin/'+plugins[n];
+            if(plugins[ag]){
+                ag=(top.path||'')+'/dist/plugin/'+plugins[ag];
+            }
+            //对应默认文件夹
+            else if(ag.indexOf('/')<0){
+                if(ag.match(/.*.css$/i)){
+                    ag=(top.path||'')+'/dist/css/'+ag;
+                }
+                if(ag.match(/.*.js$/i)){
+                    ag=(top.path||'')+'/dist/js/'+ag;
                 }
             }
+            //识别加载方式
             window[ag.match(/.*\/css\/.+|.css$/i)?'$style':'$script'](ag,function(){
                 window.importing.apply(this,[].slice.call(ags,1));
             })

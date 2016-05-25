@@ -1,0 +1,242 @@
+/*@group module sql*/
+.query-condition{
+    font-family: 微软雅黑!important;
+}
+.query-condition-p{
+    /*width: 1100px;*/
+    /*margin: 10px auto;*/
+    margin:10px;
+}
+.query-p-helper{
+    display: inline-block;
+    position: relative;
+}
+.query-select,.query-input,.query-date,.query-input-implement,.query-select-implement{
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /*font-size: 14px;*/
+}
+.query-select{
+    width: 205px;
+    padding-left: 10px;
+}
+.query-select-implement{
+    padding-left: 36px;
+    width: 298px;
+}
+.query-input{
+    width: 180px;
+    padding-left: 36px;
+}
+.query-input-implement{
+    width: 261px;
+    padding-left: 36px;
+}
+.query-date{
+    /*height: auto;*/
+    height:30px;
+    width: 130px;
+    /*padding: 10.5px 5px;*/
+    padding: 0 5px;
+}
+.on-date{
+    padding: 7.5px 5px;
+}
+.qs-label,.qi-label{
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 0 5px 5px 0;
+    background-position-x: 6px!important;
+    background-position-y: 6px!important;
+}
+.qs-label{
+    right: 0;
+    background: #17A3F7;
+    color: #fff;
+}
+.qi-label{
+    left: 0;
+    color: #6b6b6b;
+}
+.sql-use{
+    background: url("../img/database.png") no-repeat;
+}
+.sql-con{
+    background: url("../img/file.png") no-repeat;
+}
+.query-btn,.reset-btn,.add-btn{
+    width: 72px;
+    height: 28px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+.add-btn{
+    /*color: #17A3F7;*/
+    /*border: 1px solid #17A3F7;*/
+    color: #FCBC40;
+    border: 1px solid #FCBC40;
+    height: 22px;
+    float: right;
+    margin: 7px 5px 0 0;
+    background: #fff;
+}
+.query-btn{
+    /*background: #17A3F7;*/
+    background: #777;
+}
+.reset-btn{
+    background: #FCBC40;
+}
+.new-color-bar{
+    height: 30px;
+    line-height: 30px;
+    text-indent: 1em;
+    background: #777;
+    /*background: linear-gradient(to right, #c0d2ec , #DEE9F1);*/
+}
+.new-color-bar b{
+    padding:0 0 0 5px;
+    color:#1db6bb;
+    /*font-size:14px;*/
+}
+.new-color-bar .title{
+    font-size: 13px;
+    /*font-weight: bold;*/
+    color: gold;
+    font-family: 微软雅黑;
+}
+.typical-tb{
+    width: 100%;
+    border-collapse:collapse;
+    margin: 0 auto;
+    /*border: 1px solid #cdcdcd;*/
+}
+.typical-tb tr{
+    /*min-height: 36px;*/
+}
+.typical-tb thead tr{
+    background: #f1f1f1;
+}
+.typical-tb tbody tr.nth-even{
+    background: #f5f5f5;
+}
+.typical-tb tbody tr:hover{
+    background: #ffef85;
+}
+.typical-tb th{
+    height: 60px;
+    color: #545454;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+    /*font-size: 14px;*/
+    /*background:#f5f5f5;*/
+    /*background:linear-gradient(#f7f7f7, #f1f1f1, #efefef);*/
+}
+.typical-tb td{
+    text-align: center;
+    /*border-bottom: 1px dotted #a9a9a9;*/
+    height: 28px;
+    line-height: 28px;
+    font-size: 13px;
+    border-bottom: 1px solid #d9d9d9;
+    border-left: 1px solid #ddd;
+}
+.typical-tb td td{
+    border:none;
+}
+.typical-tb td a{
+    color: #0066cc;
+}
+#implement-addr-table td{
+    text-align: center;
+    padding:3px;
+}
+.sql-content{
+    height: 100px;
+    line-height: 25px;
+    overflow: hidden;
+}
+.more-a{
+    float: right;
+}
+.show{
+    height: auto;
+    overflow: visible;
+}
+.add{
+    background: url("../img/bullet_add.png") no-repeat;
+}
+.delete{
+    background: url("../img/bullet_deny.png") no-repeat;
+}
+.modify{
+    background: url("../img/edit.png") no-repeat;
+}
+.search{
+    background: url("../img/zoom.png") no-repeat;
+}
+.add,.delete,.modify,.search{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-position: center;
+}
+.xtlb,.xtbdj,.ifdj{
+    float: left;
+}
+.xtlb{
+    /*display: inline-block;*/
+    width: 50px;
+}
+.xtbdj{
+    /*display: inline-block;*/
+    width: 36px;
+    padding-left: 10px;
+}
+.ifdj{
+    float: left;
+    margin-top: 6px;
+}
+.server-td{
+    width: 200px;
+}
+.db-info-td{
+    width: 150px;
+}
+.position{
+    width: 85px;
+}
+#unit{
+    background: url("../img/icon_building.png") no-repeat;
+
+}
+#manager{
+    background: url("../img/male157.png") no-repeat;
+}
+#director{
+    background: url("../img/profle.png") no-repeat;
+}
+#version{
+    background: url("../img/vimeo24.png") no-repeat;
+}
+#level{
+    background: url("../img/levels.png") no-repeat;
+    color:#666;
+}
+#unit,#manager,#director,#version,#level{
+    background-position: 6px 6px;
+    background:none;
+    padding-left:5px;
+}
+/*@end*/
