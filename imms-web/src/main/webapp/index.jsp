@@ -20,8 +20,12 @@
     <canvas id="bubbleCanvas" width="320" height="150"></canvas>
     <h1 id="head-txt">刑技实施管理平台</h1>
     <nav class="nav-wrap">
-
         <ul id="root-nav" class="nav" tpsource="#nav-tp"></ul>
+        <div class="nav-operation">
+            <a href="">用户名</a>
+            <%--TODO: 注销 login-out绑定的click事件在index.js中--%>
+            <a id="login-out" href="javascript:void(0);">注销</a>
+        </div>
         <div class="arr-l-wrap"><p class="arr-l"></p></div>
         <div class="arr-r-wrap"><p class="arr-r"></p></div>
     </nav>
