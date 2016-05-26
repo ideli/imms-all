@@ -80,6 +80,10 @@ window.$.fn.treemenu=(function(){
         treeMenu.data('collapsed',!collapsed);
         return true;
     };
+
+    window.hideSliderMenu=function(){top.rootTreeMenu.trigger('toggle','hide');}
+    window.showSliderMenu=function(){top.rootTreeMenu.trigger('toggle','show');}
+
     return function(data,selectHandle){
         var ul=$('<ul class="tree-menu-accordion" tpsource="#tree-menu-tp"></ul>');
         $template(ul,data);
@@ -88,9 +92,9 @@ window.$.fn.treemenu=(function(){
                 .find('li').click(function(){selectItem.call(this,selectHandle);}).end().on('toggle',function(eve,param){
                 //提供给默认折叠侧菜单的控制,与hider和shower不同,不采用动画
                 if(param==='hide'){
-                    $(this).width(1).find('ul').hide().end().find('.toggle-tag').html('▶');
+                    $(this).width(1).find('ul').hide().end().data('collapsed',true).find('.toggle-tag').html('▶');
                 }else{
-                    $(this).width(170).find('ul').end().find('.toggle-tag').html('◄');
+                    $(this).width(170).find('ul').end().data('collapsed',false).find('.toggle-tag').html('◄');
                 }
             })
         );
