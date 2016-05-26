@@ -146,6 +146,7 @@
                 /lib/** = anon
                 /data/** = anon
                 /api/** = anon
+                /exception/** = anon
                 /favicon.ico = anon
                 /websocket/** = anon
                 /logout = logout

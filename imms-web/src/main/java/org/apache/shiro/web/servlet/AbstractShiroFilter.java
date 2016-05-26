@@ -27,6 +27,7 @@ import org.apache.shiro.web.filter.mgt.FilterChainResolver;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.shiro.web.subject.WebSubject;
+import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -363,8 +364,8 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
                 request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
                 request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
             }
-            final Subject subject = createSubject(request, response);
 
+            final Subject subject = createSubject(request, response);
 
             //noinspection unchecked
             subject.execute(new Callable() {
@@ -389,7 +390,8 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
             }
             //otherwise it's not one of the two exceptions expected by the filter method signature - wrap it in one:
             String msg = "Filtered request failed.";
-            throw new ServletException(msg, t);
+            log.error(msg, t);
+            WebUtils.issueRedirect(servletRequest, servletResponse, "/exception/error");
         }
     }
 
