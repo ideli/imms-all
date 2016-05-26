@@ -22,5 +22,6 @@
     <!-- -->
     <dubbo:service interface="com.hisign.imms.api.system.SysUserService" protocol="rmi,rest,webservice" ref="sysUserService" />
 
+    <dubbo:service interface="com.hisign.imms.api.system.SysDictService" protocol="rmi" ref="sysDictService" />
 
 </beans>
