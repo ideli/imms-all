@@ -1,4 +1,4 @@
-package com.hisign.imms.web.action;
+package com.hisign.imms.web.action.exception;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
