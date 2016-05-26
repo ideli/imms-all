@@ -93,7 +93,7 @@
 }
 .add-btn:hover{
     background: #fafafa;
-    box-shadow: 1px 1px 1px #ccc inset;
+    box-shadow: 1px 1px 1px #ccc;
 }
 .query-btn{
     /*background: #17A3F7;*/
