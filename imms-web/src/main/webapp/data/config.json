@@ -8,6 +8,7 @@
         "echarts":"echarts/echarts317.js",
         "echarts2":"echarts/echarts225.js",
         "echarts3":"echarts/echarts317.js",
-        "china":"echarts/china.js"
+        "china":"echarts/china.js",
+        "dict":"dict/dict.js"
     }
 }

@@ -74,7 +74,8 @@ var molDatas=[
             {name:'系统角色管理',id:'',direct:'sys-xtjsgl.html',items:null},
             {name:'系统模块管理',id:'',direct:'sys-xtmkgl.html',items:null},
             {name:'统计报表管理',id:'',direct:'sys-tjbbgl.html',items:null},
-            {name:'统计报表维护',id:'',direct:'sys-tjbbwh.html',items:null}
+            {name:'统计报表维护',id:'',direct:'sys-tjbbwh.html',items:null},
+            {name:'字典控件',id:'',direct:'sys-dict.html',items:null}
         ]
     }
 
