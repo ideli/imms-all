@@ -53,7 +53,7 @@ msgLogin:<%=message_login%>
 </body>
 <script>
     if(!window.chrome){
-        document.getElementById('browser-tip').innerHTML='检测到您到浏览器非chrome, 请下载chrome谷歌浏览器后, 再打开本系统!';
+        document.getElementById('browser-tip').innerHTML='检测到您的浏览器非chrome, 请下载chrome谷歌浏览器后, 再打开本系统!';
         document.getElementById('download-cr').style.display='block';
     }
 </script>

@@ -175,3 +175,8 @@ $('.nav a').click(function(){
 
 });
 
+//注销
+$('#login-out').on('click',function () {
+    
+});
+
