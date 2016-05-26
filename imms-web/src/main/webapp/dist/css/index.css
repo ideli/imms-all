@@ -306,9 +306,9 @@ header {
   overflow: hidden;
 }
 [mol-id="sys"]:before {
-  content: "\e81b";
+  content:"\f013";
   visibility: visible;
-  font-family: 'icomoon';
+  font-family: FontAwesome;
   font-size: 24px;
 }
 #bubbleCanvas {

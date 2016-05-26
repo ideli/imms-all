@@ -47,9 +47,9 @@ gulp.task('less', function () {
     gulp.src('style/base.less')
         .pipe(less())
         .pipe(gulp.dest('dist/css'));
-    gulp.src('style/index.less')
-        .pipe(less())
-        .pipe(gulp.dest('dist/css'));
+    //gulp.src('style/index.less')
+    //    .pipe(less())
+    //    .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('minifycss', function() {
