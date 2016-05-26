@@ -18,6 +18,7 @@
  */
 package org.apache.shiro.web.servlet;
 
+import com.alibaba.dubbo.common.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.ExecutionException;
@@ -356,11 +357,14 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
             final ServletRequest request = prepareServletRequest(servletRequest, servletResponse, chain);
             final ServletResponse response = prepareServletResponse(request, servletResponse, chain);
 
-//            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, ((HttpServletRequest)servletRequest).getRequestedSessionId());
-//            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
-//            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
-
+            String sessionId = ((HttpServletRequest)servletRequest).getRequestedSessionId();
+            if (StringUtils.isNotEmpty(sessionId)) {
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+            }
             final Subject subject = createSubject(request, response);
+
 
             //noinspection unchecked
             subject.execute(new Callable() {

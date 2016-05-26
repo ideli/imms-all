@@ -1,6 +1,8 @@
 package com.hisign.imms.web.shiro.filter;
 
 import com.hisign.imms.web.bind.CommonMap;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
@@ -14,10 +16,12 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
- * 
  * @author wangping
  * @version 1.0
  * @since 2016/5/24 13:22
@@ -28,7 +32,7 @@ public class MyLogoutFilter extends LogoutFilter {
 
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-        Subject subject = getSubject(request, response);
+        Subject subject = SecurityUtils.getSubject();
         String redirectUrl = getRedirectUrl(request, response, subject);
         //try/catch added for SHIRO-298:
         try {
@@ -41,8 +45,21 @@ public class MyLogoutFilter extends LogoutFilter {
         return false;
     }
 
+    private void changeSession(ServletRequest request, ServletResponse servletResponse) {
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String sessionId = UUID.randomUUID().toString();
+        String name = request.getServletContext().getSessionCookieConfig().getName();
+
+        if (StringUtils.isEmpty(name)) {
+            name = "JSESSIONID";
+        }
+        Cookie cookie = new Cookie(name, sessionId);
+        response.addCookie(cookie);
+    }
+
     @Override
     protected void issueRedirect(ServletRequest request, ServletResponse response, String redirectUrl) throws Exception {
+        changeSession(request, response);
         super.issueRedirect(request, response, redirectUrl);
     }
 }

@@ -71,6 +71,11 @@
         <property name="redisManager" ref="redisManager"/>
     </bean>
 
+    <bean id="cacheManager2" class="org.crazycake.shiro.RedisCacheManager">
+        <property name="keyPrefix" value="xjpt:"/>
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+
     <!-- shiro redisManager -->
     <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
         <property name="host" value="${redis.host}"/>
@@ -141,8 +146,9 @@
                 /lib/** = anon
                 /data/** = anon
                 /api/** = anon
+                /favicon.ico = anon
                 /websocket/** = anon
-                /logout = anon
+                /logout = logout
                 /login = authc
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/intoLogin-->
                 /** = user

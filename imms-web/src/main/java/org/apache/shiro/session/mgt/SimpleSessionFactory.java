@@ -19,6 +19,7 @@
 package org.apache.shiro.session.mgt;
 
 import org.apache.shiro.session.Session;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,11 +51,11 @@ public class SimpleSessionFactory implements SessionFactory {
             ss = new SimpleSession();
         }
 
-//        if (initData instanceof DefaultWebSessionContext) {
-//            DefaultWebSessionContext dwc = (DefaultWebSessionContext) initData;
-//            HttpServletRequest req = (HttpServletRequest) dwc.getServletRequest();
-//            ss.setId(req.getRequestedSessionId());
-//        }
+        if (initData instanceof DefaultWebSessionContext) {
+            DefaultWebSessionContext dwc = (DefaultWebSessionContext) initData;
+            ss.setAttribute("RESPONSE", dwc.getServletResponse());
+            ss.setAttribute("REQUEST", dwc.getServletRequest());
+        }
         return ss;
     }
 }

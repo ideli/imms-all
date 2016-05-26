@@ -1,7 +1,9 @@
 package com.hisign.imms.web.shiro.filter;
 
 import com.hisign.imms.web.bind.CommonMap;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
@@ -27,7 +29,12 @@ public class MyLoginFilter extends FormAuthenticationFilter {
     private SimpleCookie sessionIdCookie;
 
     public void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
-        String sessionId = (String) this.getSubject(request, response).getSession(false).getId();
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession(false);
+        if (null == session) {
+            session = subject.getSession();
+        }
+        String sessionId = (String) session.getId();
         // clear JSESSIONID in URL if session id is not null
         if(sessionId != null){
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);

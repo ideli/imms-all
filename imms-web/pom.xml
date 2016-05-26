@@ -203,8 +203,6 @@
             <artifactId>jsp-api</artifactId>
         </dependency>
 
-
-
     </dependencies>
 
     <build>

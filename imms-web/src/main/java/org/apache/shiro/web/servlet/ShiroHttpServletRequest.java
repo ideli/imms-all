@@ -28,6 +28,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.security.Principal;
 
 
@@ -39,7 +40,7 @@ import java.security.Principal;
  *
  * @since 0.2
  */
-public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
+public class ShiroHttpServletRequest extends HttpServletRequestWrapper implements Serializable {
 
     //TODO - complete JavaDoc
 
@@ -56,6 +57,16 @@ public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
 
     protected HttpSession session = null;
     protected boolean httpSessions = true;
+
+    /**
+     * Was the requested session ID received in a cookie?
+     */
+    private boolean requestedSessionCookie = false;
+
+    /**
+     * Was the requested session ID received in a URL?
+     */
+    protected boolean requestedSessionURL = false;
 
     public ShiroHttpServletRequest(HttpServletRequest wrapped, ServletContext servletContext, boolean httpSessions) {
         super(wrapped);
@@ -219,6 +230,23 @@ public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
         return isRequestedSessionIdFromURL();
     }
 
+
+    public boolean isRequestedSessionCookie() {
+        return requestedSessionCookie;
+    }
+
+    public void setRequestedSessionCookie(boolean requestedSessionCookie) {
+        this.requestedSessionCookie = requestedSessionCookie;
+    }
+
+    public boolean isRequestedSessionURL() {
+        return requestedSessionURL;
+    }
+
+    public void setRequestedSessionURL(boolean requestedSessionURL) {
+        this.requestedSessionURL = requestedSessionURL;
+    }
+
     private class ObjectPrincipal implements java.security.Principal {
         private Object object = null;
 
@@ -249,5 +277,7 @@ public class ShiroHttpServletRequest extends HttpServletRequestWrapper {
         public String toString() {
             return object.toString();
         }
+
+
     }
 }
