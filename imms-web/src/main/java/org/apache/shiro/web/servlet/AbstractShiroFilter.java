@@ -389,7 +389,7 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
                 throw (IOException) t;
             }
             //otherwise it's not one of the two exceptions expected by the filter method signature - wrap it in one:
-            String msg = "Filtered request failed.";
+            String msg = "Filtered request failed.Jump to /exception/error!";
             log.error(msg, t);
             WebUtils.issueRedirect(servletRequest, servletResponse, "/exception/error");
         }

@@ -2,6 +2,7 @@ package com.hisign.imms.web.shiro.filter;
 
 import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -20,6 +21,9 @@ public class MyAnonymousFilter extends PathMatchingFilter {
         if (uri.contains("/api/")) {
             //TODO 在这里加入记录操作日志的信息，可使用username和uri
             String username = req.getRemoteUser();
+            if (StringUtils.isEmpty(username)) {
+                username = "";
+            }
         }
 
         return super.onPreHandle(request, response, mappedValue);

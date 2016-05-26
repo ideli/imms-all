@@ -113,7 +113,8 @@
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
-    <bean id="anonFilter" class="com.hisign.imms.web.shiro.filter.MyAnonymousFilter"/>
+    <bean id="myAnonFilter" class="com.hisign.imms.web.shiro.filter.MyAnonymousFilter"/>
+    <bean id="anonFilter" class="org.apache.shiro.web.filter.authc.AnonymousFilter"/>
     <bean id="logoutFilter" class="com.hisign.imms.web.shiro.filter.MyLogoutFilter"/>
     <bean id="userFilter" class="com.hisign.imms.web.shiro.filter.MyUserFilter">
         <property name="successUrl" value="/index"/>
@@ -131,6 +132,7 @@
         <property name="filters">
             <util:map>
                 <entry key="anon" value-ref="anonFilter"/>
+                <entry key="myAnon" value-ref="myAnonFilter"/>
                 <entry key="user" value-ref="userFilter"/>
                 <entry key="authc" value-ref="loginFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
@@ -145,10 +147,10 @@
                 /view/** = anon
                 /lib/** = anon
                 /data/** = anon
-                /api/** = anon
                 /exception/** = anon
                 /favicon.ico = anon
-                /websocket/** = anon
+                /websocket/** = myAnon
+                /api/** = myAnon
                 /logout = logout
                 /login = authc
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/intoLogin-->
