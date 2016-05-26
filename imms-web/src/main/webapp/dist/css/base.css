@@ -3635,23 +3635,6 @@ button {
 .no-border {
   border: none;
 }
-.ui-btn {
-  display: inline-block;
-  /*padding: 4px 8px;*/
-  padding: 0 8px;
-  line-height: 24px;
-  min-width: 48px;
-  font-size: 12px;
-  text-align: center;
-  border-radius: 3px;
-  box-shadow: none;
-  border: 1px solid #bbb;
-  background: linear-gradient(to bottom, #ffffff 0, #e1e1e1 100%);
-}
-.ui-btn:hover {
-  background: linear-gradient(to bottom, #f5f5f5 0, #dfdfdf 100%);
-  border: 1px solid #bbb;
-}
 /*@end*/
 /* @group paging */
 .paging {
@@ -3696,7 +3679,7 @@ button {
   background: #fff;
 }
 /* @end paging*/
-/*@group 总体布局*/
+/*@group 公用组件*/
 #current-position {
   height: 32px;
   line-height: 32px;
@@ -3713,6 +3696,27 @@ button {
   overflow: hidden;
   background-color: #5e5e5e;
   position: relative;
+}
+.ui-btn {
+  display: inline-block;
+  /*padding: 4px 8px;*/
+  padding: 0 8px;
+  line-height: 24px;
+  min-width: 48px;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: none;
+  border: 1px solid #bbb;
+  background: linear-gradient(to bottom, #ffffff 0, #e1e1e1 100%);
+}
+.ui-btn:hover {
+  background: linear-gradient(to bottom, #f5f5f5 0, #dfdfdf 100%);
+  border: 1px solid #bbb;
+}
+.ui-btn-dark {
+  background-color: #444;
+  color: #fff;
 }
 /*@end 总体布局*/
 /*@group animate*/

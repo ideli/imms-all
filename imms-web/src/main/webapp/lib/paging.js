@@ -196,7 +196,7 @@
         
 		if(opts.loadFirstPage) {
 			//config中一路传过来的newSearch在此时会传入，也只有loadFirstPage时有机会传第三个参数，确保了selectPage时为false
-			opts.callback(currentPage, containers,opt.newSearch);
+			opts.callback(currentPage, containers,opts.newSearch);
 		}
 	}; 
 	
@@ -207,9 +207,9 @@
  			var pageOnce=config.pageOnce=config.pageOnce||15;
  			var currentPage = config.currentPage||0;
 		    var $this = $(this);
-		    var opt = {
+		    var opts = {
 				pageOnce:pageOnce,
-				loadFirstPage:config.loadFirstPage===false?false:true,
+				loadFirstPage:config.loadFirstPage!==false,
 				num_display_entries:10,
 				num_edge_entries:2,
 				currentPage:currentPage,
@@ -221,7 +221,7 @@
 				}
 			};
             //发动容器内的.paging子元素是分页条元素，对其执行pagination
-			$this.find('.paging')._pagination(config.count,opt);
+			$this.find('.paging')._pagination(config.count,opts);
             //发动容器内的.total-count元素显示总条数，.table-name元素显示列表名（如果有配置的话将替换原来html中的表名）
             $this.find('.total-count').html(config.count);
 	        config.name && $this.find('.table-name').html(config.name); 
@@ -332,11 +332,11 @@
 					exeGlobalAjaxEvent('End');
 					if (status == 'success') {
 						if(res.length && res.length>2048*100 || (res.data && res.data.length>500)){
-							warn('异常！返回内容超长，end－bengin计算错误？或后台处理参数错误？');
+							warn("result's length too long, check the end－bengin,or other params wrong？");
 							return false;
 						}
 						res=str2obj(res);
-						if (res.flag == 1) {
+						if(res.flag == 1){
 							useCache && setCache(cacheMax,res.data,false,jsonObj['begin']);
 							cb(res);
 						} else if (res.flag == -1) {
