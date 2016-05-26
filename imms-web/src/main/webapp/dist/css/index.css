@@ -1,3 +1,4 @@
+
 header {
   height: 120px;
   padding: 1px 1px 1px 60px;
@@ -44,11 +45,67 @@ header {
     top: 90px;
   }
 }
+#root-info-bar{
+  position: absolute;
+  top:91px;
+  right:-1px;
+  width:235px;
+  height:31px;
+  line-height: 31px;
+  box-sizing: border-box;
+  padding-left: 35px;
+  font-size:13px;
+  background: -webkit-linear-gradient(left, #eee, #666);
+  cursor: pointer;
+}
+
+.hs-barge {
+  position: absolute;
+  top:-6px;
+  left:28px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  background: orange;
+  color:#fff;
+  font-size: 16px;
+  font-weight: 400;
+}
+#user-name{
+  padding-right:12px;
+}
+#login-out{
+  padding-left: 12px;
+  color:#fff;
+}
+#login-out:hover{
+  text-decoration: underline;
+}
+#msg-count-wrap{
+  font-size:22px;
+  color:gold;
+  position:relative;
+  top:1px;
+}
+#msg-count{
+  font-size:13px;
+  color:#fff;
+}
+#more-tool{
+  position: relative;
+  padding-left:20px;
+  font-size:20px;
+  color:#fff;
+  top:3px;
+}
 .nav-wrap {
   display: table;
   position: absolute;
   top: 90px;
-  right: -50px;
+  /*right: -50px;*/
+  right:200px;
   padding: 0 31px;
   background: transparent;
   -webkit-user-select: none;
@@ -101,7 +158,8 @@ header {
   /*color:#fff;*/
 }
 .nav {
-  display: table;
+  display: block;
+  float: left;
   overflow: visible;
   box-shadow: -5px 5px 5px rgba(55, 55, 55, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
   background: -webkit-linear-gradient(left, #444, #5e5e5e 45%, #777777 50%, #5e5e5e 55%, #444);
@@ -115,6 +173,24 @@ header {
   color: #fff;
   /*color:@ml-color;*/
   box-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.1);
+}
+.nav-operation{
+    display: block;
+    float: left;
+    background: #444;
+    padding-right: 20px;
+}
+.nav-operation>a{
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+}
+.nav-operation>a:hover{
+    color: gold;
 }
 .nav-first {
   float: left;
@@ -279,13 +355,17 @@ header {
   color: gold;
 }
 [mol-id="sys"] {
-  visibility: hidden;
+  /*visibility: hidden;*/
+  display: inline-block;
+  width: 26px;
+  height: 32px;
+  overflow: hidden;
 }
 [mol-id="sys"]:before {
-  content: "\e81b";
+  content:"\f013";
   visibility: visible;
-  font-family: 'icomoon';
-  font-size: 24px;
+  font-family: FontAwesome;
+  font-size: 32px;
 }
 #bubbleCanvas {
   position: absolute;

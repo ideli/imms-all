@@ -17,5 +17,7 @@
 	<dubbo:application name="hisign-imms-app" />
     <!-- -->
     <dubbo:reference id="sysUserService" interface="com.hisign.imms.api.system.SysUserService" timeout="20000" retries="0"/>
-    
+
+    <dubbo:reference id="sysDictService" interface="com.hisign.imms.api.system.SysDictService" timeout="20000" retries="0"/>
+
 </beans>
