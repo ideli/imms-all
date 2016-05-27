@@ -77,15 +77,4 @@ public class LoginAction {
         }
         return resultPageURL;
     }
-
-    /**
-     * 用户注销
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request){
-        SecurityUtils.getSubject().logout();
-        return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/";
-    }
 }
