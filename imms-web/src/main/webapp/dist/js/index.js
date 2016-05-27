@@ -99,7 +99,9 @@ window.extending({
 
 //启动选项卡
 rootTabs.height(window.height-123).tabs({'scrollIncrement':320});
-
+$(window).on('resize',function(){
+    rootTabs.height(window.height-123);
+});
 
 //生成导航条
 $template(rootNav,molDatas);

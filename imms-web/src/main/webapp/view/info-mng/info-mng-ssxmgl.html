@@ -9,27 +9,29 @@
 <body>
     <div id="current-position">
         <!--<span>※ </span><span color="#265EA9">当前位置：基础信息管理 ></span> 实施项目管理-->
-        <input type="button" class="add-btn" id="push" value="推 送"/>
-        <input type="button" class="add-btn" id="addObj" value="新 增"/>
+        <input type="button" class="ui-btn" id="push-btn" value="推 送"/>
+        <input type="button" class="ui-btn" id="add-btn" value="新 增"/>
     </div>
     <div class="query-condition mt10">
         <p class="query-condition-p">
             <input id="unit" type="text" class="query-input-implement" placeholder="实施项目单位">
             <input id="manager" type="text" class="query-input-implement" placeholder="实施项目经理">
             <input id="director" type="text" class="query-input-implement" placeholder="实施负责人">
-            <a class="query-btn"> <i class="icon-search"></i>  查 询</a>
+            <button id="query-btn" class="ui-btn"><i class="icon-search fs14"></i> 查 询</button>
         </p>
         <p class="query-condition-p">
             <input id="version" type="text" class="query-input-implement" placeholder="系统当前版本号">
-            <input type="text" class="query-date" placeholder="实施开展时间开始">~
-            <input type="text" class="query-date" placeholder="实施开展时间结束">
+            <input type="text" class="query-date" placeholder="实施开展 开始时间">~
+            <input type="text" class="query-date" placeholder="实施开展 结束时间">
             <select name="" id="level" class="query-select-implement">
                 <option disabled selected>项目级别</option>
                 <option value="">A</option>
                 <option value="">B</option>
                 <option value="">C</option>
             </select>
-            <a class="reset-btn"><i class="icon-refresh"></i> 重 置</a>
+            <button id="reset-btn" class="ui-btn"><i class="icon-refresh fs14"></i> 重 置</button>
+            <a href="javascript:;" class="ui-btn">按钮而已</a>
+            <a href="javascript:;" class="ui-button ui-button-primary">按钮而已</a>
         </p>
     </div>
     <div id="query-result" class="mt20">
