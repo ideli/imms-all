@@ -17,7 +17,7 @@
             <input id="unit" type="text" class="query-input-implement" placeholder="实施项目单位">
             <input id="manager" type="text" class="query-input-implement" placeholder="实施项目经理">
             <input id="director" type="text" class="query-input-implement" placeholder="实施负责人">
-            <input type="button" class="query-btn" value="查 询">
+            <a class="query-btn"> <i class="icon-search"></i>  查 询</a>
         </p>
         <p class="query-condition-p">
             <input id="version" type="text" class="query-input-implement" placeholder="系统当前版本号">
@@ -29,7 +29,7 @@
                 <option value="">B</option>
                 <option value="">C</option>
             </select>
-            <input type="button" class="reset-btn" value="重 置">
+            <a class="reset-btn"><i class="icon-refresh"></i> 重 置</a>
         </p>
     </div>
     <div id="query-result" class="mt20">
@@ -104,6 +104,7 @@
 </script>
 <script src="../../dist/js/base.js"></script>
 <script>
+    hideSlideMenu(200);
     var implementData = [
         {"rownum":"1", "unit":"110000|北京(A级)", "members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":"赵金海,张启伦,陈维,刘晋,林元东"}], "time":"2011-01-01", "version":"V2.7.9", "server":{"content":"IP:192.168.1.169 端口：8081 用户名/密码:administrator/hisign  登陆用户：sys/sys","param":"http://192.168.1.169:8081/xjpt"}, "loginInfo":"sys/hisign", "sysDjqk":[{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"1","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"1","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"0","xtbdj":"DNA"}], "databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/该数据使用10g", "sjxx":[{"sjlz":"足迹","gsmc":"大连恒锐"},{"sjlz":"警综","gsmc":"三版本"},{"sjlz":"指纹","gsmc":"文创思宇"},{"sjlz":"现勘","gsmc":"北京海鑫"},{"sjlz":"DNA","gsmc":"海华鑫安"}], "id":"8af67d624398eea7014399ba1689003d"},
         {"rownum":"2","unit":"110109|北京门头沟区(A级)","members":[{"position":"实施项目经理","name":"楼挺"},{"position":"实施责任人员","name":"周凯"},{"position":"驻地维护人员","name":"谢昆仑"}],"time":"2015-05-26","version":"v2.6.6","server":{"content":"应用服务器：IP:10.12.69.90 端口：8081 用户名/密码:administrator/dell123456@dell.com 登陆用户：sys/sys ","param":"http://10.12.69.90:8081/xjpt"},"loginInfo":"sys/hisign","sysDjqk":[{"xtlb":"案件","ifDj":"0","xtbdj":"现勘"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"指纹"},{"xtlb":"案、勘","ifDj":"1","xtbdj":"足迹"},{"xtlb":"案、勘","ifDj":"0","xtbdj":"DNA"},{"xtlb":"人员","ifDj":"1","xtbdj":"指纹"},{"xtlb":"人员","ifDj":"1","xtbdj":"DNA"}],"databaseInfo":"10.8.40.223:1521:bjyppt/yppt/yppt/","sjxx":[{"sjlz":"警综","gsmc":"三版本"}],"id":"8af67d624d8e44bd014d8e44bd780000"},

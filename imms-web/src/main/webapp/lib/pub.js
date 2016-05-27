@@ -1,7 +1,7 @@
 //左侧折叠菜单
-window.$.fn.treemenu=function(){
+window.$.fn.treemenu=(function(){
     function expandMenu(){
-        //console.info(ul)
+        //event.stopPropagation();
         var ul=$(this);
         if(ul.data('showed')==1){
             ul.slideUp().data('showed',0).parent().removeClass('expanded');
@@ -9,13 +9,30 @@ window.$.fn.treemenu=function(){
             ul.slideDown().data('showed',1).parent().addClass('expanded');
         }
     }
+
+    function reset(treeMenu){
+        //treeMenu.clearQueue();
+        treeMenu.stop(true,true);
+        treeMenu.find('ul').stop(true,true);
+        treeMenu.width(170);
+        treeMenu.data('collapsed',false);
+        treeMenu.find('ul').show();
+        //treeMenu.queue(function(){
+        //    treeMenu.width(170).find('.tree-menu-accordion').show();
+        //});
+        return treeMenu;
+    }
     function selectItem(selectHandle) {
         var li=$(this);
         event.stopPropagation();
         var src,navlink,ul,secCount=li.attr('sec-count');
 
+        //清空尚未完成的效果
+        var treeMenu=li.parents('.tree-menu-accordion').eq(0).parent();
+        //reset(treeMenu);
+
         //所有项移除,自身加上selected
-        li.parents('.tree-menu-accordion').find('li').removeClass('selected');
+        treeMenu.find('li').removeClass('selected');
         li.addClass('selected').parents('li').addClass('selected');
 
         //一级,设置二级selected,自动打开二级内部a
@@ -36,38 +53,58 @@ window.$.fn.treemenu=function(){
         src=navlink.attr('direct')||navlink.siblings('ul').find('li').eq(0).addClass('selected').find('a').eq(0).attr('direct');//TODO 有可能是传进来指定项
         selectHandle=selectHandle||function(){};
         //log(src)
-        src && selectHandle(src,this);
+        event.target.nodeName!=='B'&& src && selectHandle(src,this);
     }
 
-    var doToggle=function(){
-        var $this=$(this);
-        var treeMenu=$this.parent();
-        var collapsed=treeMenu.data('collapsed');
-        if(collapsed){
-            treeMenu.animate({width:170},250,function(){
-                treeMenu.find('.tree-menu-accordion').fadeIn();
-            });
-            $this.html('◄')
-        }else{
-            treeMenu.find('.tree-menu-accordion').fadeOut('fast',function () {
-                treeMenu.animate({width:1},250);
-            });
-            $this.html('▶')
-        }
-        treeMenu.data('collapsed',!collapsed);
+    var hider=function($this,treeMenu,time){
+        treeMenu.find('.tree-menu-accordion').fadeOut(time||100,function () {
+            treeMenu.animate({width:1},time||200);
+            //treeMenu.dequeue();
+        });
+        $this.html('▶');
     };
 
-    return function(data,selectHandle){
-        //$this=$(this);
-        //var defaultHTML='<ul class="tree-menu-accordion"></ul><p id="toggle-tag">◄</p>';
-        //var template='<li class="grade-1" sec-count="{secItems.length}"><a title="{name}" direct="{direct}">{name}</a><ul class="hide{secItems.length}">{{secItems:#<li class="grade-2"><a class="nav-link" title="{name}" direct="{direct}">项目存储过程</a></li>#}}</ul><b  class="hide{secItems.length}"></b></li>'
-        //$this.addClass('tree-menu-accordion').html($compile(template,data));
+    var shower=function($this,treeMenu,time){
+        treeMenu.animate({width:170},time||200,function(){
+            treeMenu.find('.tree-menu-accordion').fadeIn(time||100);
+            //treeMenu.dequeue();
+        });
+        $this.html('◄');
+    };
 
+    var doToggle=function(parse){
+        var $this=$(this);
+        var lastTime=$this.data('clicked-time');
+        if(lastTime && (lastTime+500>new Date().getTime())){
+            return false;
+        }
+        var treeMenu=$this.parent();
+        var collapsed=treeMenu.data('collapsed');
+        collapsed ? shower($this,treeMenu) : hider($this,treeMenu);
+        $this.data('clicked-time',new Date().getTime());
+        treeMenu.data('collapsed',!collapsed);
+        return true;
+    };
+
+    window.hideSlideMenu=function(time){top.rootTreeMenu.trigger('collapse',['hide',time]);}
+    window.showSlideMenu=function(time){top.rootTreeMenu.trigger('collapse',['show',time]);}
+
+    return function(data,selectHandle){
         var ul=$('<ul class="tree-menu-accordion" tpsource="#tree-menu-tp"></ul>');
         $template(ul,data);
-        return $(this).empty().append($('<p class="toggle-tag">◄</p>').click(doToggle)).append(ul).find('li').click(function(){selectItem.call(this,selectHandle);}).end();
+        return reset(
+            $(this).empty().append($('<p class="toggle-tag">◄</p>').click(doToggle)).append(ul)
+                .find('li').click(function(){selectItem.call(this,selectHandle);}).end().on('collapse',function(eve,param,time){
+                //提供给默认折叠侧菜单的控制,与hider和shower不同,不采用动画
+                if(param==='hide'){
+                    $(this).find('ul').hide().end().data('collapsed',true).find('.toggle-tag').html('▶').end().animate({width:1},time||60);
+                }else{
+                    $(this).find('ul').show().end().data('collapsed',false).find('.toggle-tag').html('◄').end().animate({width:170},time||60);
+                }
+            })
+        );
     }
-}();
+})();
 
 window.$.fn.$close=function(){
     var $this=$(this);

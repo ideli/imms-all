@@ -74,7 +74,8 @@ var molDatas=[
             {name:'系统角色管理',id:'',direct:'sys-xtjsgl.html',items:null},
             {name:'系统模块管理',id:'',direct:'sys-xtmkgl.html',items:null},
             {name:'统计报表管理',id:'',direct:'sys-tjbbgl.html',items:null},
-            {name:'统计报表维护',id:'',direct:'sys-tjbbwh.html',items:null}
+            {name:'统计报表维护',id:'',direct:'sys-tjbbwh.html',items:null},
+            {name:'字典控件',id:'',direct:'sys-dict.html',items:null}
         ]
     }
 
@@ -84,12 +85,13 @@ var molDatas=[
 window.extending({
     rootTabs:$('#root-tabs'),
     rootNav:$('#root-nav'),
-    rootTreemenu:$('#tree-menu').hide(),
+    rootTreeMenu:$('#tree-menu').hide(),
     registry:(function(){
         var obj={};
         for(var i=0;i<molDatas.length;i++){
             obj.extending(molDatas[i].id,{});
         }
+        obj.extending('global',{});
         return obj;
     })()
 });
@@ -125,12 +127,22 @@ $('.nav a').click(function(){
     var molItems;
 
     //alert(molId)
-    for(var i=molDatas.length-1;i>-1;i--){
-        if(molDatas[i].id==molId){
-            molItems=molDatas[i].items;//log(molData);log(molDatas);
-            break;
-        }
-    }
+    //for(var i=molDatas.length-1;i>-1;i--){
+    //    if(molDatas[i].id==molId){
+    //        molItems=molDatas[i].items;//log(molData);log(molDatas);
+    //        break;
+    //    }
+    //}
+
+   //molDatas.some(function(i){
+   //        if(i.id==molId){
+   //            molItems= i.items;
+   //            return true;
+   //        }
+   // });
+
+    window.currentMolId=molId;
+    molItems=molDatas.where(/data => data.id==currentMolId/)[0].items;
 
     //消除切换闪动
     $('#main').addClass('hidden');
@@ -147,14 +159,14 @@ $('.nav a').click(function(){
         }).show();
         var clicked=false;
         //与导航条联动
-        rootTreemenu.find('li').each(function(){
+        rootTreeMenu.find('li').each(function(){
             if(!clicked && top._currentItem_ && top._currentItem_.html()==$(this).children('a',0).html()) {
                 this.click();
                 clicked=true;
             }
         });
         if(!clicked){
-            rootTreemenu.find('li').eq(0).click();
+            rootTreeMenu.find('li').eq(0).click();
         }
     }
     //无功能就隐藏菜单,载入src
