@@ -4490,7 +4490,7 @@ button {
   background: #fff;
 }
 /* @end paging*/
-/*@group 总体布局*/
+/*@group 公用组件*/
 #current-position {
   height: 32px;
   line-height: 32px;
