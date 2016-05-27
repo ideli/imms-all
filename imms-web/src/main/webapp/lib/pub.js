@@ -66,7 +66,7 @@ window.$.fn.treemenu=(function(){
 
     var shower=function($this,treeMenu,time){
         treeMenu.animate({width:170},time||200,function(){
-            treeMenu.find('.tree-menu-accordion').fadeIn(time||160);
+            treeMenu.find('.tree-menu-accordion').fadeIn(time||100);
             //treeMenu.dequeue();
         });
         $this.html('◄');
@@ -74,27 +74,32 @@ window.$.fn.treemenu=(function(){
 
     var doToggle=function(parse){
         var $this=$(this);
+        var lastTime=$this.data('clicked-time');
+        if(lastTime && (lastTime+500>new Date().getTime())){
+            return false;
+        }
         var treeMenu=$this.parent();
         var collapsed=treeMenu.data('collapsed');
         collapsed ? shower($this,treeMenu) : hider($this,treeMenu);
+        $this.data('clicked-time',new Date().getTime());
         treeMenu.data('collapsed',!collapsed);
         return true;
     };
 
-    window.hideSliderMenu=function(){top.rootTreeMenu.trigger('toggle','hide');}
-    window.showSliderMenu=function(){top.rootTreeMenu.trigger('toggle','show');}
+    window.hideSlideMenu=function(time){top.rootTreeMenu.trigger('collapse',['hide',time]);}
+    window.showSlideMenu=function(time){top.rootTreeMenu.trigger('collapse',['show',time]);}
 
     return function(data,selectHandle){
         var ul=$('<ul class="tree-menu-accordion" tpsource="#tree-menu-tp"></ul>');
         $template(ul,data);
         return reset(
             $(this).empty().append($('<p class="toggle-tag">◄</p>').click(doToggle)).append(ul)
-                .find('li').click(function(){selectItem.call(this,selectHandle);}).end().on('toggle',function(eve,param){
+                .find('li').click(function(){selectItem.call(this,selectHandle);}).end().on('collapse',function(eve,param,time){
                 //提供给默认折叠侧菜单的控制,与hider和shower不同,不采用动画
                 if(param==='hide'){
-                    $(this).width(1).find('ul').hide().end().data('collapsed',true).find('.toggle-tag').html('▶');
+                    $(this).find('ul').hide().end().data('collapsed',true).find('.toggle-tag').html('▶').end().animate({width:1},time||60);
                 }else{
-                    $(this).width(170).find('ul').end().data('collapsed',false).find('.toggle-tag').html('◄');
+                    $(this).find('ul').show().end().data('collapsed',false).find('.toggle-tag').html('◄').end().animate({width:170},time||60);
                 }
             })
         );
