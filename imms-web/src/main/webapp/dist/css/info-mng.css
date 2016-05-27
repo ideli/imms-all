@@ -72,14 +72,17 @@
     background: url("../img/file.png") no-repeat;
 }
 .query-btn,.reset-btn,.add-btn{
+    display: inline-block;
     width: 72px;
     height: 28px;
+    line-height: 28px;
     color: #fff;
     border: none;
     border-radius: 3px;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
+    white-space: pre;
 }
 .add-btn{
     /*color: #17A3F7;*/
