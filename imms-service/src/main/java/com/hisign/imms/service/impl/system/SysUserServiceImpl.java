@@ -31,7 +31,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Page<SysUser> findSysUserListByFilter(SysUser user) {
-        PageHelper.startPage(1, 10);
+        PageHelper.startPage(1, 500);
         List<SysUser> list = sysUserMapper.findSysUserListByFilter(user);
         return (Page<SysUser>) list;
     }

@@ -13,6 +13,9 @@ public interface SysDictService {
 
     public List<Dict> querySingleDictByRoot(String root);
 
-
     public List<Dict> queryMultiDictByRoot(String root);
+
+    public Dict queryDictByKey(String root, String key);
+
+    public List<Dict> queryDictListByKeys(String root, String keys);
 }

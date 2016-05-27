@@ -11,6 +11,8 @@ public class Dict implements Serializable {
 
     private String key;
 
+    private String[] keys;
+
     private String value;
 
     private String parentKey;
@@ -46,5 +48,13 @@ public class Dict implements Serializable {
 
     public void setParentKey(String parentKey) {
         this.parentKey = parentKey;
+    }
+
+    public String[] getKeys() {
+        return keys;
+    }
+
+    public void setKeys(String[] keys) {
+        this.keys = keys;
     }
 }

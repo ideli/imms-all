@@ -27,4 +27,33 @@
       and dict_key != root_key
       order by dict_Key
     </select>
+
+    <select id="queryDictByKey" parameterType="com.hisign.imms.model.system.Dict" resultType="com.hisign.imms.model.system.Dict">
+        select
+            dict_key as key,
+            root_key as root,
+            dict_value1 as value,
+            parent_key as parentKey
+        from sys_dict
+        where open_flag = '1'
+        and root_key = #{root}
+        and dict_key = #{key}
+        and rownum = 1
+    </select>
+
+    <select id="queryDictListByKeys" parameterType="com.hisign.imms.model.system.Dict" resultType="com.hisign.imms.model.system.Dict">
+        select
+            dict_key as key,
+            root_key as root,
+            dict_value1 as value,
+            parent_key as parentKey
+        from sys_dict
+        where open_flag = '1'
+        and root_key = #{root}
+        and dict_key in
+        <foreach collection="keys" item="key" index="index"  open="(" close=")" separator=",">
+            #{key}
+        </foreach>
+    </select>
+
 </mapper>

@@ -14,6 +14,10 @@ public interface SysDictMapper {
 
     List<Dict> queryMultiDictByRoot(String root);
 
+    Dict queryDictByKey(Dict query);
+
+    List<Dict> queryDictListByKeys(Dict query);
+
 }
 
 

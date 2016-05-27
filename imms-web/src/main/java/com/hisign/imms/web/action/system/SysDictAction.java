@@ -49,6 +49,21 @@ public class SysDictAction {
 		return list;
 	}
 
+	@RequestMapping(value="/api/dict/{root}/{key}", method= RequestMethod.GET)
+	@ResponseBody
+	public Dict getDictByKey(@PathVariable("root") String root, @PathVariable("key") String key) {
+		Dict dict = this.sysDictService.queryDictByKey(root, key);
+		return dict;
+	}
+
+	@RequestMapping(value="/api/dict/{root}/keys/{keys}", method= RequestMethod.GET)
+	@ResponseBody
+	public List<Dict> getDicstByKeys(@PathVariable("root") String root, @PathVariable("keys") String keys) {
+		List<Dict> list = this.sysDictService.queryDictListByKeys(root, keys);
+		return list;
+	}
+
+
 
 
 }

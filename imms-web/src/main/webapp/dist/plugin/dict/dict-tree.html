@@ -1,6 +1,13 @@
 <div>
-<button class="icon-ok-sign" onclick="treeDictOk()">确     定</button>
-<button class="icon-circle-blank" onclick="treeDictEmpty()">选择空值</button>
+<button onclick="treeDictOk()">确     定</button>
+<button onclick="treeDictEmpty()">选择空值</button>
+
+</div>
+<div id="multipleDiv" style="display: none">
+    <input type="hidden" name="itemskeybox" id="selectedKeys"/>
+    已选字典:
+    <input type="text" readonly="readonly" name="itemsvaluebox" id="selectedValues" />
+    <a href="javascript:clearMultipleDict();">清空</a>
 </div>
 <div>
 <ul id="baseTree" class="ztree"></ul>

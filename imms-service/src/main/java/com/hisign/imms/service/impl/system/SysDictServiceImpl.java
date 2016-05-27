@@ -37,4 +37,22 @@ public class SysDictServiceImpl implements SysDictService {
         List<Dict> list = sysDictMapper.queryMultiDictByRoot(root.toUpperCase());
         return list;
     }
+
+    @Override
+    public Dict queryDictByKey(String root, String key) {
+        Dict query = new Dict();
+        query.setRoot(root.toUpperCase());
+        query.setKey(key);
+        Dict dict = sysDictMapper.queryDictByKey(query);
+        return dict;
+    }
+
+    @Override
+    public List<Dict> queryDictListByKeys(String root, String keys){
+        Dict query = new Dict();
+        query.setRoot(root.toUpperCase());
+        query.setKeys(keys.split(","));
+        List<Dict> list = sysDictMapper.queryDictListByKeys(query);
+        return list;
+    }
 }

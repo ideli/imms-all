@@ -9,40 +9,55 @@
 <h1>字典控件Demo</h1>
 <hr>
 下拉字典
-<dict type="select" root="xzqhdm" id="dict1"></dict>
+<dict dict-type="select" root="xzqhdm" id="dict1" class="dict"></dict>
 <button onclick="getdictvalue('dict1')">getValue</button>
 <button onclick="setdictvalue('dict1','110000')">setValue</button>
 
-<dict type="select" root="QSGTDM" id="dict2" empty="false" return-value="true"></dict>
-<dict type="select" root="xbdm" id="dict3" class="dict"></dict>
-<dict type="select" root="sfdm" id="dict4" class="dict" return-value="true"></dict>
+
+<dict dict-type="select" root="xzqhdm" id="dict2" class="dict"></dict>
+<button onclick="getdictvalue('dict2')">getValue</button>
+<button onclick="setdictvalue('dict2','2222')">setValue</button>
+
+<dict dict-type="select" root="xbdm" id="dict3" empty="false" class="dict"></dict>
+<dict dict-type="select" root="sfdm" id="dict4" return-value="true" class="dict"></dict>
 <button onclick="getdictvalue('dict4')">getValue</button>
 <button onclick="setdictvalue('dict4','是')">setValue</button>
-<dict type="select" root="sfdm" class="test"></dict>
 <hr>
 树形字典
 <br><br>
-<dict type="tree" root="xzqhdm" class="dict5" id="fadd" name="filter.fadd"></dict>
+<dict dict-type="tree" root="xzqhdm" id="dict5" class="dict" name="filter.fadd" dict-multiple="true" return-value="true"></dict>
 <br>
-<button onclick="getdictvalue('fadd')">key</button>
-<button onclick="getdictvalue('fadd_displayValue')">value</button>
+<button onclick="getdictvalue('dict5')">key</button>
+<button onclick="getdictvalue('dict5_displayValue')">value</button>
+<button onclick="setdictvalue('dict5','杭州市、广州市')">setValue</button>
 <br><br>
-<dict type="tree" root="ajlbdm" class="dict5" id="fadd2" name="filter.fadd2"></dict>
+<dict dict-type="tree" root="ajlbdm"  id="dict6" class="dict" name="filter.fadd2"></dict>
 <br>
-<button onclick="getdictvalue('fadd2')">key</button>
-<button onclick="getdictvalue('fadd2_displayValue')">value</button>
+<button onclick="getdictvalue('dict6')">key</button>
+<button onclick="getdictvalue('dict6_displayValue')">value</button>
 <br><br>
-<dict type="tree" root="gxsdm" class="dict5" id="fadd3" name="filter.fadd3"></dict>
+<dict dict-type="tree" root="gxsdm1"  id="dict7" class="dict" name="filter.fadd3"></dict>
+<button onclick="getdictvalue('dict7')">key</button>
+<button onclick="getdictvalue('dict7_displayValue')">value</button>
+<dict dict-type="tree" root="custom"  id="dict8" class="dict" name="filter.fadd4"></dict>
+<button onclick="getdictvalue('dict8')">key</button>
+<button onclick="getdictvalue('dict8_displayValue')">value</button>
+<button onclick="setdictvalue('dict8','3')">setValue</button>
+
 </body>
 <script src="../dist/js/base.js"></script>
 <script>
     importing('dict',function() {
-        $('#dict1').dict().dictSelect('440000');
-        $('#dict2').dict();
-        $('.dict').dict();//.dictSelect('1');
-       // $('#dict4').dict([{key:'111',value:'小王===='},{key:'2222', value:'大王===='}]);//自定义数据,root属性无效
-        $('.test').dict();
-        $('.dict5').dict();
+//        $('#dict1').dict();//.dictSelect('440000');
+//        $('#dict2').dict([{key:'111',value:'小王===='},{key:'2222', value:'大王===='}]);//.dictSelect('111')//自定义数据,root属性无效
+//        $('#dict3').dict();
+//        $('#dict4').dict();
+//
+//        $('#dict5').dict().dictSelect('杭州市、广州市');
+//        $('#dict6').dict();
+//        $('#dict7').dict().dictSelect('330106000000');
+//        $('#dict8').dict([{key:'1',value:'省',parentKey:null},{key:'2',value:'市',parentKey:'1'},{key:'3',value:'县',parentKey:'1'}]);
+        $('.dict').dict();
     });
 
     function getdictvalue(id){
