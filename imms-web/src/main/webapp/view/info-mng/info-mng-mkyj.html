@@ -5,7 +5,9 @@
 	<meta charset="UTF-8">	
 	<title>模块语句管理</title>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/basic-info.css"/>
+	<!--<link rel="stylesheet" href="css/basic-info.css"/>-->
+	<link rel="stylesheet" href="../../dist/css/base.css">
+	<link rel="stylesheet" href="../../dist/css/info-mng.css"/>
 </head>
 <body>
 	<div id="current-position">
@@ -19,7 +21,7 @@
 				<option>2</option>
 				<option>3</option>
 			</select>
-			<label for="ssmk" class="qs-label">☰</label>
+			<label for="ssmk" class="qs-label" id="select-menu">☰</label>
 		</p>
 		<p class="query-p-helper">
 			<input name="state-use" id="state-use" class="query-input" placeholder="语句用途"/>
@@ -29,7 +31,7 @@
 			<input name="filter-content" id="content" class="query-input" placeholder="语句内容"/>
 			<label for="content" class="qi-label sql-con"></label>
 		</p>
-		<input value="查 询" id="search" class="query-btn"/><input type="button" value="重 置" id="resetSearch" class="reset-btn ml10"/>
+		<input value="查 询" id="search" class="query-btn" type="button"/><input type="button" value="重 置" id="resetSearch" class="reset-btn ml10"/>
 	</div>
 	<div id="query-result" class="mt20">
 		<div class="new-color-bar">
@@ -61,10 +63,10 @@
 		</td>
 	</tr>
 </script>
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/pub.js"></script>
-<script src="js/paging.js"></script>
-<script src="js/basic-info.js"></script>
+<script src="../../dist/js/base.js"></script>
+<!--<script src="js/pub.js"></script>-->
+<!--<script src="js/paging.js"></script>-->
+<!--<script src="js/basic-info.js"></script>-->
 <script type="text/javascript">
 	var modData = [
 		{"rownum":"1","molname":"首页","used":"test11<br/>首页     <br/>     基础信息管理","content":"首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈     <br/>     管理维护11     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页 2222    <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 222    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理222<br/>首页     <br/>     基础信息管理     <br/>     项目工作管理     <br/>     项目运行监控     <br/>     用户反馈 444    <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理   <br/>首页    77777 <br/>     基础信息管理 222r    <br/>     项目工作管理     <br/>     项目运行监控fdfdfdf     <br/>     用户反馈     <br/>     管理维护     <br/>     基础信息管理      <br/>  实施项目管理554656546221212","id":"665c0038f0154c728c045acaba2e75fe"},
@@ -77,14 +79,14 @@
 	// 在doc准备好后,写js逻辑
 	$(document).ready(function(){
 		//添加当前位置
-		createCurrentPosition({pTitle:['基础信息管理']});
+//		createCurrentPosition({pTitle:['基础信息管理']});
 
 		//加载模块语句列表数据
-		encodeStp.allowHTML = true;
-		$('#query-result').paging({count:modData.length,pageOnce:5},function (begin,end) {
-			$template('#module-sql-table tbody',modData.slice(begin-1,end));
-		});
-
+		$encode.allowHTML = true;
+//		$('#query-result').paging({count:modData.length,pageOnce:5},function (begin,end) {
+//			$template('#module-sql-table tbody',modData.slice(begin-1,end));
+//		});
+		$template('#module-sql-table tbody',modData);
 		//内容在4行内的不显示“更多”
 		$('p.sql-content').each(function(index,el){
 			if(el.innerHTML.match(/<br/gm).length<4){
@@ -93,9 +95,9 @@
 		});
 
 		//点击重置按钮
-		$('#resetSearch').on('click',function(){
-			resetInput();
-		});
+//		$('#resetSearch').on('click',function(){
+//			resetInput();
+//		});
 	});
 </script>
 </html>

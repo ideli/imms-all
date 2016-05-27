@@ -203,6 +203,11 @@
             <artifactId>jsp-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.hisign</groupId>
+            <artifactId>shiro-patch</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -41,7 +41,8 @@ header {
     top: 90px;
   }
   100% {
-    right: -50px;
+    /*right: -50px;*/
+    right: 200px;
     top: 90px;
   }
 }
@@ -106,7 +107,7 @@ header {
   top: 90px;
   /*right: -50px;*/
   right:200px;
-  padding: 0 31px;
+  padding: 0 30px;
   background: transparent;
   -webkit-user-select: none;
 }
@@ -401,6 +402,15 @@ iframe {
 }
 .icon-reload {
   cursor: pointer;
+}
+/*用户名 修改密码弹出框*/
+.btn-div{
+  text-align: right;
+  padding: 5px;
+}
+.edit-div{
+  width: 270px;
+  margin: 0 auto;
 }
 /*选项卡*/
 #root-tabs {

@@ -78,6 +78,7 @@ module.exports={
                 link.href=src+(window.config.distVersion?'?version='+window.config.distVersion:'');
                 document.head.appendChild(link);
                 cb && cb.call(link);
+                return link;
             },
         $script:function (src,cb){
             var bol=false;
@@ -98,6 +99,7 @@ module.exports={
                 }
             };
             document.head.appendChild(tag);
+            return tag;
         },
         importing:function(){
             var ags=arguments;

@@ -16,21 +16,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.shiro.session.mgt;
+package com.hisign.imms.web.shiro.session;
 
 import org.apache.shiro.session.Session;
-import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+import org.apache.shiro.session.mgt.SessionContext;
+import org.apache.shiro.session.mgt.SessionFactory;
+import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionContext;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 
 /**
  * {@code SessionFactory} implementation that generates {@link SimpleSession} instances.
  *
  * @since 1.0
  */
-public class SimpleSessionFactory implements SessionFactory {
+public class MySimpleSessionFactory implements SessionFactory {
 
     /**
      * Creates a new {@link SimpleSession SimpleSession} instance retaining the context's
