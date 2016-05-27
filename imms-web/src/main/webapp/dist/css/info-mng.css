@@ -217,16 +217,16 @@
     /*background: url("../img/file.png") no-repeat;*/
 }
 .add{
-    /*background: url("../img/bullet_add.png") no-repeat;*/
+    background: url("../img/bullet_add.png") no-repeat;
 }
 .delete{
-    /*background: url("../img/bullet_deny.png") no-repeat;*/
+    background: url("../img/bullet_deny.png") no-repeat;
 }
 .modify{
-    /*background: url("../img/edit.png") no-repeat;*/
+    background: url("../img/edit.png") no-repeat;
 }
 .search{
-    /*background: url("../img/zoom.png") no-repeat;*/
+    background: url("../img/zoom.png") no-repeat;
 }
 /*#unit{*/
     /*background: url("../img/icon_building.png") no-repeat;*/
