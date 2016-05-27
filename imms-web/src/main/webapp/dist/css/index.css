@@ -17,19 +17,23 @@ header {
 }
 @keyframes hozinal {
   30% {
-    right: -50px;
+    /*right: -50px;*/
+    right: 200px;
     top: 0px;
   }
   50% {
-    right: -50px;
+    /*right: -50px;*/
+    right: 200px;
     top: 0px;
   }
   75% {
-    right: -50px;
+    /*right: -50px;*/
+    right: 200px;
     top: 90px;
   }
   85% {
-    right: -50px;
+    /*right: -50px;*/
+    right: 200px;
     top: 90px;
   }
   92% {
@@ -46,6 +50,36 @@ header {
     top: 90px;
   }
 }
+@keyframes hozinal2 {
+  30% {
+    right:-1px;
+    top: 0px;
+  }
+  50% {
+    right:-1px;
+    top: 0px;
+  }
+  75% {
+    right:-1px;
+    top: 91px;
+  }
+  85% {
+    right:-1px;
+    top: 91px;
+  }
+  /*92% {*/
+    /*right:908px;*/
+    /*top: 90px;*/
+  /*}*/
+  96% {
+    right:-381px;
+    top: 91px;
+  }
+  100% {
+    right:-1px;
+    top: 91px;
+  }
+}
 #root-info-bar{
   position: absolute;
   top:91px;
@@ -58,6 +92,7 @@ header {
   font-size:13px;
   background: -webkit-linear-gradient(left, #eee, #666);
   cursor: pointer;
+  animation: hozinal2 6s 0.2s 1;
 }
 
 .hs-barge {
@@ -85,7 +120,7 @@ header {
   text-decoration: underline;
 }
 #msg-count-wrap{
-  font-size:22px;
+  font-size:20px;
   color:gold;
   position:relative;
   top:1px;
