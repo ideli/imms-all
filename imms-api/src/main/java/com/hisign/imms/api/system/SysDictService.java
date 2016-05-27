@@ -12,4 +12,7 @@ import java.util.List;
 public interface SysDictService {
 
     public List<Dict> querySingleDictByRoot(String root);
+
+
+    public List<Dict> queryMultiDictByRoot(String root);
 }

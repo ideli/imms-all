@@ -21,17 +21,21 @@
 <dict type="select" root="sfdm" class="test"></dict>
 <hr>
 树形字典
+<br><br>
 <dict type="tree" root="xzqhdm" class="dict5" id="fadd" name="filter.fadd"></dict>
+<br>
 <button onclick="getdictvalue('fadd')">key</button>
 <button onclick="getdictvalue('fadd_displayValue')">value</button>
-
-<dict type="tree" root="xzqhdm" class="dict5" id="fadd2" name="filter.fadd2"></dict>
+<br><br>
+<dict type="tree" root="ajlbdm" class="dict5" id="fadd2" name="filter.fadd2"></dict>
+<br>
 <button onclick="getdictvalue('fadd2')">key</button>
 <button onclick="getdictvalue('fadd2_displayValue')">value</button>
+<br><br>
+<dict type="tree" root="gxsdm" class="dict5" id="fadd3" name="filter.fadd3"></dict>
 </body>
 <script src="../dist/js/base.js"></script>
 <script>
-
     importing('dict',function() {
         $('#dict1').dict().dictSelect('440000');
         $('#dict2').dict();

@@ -85,6 +85,17 @@
         <property name="expire" value="${redis.expire}"/>
     </bean>
 
+
+    <bean id="cachePool" class="org.crazycake.shiro.RedisCacheManager">
+        <property name="keyPrefix" value="xjpt:"/>
+        <property name="redisManager" ref="redisPool"/>
+    </bean>
+
+    <bean id="redisPool" class="org.crazycake.shiro.RedisManager">
+        <property name="host" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+    </bean>
+
     <!-- 自定义认证结果监听器 -->
     <bean id="authcListener" class="com.hisign.imms.web.shiro.authc.MyAuthenticationListener"/>
 

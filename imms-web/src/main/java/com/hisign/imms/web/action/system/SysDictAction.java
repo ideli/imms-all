@@ -7,6 +7,7 @@ import com.hisign.imms.api.system.SysUserService;
 import com.hisign.imms.model.SysUser;
 import com.hisign.imms.model.system.Dict;
 import com.hisign.imms.web.bind.annotation.CurrentUser;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,28 @@ public class SysDictAction {
 	@Resource
 	private SysDictService sysDictService;
 
-	@RequestMapping(value="/api/dict/{root}", method= RequestMethod.GET)
+	@Resource
+	private  CacheManager cachePool;
+
+	@RequestMapping(value="/api/dict/single/{root}", method= RequestMethod.GET)
 	@ResponseBody
-	public List<Dict> singleDict(@PathVariable("root") String root,@CurrentUser SysUser user) {
+	public List<Dict> singleDict(@PathVariable("root") String root) {
 		List<Dict> list = sysDictService.querySingleDictByRoot(root);
 		return list;
 	}
+
+	@RequestMapping(value="/api/dict/multi/{root}", method= RequestMethod.GET)
+	@ResponseBody
+	public List<Dict> multiDict(@PathVariable("root") String root) {
+		Cache cache = cachePool.getCache("xjpt:");
+		List<Dict> list = (List<Dict>)cache.get(root);
+		if(list == null){
+			list = sysDictService.queryMultiDictByRoot(root);
+			cache.put(root, list);
+		}
+		return list;
+	}
+
+
 
 }
