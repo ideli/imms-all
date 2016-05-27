@@ -403,6 +403,15 @@ iframe {
 .icon-reload {
   cursor: pointer;
 }
+/*用户名 修改密码弹出框*/
+.btn-div{
+  text-align: right;
+  padding: 5px;
+}
+.edit-div{
+  width: 270px;
+  margin: 0 auto;
+}
 /*选项卡*/
 #root-tabs {
   /*height:calc(100vh - 130px);*/

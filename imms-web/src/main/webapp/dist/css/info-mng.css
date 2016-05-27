@@ -20,7 +20,9 @@
 }
 .query-select{
     width: 205px;
+    height: 32px;
     padding-left: 10px;
+    color: #666;
 }
 .query-select-implement{
     color:#555;
@@ -44,18 +46,18 @@
     position: absolute;
     top: 0;
     display: block;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
     text-align: center;
     font-size: 16px;
     border-radius: 0 5px 5px 0;
-    background-position-x: 6px!important;
-    background-position-y: 6px!important;
+    background-position-x: 4px!important;
+    background-position-y: 4px!important;
 }
 .qs-label{
     right: 0;
-    background: #17A3F7;
+    background: #Fcbf60;
     color: #fff;
 }
 .qi-label{
@@ -69,6 +71,7 @@
 #add-btn{
     /*color: #17A3F7;*/
     /*border: 1px solid #17A3F7;*/
+<<<<<<< HEAD
     /*color: #FCBC40;*/
     /*border: 1px solid #FCBC40;*/
     /*height: 22px;*/
@@ -99,6 +102,36 @@
     background-image: -webkit-linear-gradient(top, #BBB, #121212);
 }
 #new-color-bar{
+=======
+    color: #FCBC40;
+    border: 1px solid #FCBC40;
+    height: 22px;
+    float: right;
+    margin: 7px 5px 0 0;
+    background: #fff;
+}
+.add-btn:hover{
+    background: #fafafa;
+    box-shadow: 1px 1px 1px #ccc;
+}
+.query-btn{
+    /*background: #17A3F7;*/
+    /*background: #555;*/
+    background: #5e5e5e;
+}
+.query-btn:hover {
+    background: #6c6c6c;
+    box-shadow: 1px 1px 1px #ccc;
+}
+.reset-btn{
+    background: #FCBC40;
+}
+.reset-btn:hover {
+    background: #Fcbf60;
+    box-shadow: 1px 1px 1px #ccc;
+}
+.new-color-bar{
+>>>>>>> 23753107ab4027125aca4c114b0cbb4fb3d32e8f
     height: 30px;
     line-height: 30px;
     text-indent: 1em;
@@ -167,6 +200,7 @@
     overflow: hidden;
 }
 .more-a{
+    margin-right: 5px;
     float: right;
 }
 .show{
@@ -241,5 +275,7 @@
     /*background: url("../img/levels.png") no-repeat;*/
     /*color:#666;*/
 /*}*/
-
+#search{
+    margin-right: 5px;
+}
 /*@end*/

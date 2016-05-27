@@ -4240,7 +4240,7 @@ button {
   padding-left: 20px!important;
 }
 .pl30 {
-  padding-left: 20px!important;
+  padding-left: 30px!important;
 }
 .pr5 {
   padding-right: 5px!important;
@@ -4438,6 +4438,14 @@ button {
 .no-border {
   border: none;
 }
+.common-input{
+  width: 260px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
 /*@end*/
 /* @group paging */
 .paging {
@@ -4482,7 +4490,7 @@ button {
   background: #fff;
 }
 /* @end paging*/
-/*@group 公用组件*/
+/*@group 总体布局*/
 #current-position {
   height: 32px;
   line-height: 32px;

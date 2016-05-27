@@ -16,16 +16,33 @@ $.fn.dict = function(initValue, customData){
             initSelectDict(target, data, initValue);
         }else if(type === 'tree'){
             importing('ztree',function() {
-                var data = [
-                    {id: '330000',name:'浙江省', pId: null},
-                    {id: '330100',name:'杭州市', pId: '330000'},
-                    {id: '330200',name:'宁波市', pId: '330000'},
-                    {id: '330300',name:'温州市', pId: '330000'},
-                    {id: '440000',name:'广东省', pId: null},
-                    {id: '440100',name:'广州市', pId: '440000'},
-                    {id: '440300',name:'深圳市', pId: '440000'}
-                ];
-                initTreeDict(target, data, initValue);
+                var data = localData.get(type + '_' + root);
+                if(data === undefined){
+                    $.ajax({
+                        type: 'get',
+                        url: '/api/dict/multi/' + root,
+                        data: {},
+                        async: true,//同步
+                        success: function (remoteData) {
+                            data = remoteData;
+                            localData.set(type + '_' + root, data);
+                            initTreeDict(target, data, initValue);
+                        }
+                    });
+                }else{
+                    initTreeDict(target, data, initValue);
+                }
+
+                //var data = [
+                //    {key: '330000',value:'浙江省', parentKey: null},
+                //    {key: '330100',value:'杭州市', parentKey: '330000'},
+                //    {key: '330200',value:'宁波市', parentKey: '330000'},
+                //    {key: '330300',value:'温州市', parentKey: '330000'},
+                //    {key: '440000',value:'广东省', parentKey: null},
+                //    {key: '440100',value:'广州市', parentKey: '440000'},
+                //    {key: '440300',value:'深圳市', parentKey: '440000'}
+                //];
+
             });
         }
     });
@@ -59,7 +76,7 @@ function getDataForDict(target, customData){
     if(data === undefined) {
         $.ajax({
             type: 'get',
-            url: '/api/dict/' + root,
+            url: '/api/dict/single/' + root,
             data: {},
             async: false,//同步
             success: function (remoteData) {
@@ -106,19 +123,26 @@ function initSelectDict(target, data, initValue){
 var zTreeObj ;
 var setting = {
     data: {
-        key: {},
+        key: {
+            id: 'key',
+            name: 'value'
+        },
         simpleData: {
-            enable: true
+            enable: true,
+            idKey: "key",
+            pIdKey: "parentKey",
+            rootPId: 0
         }
     },
     callback: {
         onDblClick: function (event, treeId, treeNode) { //鼠标双击选中
-            $('#'+currentDictId).val(treeNode.id);
-            $('#'+currentDictId + '_displayValue').val(treeNode.name);
+            $('#'+currentDictId).val(treeNode.key);
+            $('#'+currentDictId + '_displayValue').val(treeNode.value);
             window.dictWin.$close();
         },
         onClick:function(event, treeId, treeNode){ //鼠标单击展开
             zTreeObj.expandNode(treeNode, !treeNode.open, false, false);
+            window.currentDictNode = treeNode;
         }
     },
     view: {
@@ -138,7 +162,7 @@ function initTreeDict(target, data, initValue){
         var target_name = target.attr('name') || 'name_' + Math.floor(Math.random()*100000);
         var template = '<input type="text" readonly="readonly" name="{target_name}_displayValue" id="{target_id}_displayValue">\
                         <input type="hidden" name="{target_name}" id="{target_id}">\
-                        <span class="treeButton" id="{target_id}_treeButton">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+                        <a href="#" id="{target_id}_treeButton"><i class="icon-circle-arrow-right"></i></a>';
         if(target.attr('id') === target_id){
             target.removeAttr('id');
         }
@@ -151,14 +175,41 @@ function initTreeDict(target, data, initValue){
         }
         target.html($compile(template,config));
 
+        /*
         $('#'+target_id+'_treeButton').bind("click", function(e){
             var x = e.pageX-100;
             var y = e.pageY+15;
             $('#baseTree').remove();
-            $('<ul id="baseTree" class="ztree"></ul>').appendTo('body').hide();
+            $('<ul id="baseTree" class="ztree"><a href="#">确定</a><a href="#">选择空值</a></ul>').appendTo('body').hide();
             window.dictWin = $open('#baseTree',{width:320,height:500, top:y,left:x});
             window.currentDictId = target_id;
             zTreeObj = $.ztree.init($('#baseTree'), setting, data);
         });
+        */
 
+    $('#'+target_id+'_treeButton').bind("click", function(e){
+        var x = e.pageX-100;
+        var y = e.pageY+15;
+        $('#baseTree').remove();
+        window.currentDictId = target_id;
+        window.dictWin = $open(top.path + '/dist/plugin/dict/dict-tree.html', {title:'多级字典',width:320,height:500, top:y,left:x}, true, function(){
+            zTreeObj = $.ztree.init($('#baseTree'), setting, data);
+        });
+    });
+}
+
+function treeDictOk(){
+    if(window.currentDictNode === undefined ){
+        alert('请选择字典节点');
+        return;
+    }
+    $('#'+currentDictId).val(window.currentDictNode.key);
+    $('#'+currentDictId + '_displayValue').val(window.currentDictNode.value);
+    window.dictWin.$close();
+}
+
+function  treeDictEmpty(){
+    $('#'+currentDictId).val('');
+    $('#'+currentDictId + '_displayValue').val('');
+    window.dictWin.$close();
 }
