@@ -37,7 +37,7 @@ var molDatas=[
             ]},
             {name:'系统版本管理',id:'',direct:'info-mng-xtbb.html',items:null},
             {name:'系统参数管理',id:'',direct:'info-mng-xtcs.html',items:null},
-            {name:'模块语句管理',id:'',direct:'info-mng-mkyj.html',items:null},
+            {name:'模块语句管理',id:'',direct:'info-mng/info-mng-mkyj.html',items:null},
             {name:'问题共享管理',id:'',direct:'info-mng-wtgx.html',items:null}
         ]
     },
@@ -178,5 +178,13 @@ $('.nav a').click(function(){
 //注销
 $('#login-out').on('click',function () {
     
+});
+
+//点击用户名 修改密码
+$('#username').on('click',function () {
+    var editPwdWin = $open('#edit-pwd-block',{width:516,height:267,title:'&nbsp系统用户修改个人密码',closable:false});
+});
+$('#close-edit-pwd').on('click',function () {
+    $('#edit-pwd-block').window('close');
 });
 

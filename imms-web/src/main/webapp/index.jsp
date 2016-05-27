@@ -22,7 +22,7 @@
     <nav class="nav-wrap">
         <ul id="root-nav" class="nav" tpsource="#nav-tp"></ul>
         <div class="nav-operation">
-            <a href="">用户名</a>
+            <a id="username" href="javascript:void(0);">用户名</a>
             <%--TODO: 注销 login-out绑定的click事件在index.js中--%>
             <a id="login-out" href="javascript:void(0);">注销</a>
         </div>
@@ -44,6 +44,18 @@
 </div>
 <div id="root-mask"></div>
 <iframe src="" frameborder="0" width="0" height="0 "id="upframe" name="upframe" class="hidePlus"></iframe>
+<div id="edit-pwd-block" class="hide">
+    <div class="btn-div">
+        <a class="save-btn ui-btn">保 存</a>
+        <a id="close-edit-pwd" class="close-btn ui-btn">关 闭</a>
+    </div>
+    <div class="edit-div">
+        <%--<p>修改个人密码</p>--%>
+        <span class="red">* </span><input class="common-input mt10" type="text" placeholder="原密码">
+        <span class="red">* </span><input class="common-input mt10" type="text" placeholder="新密码">
+        <span class="red">* </span><input class="common-input mt10" type="text" placeholder="确认新密码">
+    </div>
+</div>
 </body>
 <script type="text/template" id="tree-menu-tp">
     <li class="grade-1" sec-count="{items.length}">
