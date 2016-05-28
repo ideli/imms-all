@@ -35,6 +35,7 @@
         </mvc:message-converters>
         <mvc:argument-resolvers>
             <bean class="com.hisign.imms.web.bind.method.CurrentUserMethodArgumentsResolver"/>
+            <bean class="com.hisign.imms.web.bind.method.TranslateObjectMethodArgumentsResolver"/>
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
