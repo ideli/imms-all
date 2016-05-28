@@ -35,6 +35,7 @@
         scrollTop:function(){return document.documentElement.scrollTop||document.body.scrollTop;},
         scrollLeft:function(){return document.documentElement.scrollLeft||document.body.scrollLeft;},
         iframe:function(){
+            if(window===top)return null;
             var frs=parent.document.getElementsByTagName('iframe');
             for(var i=frs.length-1;i>-1;i--){
                 if(frs[i].contentWindow==self){return frs[i];}
@@ -46,6 +47,8 @@
             return top._opener_wins[openerId];
         }
     });
+
+    window!==top && (window.originSrc=window.iframe.getAttribute('o-src'))&&(location.href!==originSrc)&&(location.href=originSrc);
 
     Object.prototype.extending('fixing',function(key){this.extending(key,this[key]);});
 

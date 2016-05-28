@@ -4,12 +4,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> I M M S </title>
+    <title>::IMMS:: </title>
     <link rel="shortcut icon" href="dist/img/favicon.ico?version=1.0" type="image/x-icon" />
     <link rel="stylesheet" href="dist/css/base.css?version=1.0">
     <script>
         window.version='1.0';
         window.path=location.href.replace(/index2?\.(html|jsp)/,'').replace(/view\/.*/,'');
+        window.molDatas=[
+            {
+                name:'首页',
+                id:'fst-page',
+                direct:'fst-page.html',
+                items:null
+            },
+            {
+                name:'信息管理',
+                id:'info-mng',
+                items:[
+                    {name:'实施项目管理',id:'',direct:'info-mng/info-mng-ssxmgl.html',items:null},
+                    {name:'存储过程管理',id:'',direct:null,items:[
+                        {name:'项目存储过程',id:'',direct:'info-mng-xmcc.html'},
+                        {name:'工作存储过程',id:'',direct:'info-mng-gzcc.html'}
+                    ]},
+                    {name:'系统版本管理',id:'',direct:'info-mng-xtbb.html',items:null},
+                    {name:'系统参数管理',id:'',direct:'info-mng-xtcs.html',items:null},
+                    {name:'模块语句管理',id:'',direct:'info-mng/info-mng-mkyj.html',items:null},
+                    {name:'问题共享管理',id:'',direct:'info-mng-wtgx.html',items:null}
+                ]
+            },
+            {
+                name:'项目监控',
+                id:'prj-watch',
+                items:[
+                    {name:'数据实时统计',id:'prj-watch-sjsstj',direct:'prj-watch-sjsstj.html',items:null},
+                    {name:'数据实时监控',id:'prj-watch-sjssjk',direct:'prj-watch-sjssjk.html',items:null},
+                    {name:'应用服务监控',id:'prj-watch-yyfwjk',direct:'prj-watch-yyfwjk.html',items:null}
+                ]
+            },
+            {
+                name:'用户反馈',
+                id:'feed-back',
+                items:[
+                    {name:'用户反馈管理',id:'feed-back-mng',direct:'feed-back-mng.html',items:null},
+                    {name:'培训情况维护',id:'feed-back-pxqkwh',direct:'feed-back-pxqkwh.html',items:null},
+                    {name:'案例情况维护',id:'feed-back-alqkwh',direct:'feed-back-alqkwh.html',items:null}
+                ]
+            },
+            {
+                name:'统计报表',
+                id:'reports',
+                items:[
+                    {name:'系统使用情况统计',id:'',direct:'reports-sys-use.html',items:null}
+                ]
+            },
+            {
+                name:'管理维护',
+                id:'sys',
+                items:[
+                    {name:'登录用户管理',id:'',direct:'sys-dlyhgl.html',items:null},
+                    {name:'系统角色管理',id:'',direct:'sys-xtjsgl.html',items:null},
+                    {name:'系统模块管理',id:'',direct:'sys-xtmkgl.html',items:null},
+                    {name:'统计报表管理',id:'',direct:'sys-tjbbgl.html',items:null},
+                    {name:'统计报表维护',id:'',direct:'sys-tjbbwh.html',items:null},
+                    {name:'字典控件',id:'',direct:'sys-dict.html',items:null}
+                ]
+            }
+
+        ];
     </script>
     <link rel="stylesheet" href="dist/css/index.css">
 </head>

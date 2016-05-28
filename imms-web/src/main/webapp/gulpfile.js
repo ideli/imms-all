@@ -6,8 +6,8 @@ var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var minifyCss = require('gulp-minify-css');
 var del = require('del');
-var browserify=require('gulp-browserify');
-var livereload = require('gulp-livereload');
+//var browserify=require('gulp-browserify');
+//var livereload = require('gulp-livereload');
 
 //gulp.task('live', function () {    // 这里的watch，是自定义的，写成live或者别的也行
 //    var server = livereload();
@@ -24,13 +24,13 @@ var livereload = require('gulp-livereload');
 //    .pipe(livereload());
 //});
 
-gulp.task('live', function() {
-    livereload.listen();
-    gulp.watch('*.*',function(file){
-        console.log(file.path)
-        gulp.src(file.path).pipe(livereload());
-    });
-});
+//gulp.task('live', function() {
+//    livereload.listen();
+//    gulp.watch('*.*',function(file){
+//        console.log(file.path)
+//        gulp.src(file.path).pipe(livereload());
+//    });
+//});
 
 gulp.task('hint', function() {
     gulp.src('script/*.js')
@@ -70,21 +70,26 @@ gulp.task('minifycss', function() {
 //        .pipe(gulp.dest('dist/js'));
 //});
 
-gulp.task('browserify', function() {
-    // Single entry point to browserify
-    return gulp.src('script/base.js')
-        .pipe(browserify({
-            //insertGlobals : true,
-            //debug : !gulp.env.production
-        }))
-        .pipe(gulp.dest('dist/js'))
-});
+//gulp.task('browserify', function() {
+//    // Single entry point to browserify
+//    return gulp.src('script/base.js')
+//        .pipe(browserify({
+//            //insertGlobals : true,
+//            //debug : !gulp.env.production
+//        }))
+//        .pipe(gulp.dest('dist/js'))
+//});
 
 gulp.task('uglify', function() {
     return gulp.src('dist/js/base.js')
        // .pipe(rename({suffix: ''}))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'))
+        //&&
+        //gulp.src('script/index.js')
+        //    // .pipe(rename({suffix: ''}))
+        //    .pipe(uglify())
+        //    .pipe(gulp.dest('dist/js'));
 });
 
 // dragon
