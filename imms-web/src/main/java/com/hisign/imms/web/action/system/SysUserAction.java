@@ -28,7 +28,7 @@ public class SysUserAction {
 
 	@RequestMapping("api/users/getUserPage")
 	@ResponseBody
-	public Page<SysUser> getList(@TranslateObject Map map) {
+	public Page<SysUser> getList() {
 		SysUser user = new SysUser();
 		Page<SysUser> page = sysUserService.findSysUserListByFilter(user);
 		return page;

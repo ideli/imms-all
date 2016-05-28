@@ -23,5 +23,8 @@
     <dubbo:service interface="com.hisign.imms.api.system.SysUserService" protocol="rmi,rest,webservice" ref="sysUserService" />
 
     <dubbo:service interface="com.hisign.imms.api.system.SysDictService" protocol="rmi" ref="sysDictService" />
+    <dubbo:service interface="com.hisign.imms.api.basic.modstate.ModStateService" protocol="rmi" ref="modStateService" />
+
+    <dubbo:service interface="com.hisign.imms.api.sys.DlyhglService" protocol="rmi" ref="dlyhglService" />
 
 </beans>

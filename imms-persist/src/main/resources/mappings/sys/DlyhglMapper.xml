@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hisign.imms.persist.mapper.sys.DlyhglMapper" >
+
+    <select id="findDLyhglListByFilter" parameterType="com.hisign.imms.model.sys.DlyhglFilter" resultType="com.hisign.imms.model.sys.Dlyhgl">
+		select p.* from(
+		select
+		rownum as rn,a.* from (
+		select
+		rownum,
+		ID as id,
+		USERNAME as username,
+		USER_LEVEL as userLevel,
+		PASSWORD as password,
+		TRUE_NAME as trueName,
+		OPEN_FLAG as openFlag,
+		DEFAULT_MODULE as defaultModule,
+		REMARK as remark,
+		CREATE_USER as createUser,
+		CREATE_DATETIME as createDatetime,
+		UPDATE_USER as updateUser,
+		POLICE_ID as policeId,
+		CARD_ID as cardId,
+		USER_TEL as userTel,
+		USER_UNIT as userUnit,
+		UPDATE_DATETIME as updateDatetime
+		from SYS_USER
+		where 1=1
+		<if test="username != null and username != ''">
+			and USERNAME like '%' || #{username,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="openFlag != null and openFlag != ''">
+			and OPEN_FLAG = #{openFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="trueName != null and trueName != ''">
+			and TRUE_NAME like '%' || #{trueName,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="userUnit != null and userUnit != ''">
+			and USER_UNIT like #{userUnit,jdbcType=VARCHAR}|| '%'
+		</if>
+		) a where rownum <![CDATA[<=]]> #{end,jdbcType=INTEGER}
+		) p where rn >= #{begin,jdbcType=INTEGER}
+    </select>
+
+	<select id="findDLyhglListByFilterForCount" parameterType="com.hisign.imms.model.sys.DlyhglFilter" resultType="java.lang.Integer">
+		select
+		count(1)
+		from SYS_USER
+		where 1=1
+		<if test="username != null and username != ''" >
+			and USERNAME like '%' || #{username,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="openFlag != null and openFlag != ''" >
+			and OPEN_FLAG = #{openFlag,jdbcType=VARCHAR}
+		</if>
+		<if test="trueName != null and trueName != ''" >
+			and TRUE_NAME like '%' || #{trueName,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="userUnit != null and userUnit != ''" >
+			and USER_UNIT like #{userUnit,jdbcType=VARCHAR}|| '%'
+		</if>
+	</select>
+
+
+</mapper>
