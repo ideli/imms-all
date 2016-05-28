@@ -25,5 +25,5 @@ public @interface TranslateObject {
      * 传入的json字符串
      * @return
      */
-    String value() default "{}";
+    String valueName() default "jsonStr";
 }
