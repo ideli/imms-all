@@ -16,12 +16,6 @@ import java.lang.annotation.*;
 public @interface TranslateObject {
 
     /**
-     * json字符串对应的对象类型名
-     * @return
-     */
-    String className() default "java.util.HashMap";
-
-    /**
      * 传入的json字符串
      * @return
      */

@@ -24,7 +24,7 @@ public class TranslateObjectMethodArgumentsResolver implements HandlerMethodArgu
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         TranslateObject translateObjectAnnotation = parameter.getParameterAnnotation(TranslateObject.class);
-        Object obj = JSON.parseObject(webRequest.getParameter(translateObjectAnnotation.valueName()), Class.forName(translateObjectAnnotation.className()));
+        Object obj = JSON.parseObject(webRequest.getParameter(translateObjectAnnotation.valueName()), parameter.getParameterType());
         return obj;
     }
 }
