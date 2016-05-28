@@ -16,8 +16,8 @@ import java.lang.annotation.*;
 public @interface TranslateObject {
 
     /**
-     * 传入的json字符串
+     * 传入的json字符串的名称，在请求中获取用
      * @return
      */
-    String valueName() default "jsonStr";
+    String value() default "jsonStr";
 }
