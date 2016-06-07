@@ -16,7 +16,6 @@ import java.util.Map;
 /**
  * Created by Jiang on 2016/5/26.
  */
-@Service("dlyhglService")
 public class DlyhglServiceImpl implements DlyhglService {
     @Resource
     private DlyhglMapper dlyhglMapper;

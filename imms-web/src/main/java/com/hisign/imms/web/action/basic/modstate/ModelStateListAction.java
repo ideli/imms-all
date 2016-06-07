@@ -16,14 +16,13 @@ import javax.annotation.Resource;
 @Controller
 public class ModelStateListAction {
 
-    @Resource
-    private ModStateService modStateService;
+
 
     @RequestMapping("api/modState/getModStatePage")
     @ResponseBody
     public Page<ModState> getList() {
-        ModState user = new ModState();
-        Page<ModState> page = modStateService.findModStateListByCondition(user);
-        return page;
+       // ModState user = new ModState();
+      //  Page<ModState> page = modStateService.findModStateListByCondition(user);
+        return null;
     }
 }

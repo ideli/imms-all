@@ -21,8 +21,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/api")
 public class DlyhglListAction {
-    @Resource
-    private DlyhglService dlyhglService;
+
 
     /**
      * 获得登录用户管理列表数据
@@ -33,7 +32,7 @@ public class DlyhglListAction {
     @RequestMapping(value="/sys/getDlyhglPage", method= RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public Map<String,Object> getDlyhglList(@TranslateObject DlyhglFilter filter) throws InterruptedException {
-        Map<String,Object> map = dlyhglService.findDLyhglListByFilter(filter);
+        Map<String,Object> map = null;//dlyhglService.findDLyhglListByFilter(filter);
         return map;
     }
 
